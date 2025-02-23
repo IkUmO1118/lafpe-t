@@ -1,0 +1,15 @@
+{
+    "name": "ikumo1118/backend",
+    "autoload": {
+        "psr-4": {
+            "Ikumo1118\\Backend\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Ikumo Takahashi",
+            "email": "ikumo1118free@gmail.com"
+        }
+    ],
+    "require": {}
+}
