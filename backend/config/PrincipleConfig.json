@@ -1,0 +1,207 @@
+{
+  "principle1": {
+    "Q1": {
+      "staticPoint": 5.0,
+      "weighting": {
+        "0": 0.5,
+        "1": 0.5
+      }
+    },
+    "Q3": {
+      "staticPoint": 5.0,
+      "point": {
+        "openRack": {
+          "0": -2.5,
+          "1": -2.5,
+          "2": 0.0,
+          "3": 0.0
+        },
+        "IVCRack": {
+          "0": 0.0,
+          "1": 0.0,
+          "2": 0.0,
+          "3": 0.0
+        },
+        "positiveRack": {
+          "0": -2.5,
+          "1": -2.5,
+          "2": 0.0,
+          "3": 0.0
+        },
+        "negativeRack": {
+          "0": 0.0,
+          "1": 0.0,
+          "2": 0.0,
+          "3": 0.0
+        },
+        "oneWayAirflowRack": {
+          "0": 0.0,
+          "1": 0.0,
+          "2": 0.0,
+          "3": 0.0
+        },
+        "isolator": {
+          "0": 0.0,
+          "1": 0.0,
+          "2": 0.0,
+          "3": 0.0
+        }
+      }
+    }
+  },
+
+  "principle2": {
+    "Q1": {
+      "staticPoint": 2.4,
+      "weighting": {
+        "0": 0.25,
+        "1": 0.25
+      }
+    },
+    "Q2": {
+      "staticPoint": 2.4,
+      "weighting": {
+        "0": 0.25,
+        "1": 0.25
+      }
+    },
+    "Q3": {
+      "staticPoint": 1.4,
+      "weighting": {
+        "openRack": {
+          "rackWeighting": 1,
+          "perWeighting": {
+            "0": 1,
+            "1": 0.8,
+            "2": 0.6,
+            "3": 0.4,
+            "4": 0.2
+          },
+          "timesWeighting": {
+            "0": -1,
+            "1": -0.5,
+            "2": 0,
+            "3": 0
+          }
+        },
+        "IVCRack": {
+          "rackWeighting": 1,
+          "perWeighting": {
+            "0": 0.2,
+            "1": 0.4,
+            "2": 0.6,
+            "3": 0.8,
+            "4": 1
+          },
+          "timesWeighting": {
+            "0": 0.3,
+            "1": 0.3,
+            "2": 0.3,
+            "3": 0.3
+          }
+        },
+        "positiveRack": {
+          "rackWeighting": 1,
+          "perWeighting": {
+            "0": 1,
+            "1": 1,
+            "2": 1,
+            "3": 1,
+            "4": 1
+          },
+          "timesWeighting": {
+            "0": -0.5,
+            "1": 0.1,
+            "2": 0.2,
+            "3": 0.2
+          }
+        },
+        "negativeRack": {
+          "rackWeighting": 1,
+          "perWeighting": {
+            "0": 1,
+            "1": 1,
+            "2": 1,
+            "3": 1,
+            "4": 1
+          },
+          "timesWeighting": {
+            "0": 0,
+            "1": 0.15,
+            "2": 0.15,
+            "3": 0.15
+          }
+        },
+        "oneWayAirflowRack": {
+          "rackWeighting": 1,
+          "perWeighting": {
+            "0": 0.2,
+            "1": 0.4,
+            "2": 0.6,
+            "3": 0.8,
+            "4": 1
+          },
+          "timesWeighting": {
+            "0": -0.5,
+            "1": 0.15,
+            "2": 0.15,
+            "3": 0.15
+          }
+        },
+        "isolator": {
+          "rackWeighting": 1,
+          "perWeighting": {
+            "0": 0.2,
+            "1": 0.4,
+            "2": 0.6,
+            "3": 0.8,
+            "4": 1
+          },
+          "timesWeighting": {
+            "0": 0.1,
+            "1": 0.1,
+            "2": 0.2,
+            "3": 0.2
+          }
+        }
+      }
+    },
+    "Q5": {
+      "staticPoint": 2.6,
+      "weighting": {
+        "0": 0.75,
+        "1": 0.5,
+        "2": -0.5
+      }
+    },
+    "Q6": {
+      "staticPoint": 2.6,
+      "weighting": {
+        "0": 0.25,
+        "1": 0.2,
+        "2": 0
+      }
+    },
+    "Q7": {
+      "staticPoint": 2.6,
+      "weighting": {
+        "0": 0.5,
+        "1": 1
+      }
+    },
+    "Q8": {
+      "staticPoint": 1,
+      "weighting": {
+        "0": 0.1,
+        "1": 0.4,
+        "2": 0.4,
+        "3": 0.1
+      }
+    }
+  },
+
+  "principle3": {},
+  "principle4": {},
+  "principle5": {},
+  "principleDP": {}
+}
