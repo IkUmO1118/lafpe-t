@@ -19,21 +19,11 @@ class PrincipleConfig
     $this->configData = json_decode($jsonData, true);
   }
 
-  public function getStaticPoint(string $principle, string $question): array | float
+  public function getPrincipleData(string $principle): array
   {
-    $staticPoint = $this->configData[$principle][$question]["staticPoint"];
-    if (isset($staticPoint)) {
-      return $staticPoint;
+    if (isset($this->configData[$principle])) {
+      return $this->configData[$principle];
     }
-    return 0;
-  }
-
-  public function getWeighting(string $principle, string $question): array | float
-  {
-    $weighting = $this->configData[$principle][$question]["weighting"];
-    if (isset($weighting)) {
-      return $weighting;
-    }
-    return 0;
+    return [];
   }
 }
