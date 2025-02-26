@@ -9,7 +9,7 @@
     },
     "Q3": {
       "staticPoint": 5.0,
-      "point": {
+      "dynamicPoint": {
         "openRack": {
           "0": -2.5,
           "1": -2.5,
