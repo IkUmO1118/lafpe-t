@@ -1,15 +1,22 @@
 {
-    "name": "ikumo1118/backend",
-    "autoload": {
-        "psr-4": {
-            "Ikumo1118\\Backend\\": "src/"
-        }
+  "name": "ikumo1118/backend",
+  "autoload": {
+    "psr-4": {
+      "app\\": "app/",
+      "Controllers\\": "app/Controllers/",
+      "Services\\": "app/Services/",
+      "config\\": "config/",
+      "Routing\\": "Routing/"
     },
-    "authors": [
-        {
-            "name": "Ikumo Takahashi",
-            "email": "ikumo1118free@gmail.com"
-        }
-    ],
-    "require": {}
+    "files": [
+      "Routing/routes.php"
+    ]
+  },
+  "authors": [
+    {
+      "name": "Ikumo Takahashi",
+      "email": "ikumo1118free@gmail.com"
+    }
+  ],
+  "require": {}
 }
