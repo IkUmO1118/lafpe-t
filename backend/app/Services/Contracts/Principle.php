@@ -1,11 +1,11 @@
 <?php
 
-namespace app\Services\Contract;
+namespace app\Services\Contracts;
 
 interface Principle
 {
   public static function getPrinciple(): string;
   public function getTotalScore(): float;
   public function addTotalScore(float $score): void;
-  public function calculate(array $res): float;
+  public function calculate(): float;
 }

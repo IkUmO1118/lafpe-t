@@ -1,13 +1,14 @@
 <?php
 
-namespace app\Services\Contract;
+namespace app\Services\Contracts;
 
-use app\Services\Contract\Principle;
+use app\Services\Contracts\Principle;
 use config\PrincipleConfig;
 use Exception;
 
 abstract class AbstractPrinciple implements Principle
 {
+  protected array $res = [];
   protected static ?string $principle = null;
   protected static array $questionList = [];
   protected float $totalScore = 0;
@@ -15,8 +16,16 @@ abstract class AbstractPrinciple implements Principle
   protected array $dynamicPoints = [];
   protected array $weightings = [];
 
-  public function __construct()
+  public function __construct(array $res)
   {
+    $this->res = $res;
+
+    foreach (static::$questionList as $questionKey) {
+      if (!array_key_exists($questionKey, $this->res)) {
+        throw new Exception("Missing key in input array: {$questionKey}");
+      }
+    }
+
     $this->setUpMaps();
   }
 
@@ -49,11 +58,9 @@ abstract class AbstractPrinciple implements Principle
         }
       }
     }
-
-    $test = $this->calculate([]);
   }
 
-  public abstract function calculate(array $res): float;
+  public abstract function calculate(): float;
 
   public function getTotalScore(): float
   {
