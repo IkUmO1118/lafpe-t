@@ -5,6 +5,7 @@
       "app\\": "app/",
       "Controllers\\": "app/Controllers/",
       "Services\\": "app/Services/",
+      "Contracts\\": "app/Services/Contracts/",
       "config\\": "config/",
       "Routing\\": "Routing/"
     },
