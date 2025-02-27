@@ -1,13 +1,13 @@
 {
   "principle1": {
-    "Q3": {
+    "Q13": {
       "staticPoint": 5.0,
       "weighting": {
         "0": 0.5,
         "1": 0.5
       }
     },
-    "Q13": {
+    "Q3": {
       "staticPoint": 5.0,
       "dynamicPoint": {
         "openRack": {
