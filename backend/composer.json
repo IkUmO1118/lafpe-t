@@ -7,6 +7,8 @@
       "Services\\": "app/Services/",
       "Contracts\\": "app/Services/Contracts/",
       "config\\": "config/",
+      "Response\\": "Response",
+      "Render\\": "Response/Render",
       "Routing\\": "Routing/"
     },
     "files": [
