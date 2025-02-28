@@ -38,7 +38,7 @@ class CalcPrinciple2 extends AbstractPrinciple
       );
 
       $this->addTotalScore($totalStaticScore * $totalWeighting);
-      echo 'Q1: ' . $totalStaticScore * $totalWeighting . PHP_EOL;
+      echo "Principle 2" . PHP_EOL . 'Q1: ' . $totalStaticScore * $totalWeighting . PHP_EOL;
     }
   }
 

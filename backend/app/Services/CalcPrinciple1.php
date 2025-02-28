@@ -37,7 +37,7 @@ class CalcPrinciple1 extends AbstractPrinciple
 
       $this->addTotalScore($totalDynamicPoint);
     }
-    echo "Q3: " . $totalStaticPoint + $totalDynamicPoint . PHP_EOL;
+    echo "Principle 1" . PHP_EOL . "Q3: " . $totalStaticPoint + $totalDynamicPoint . PHP_EOL;
   }
 
   private function calcQ13(): void
