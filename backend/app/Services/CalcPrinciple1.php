@@ -23,16 +23,19 @@ class CalcPrinciple1 extends AbstractPrinciple
 
     if (isset($resQ3) && !empty($resQ3)) {
       $totalStaticPoint = $this->staticPoints['Q3'] ?? 0;
+      $totalDynamicPoint = 0;
+
       $this->addTotalScore($totalStaticPoint);
 
-      // 各項目のisCheckedを確認し、trueの場合は対応するポイントを加算
-      foreach ($resQ3 as $key => $value) {
-        if (isset($value['isChecked']) && $value['isChecked']) {
-          $times = $value['times'] ?? 0;
-          $dynamicPoint = $this->dynamicPoints['Q3'][$key][$times] ?? 0;
-          $this->addTotalScore($dynamicPoint);
+      foreach ($resQ3 as $rackKey => $rackValue) {
+        if (isset($rackValue['isChecked']) && $rackValue['isChecked']) {
+          $times = $rackValue['times'] ?? 0;
+
+          $totalDynamicPoint += $this->dynamicPoints['Q3'][$rackKey][$times] ?? 0;
         }
       }
+
+      $this->addTotalScore($totalDynamicPoint);
     }
   }
 
