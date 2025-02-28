@@ -1,7 +1,9 @@
 <?php
 
+namespace Response;
+
 interface HTTPRenderer
 {
   public function getFields(): array;
-  public function getContents(): string;
+  public function getContent(): string;
 }
