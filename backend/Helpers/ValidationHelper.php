@@ -4,7 +4,7 @@ namespace Helpers;
 
 class ValidationHelper
 {
-  public static function checkRequiredQuestions(array $data)
+  public static function checkRequiredQuestions(array $data): array
   {
     if (!is_array($data)) {
       return false;
@@ -14,10 +14,10 @@ class ValidationHelper
 
     foreach ($requiredQuestions as $question) {
       if (!isset($data[$question])) {
-        return false;
+        throw new \InvalidArgumentException('The provided value is not a valid data.');
       }
     }
 
-    return true;
+    return $data;
   }
 }
