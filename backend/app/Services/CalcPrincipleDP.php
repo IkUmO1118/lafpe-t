@@ -24,8 +24,6 @@ class CalcPrincipleDP extends AbstractPrinciple
     if ($resQ4 === 0 || $resQ4) {
       $this->addTotalScore($this->staticPoints["Q4"] * $this->weightings["Q4"][$resQ4]);
     }
-
-    echo "Principle DP" . PHP_EOL . 'Q4: ' . $this->staticPoints["Q4"] * $this->weightings["Q4"][$resQ4] . PHP_EOL;
   }
 
   public function calcQ11(): void
@@ -44,7 +42,6 @@ class CalcPrincipleDP extends AbstractPrinciple
       );
 
       $this->addTotalScore($totalStaticScore * $totalWeighting);
-      echo 'Q11: ' . $totalStaticScore * $totalWeighting . PHP_EOL;
     }
   }
 }

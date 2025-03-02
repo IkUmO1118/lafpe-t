@@ -38,8 +38,6 @@ class CalcPrinciple5 extends AbstractPrinciple
 
       $this->addTotalScore($totalWeighting * $totalStaticPoint);
     }
-
-    echo "Principle 5" . PHP_EOL . 'Q3: ' . $totalWeighting * $this->staticPoints['Q3'] . PHP_EOL;
   }
   private function calcQ12(): void
   {
@@ -50,7 +48,5 @@ class CalcPrinciple5 extends AbstractPrinciple
 
       $this->addTotalScore($scoreMap[min(count($res12), 4)]);
     }
-
-    echo "Q12: " . $scoreMap[min(count($res12), 4)] . PHP_EOL;
   }
 }

@@ -43,8 +43,6 @@ class CalcPrinciple3 extends AbstractPrinciple
 
       $this->addTotalScore($totalWeighting * $totalStaticPoint);
     }
-
-    echo "Principle 3" . PHP_EOL . 'Q1: ' . $totalWeighting * $this->staticPoints['Q3'] . PHP_EOL;
   }
 
   private function calcQ4(): void
@@ -54,8 +52,6 @@ class CalcPrinciple3 extends AbstractPrinciple
     if ($resQ4 === 0 || $resQ4) {
       $this->addTotalScore($this->staticPoints["Q4"] * $this->weightings["Q4"][$resQ4]);
     }
-
-    echo 'Q4: ' . $this->staticPoints["Q4"] * $this->weightings["Q4"][$resQ4] . PHP_EOL;
   }
 
   private function calcQ5(): void
@@ -65,8 +61,6 @@ class CalcPrinciple3 extends AbstractPrinciple
     if ($resQ5 === 0 || $resQ5) {
       $this->addTotalScore($this->staticPoints["Q5"] * $this->weightings["Q5"][$resQ5]);
     }
-
-    echo 'Q5: ' . $this->staticPoints["Q5"] * $this->weightings["Q5"][$resQ5] . PHP_EOL;
   }
 
   private function calcQ6(): void
@@ -76,8 +70,6 @@ class CalcPrinciple3 extends AbstractPrinciple
     if ($resQ6 === 0 || $resQ6) {
       $this->addTotalScore($this->staticPoints["Q6"] * $this->weightings["Q6"][$resQ6]);
     }
-
-    echo 'Q6: ' . $this->staticPoints["Q6"] * $this->weightings["Q6"][$resQ6] . PHP_EOL;
   }
 
   private function calcQ7(): void
@@ -96,7 +88,6 @@ class CalcPrinciple3 extends AbstractPrinciple
       );
 
       $this->addTotalScore($totalStaticScore * $totalWeighting);
-      echo 'Q7: ' . $totalStaticScore * $totalWeighting . PHP_EOL;
     }
   }
 
@@ -116,7 +107,6 @@ class CalcPrinciple3 extends AbstractPrinciple
       );
 
       $this->addTotalScore($totalStaticScore * $totalWeighting);
-      echo 'Q8: ' . $totalStaticScore * $totalWeighting . PHP_EOL;
     }
   }
 
@@ -136,7 +126,6 @@ class CalcPrinciple3 extends AbstractPrinciple
       );
 
       $this->addTotalScore($totalStaticScore * $totalWeighting);
-      echo 'Q9: ' . $totalStaticScore * $totalWeighting . PHP_EOL;
     }
   }
 }
