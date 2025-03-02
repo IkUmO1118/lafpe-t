@@ -53,9 +53,6 @@ class DiagnosisController
 
     if (!$result) throw new Exception("Could not find a single part in database");
 
-    echo "\nCalculation results:\n";
-    print_r($result);
-
     return $result;
   }
 

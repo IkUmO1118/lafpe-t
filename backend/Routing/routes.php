@@ -15,7 +15,7 @@ return [
 
       $controller = new DiagnosisController($data);
       $diagnosis = $controller->store();
-      return new JSONRenderer(['diagnosis' => $diagnosis]);
+      return new JSONRenderer(["message" => "success", 'diagnosis' => $diagnosis]);
     },
 
     'PUT' => function (): HTTPRenderer {
