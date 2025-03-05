@@ -1,5 +1,9 @@
 {
   "name": "ikumo1118/backend",
+  "scripts": {
+    "run": "php -S localhost:8000",
+    "test": "./vendor/bin/phpunit"
+  },
   "autoload": {
     "psr-4": {
       "app\\": "app/",
@@ -11,10 +15,18 @@
       "Response\\": "Response/",
       "Render\\": "Response/Render/",
       "Routing\\": "Routing/"
-    },
-    "files": [
-      "Routing/routes.php"
-    ]
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/",
+      "Tests\\Feature\\": "tests/Feature/",
+      "Tests\\Integration\\": "tests/Integration/",
+      "Tests\\Unit\\": "tests/Unit/",
+      "Tests\\Unit\\Controllers\\": "tests/Unit/Controllers/",
+      "Tests\\Unit\\Services\\": "tests/Unit/Services/",
+      "Tests\\Unit\\Helpers\\": "tests/Unit/Helpers/"
+    }
   },
   "authors": [
     {
@@ -22,5 +34,8 @@
       "email": "ikumo1118free@gmail.com"
     }
   ],
-  "require": {}
+  "require-dev": {
+    "phpunit/phpunit": "^10",
+    "mockery/mockery": "^1.6"
+  }
 }
