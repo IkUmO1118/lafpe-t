@@ -89,14 +89,16 @@ if (isset($routes[$path])) {
 
       // ヘッダーの設定
       foreach ($renderer->getFields() as $name => $value) {
-        // ヘッダーに対する単純な検証を実行します。
-        $sanitized_value = filter_var($value, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+        // ヘッダーに対する単純な検証を実行
+        $sanitized_value = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
 
+        // サニタイズ後の値が元の値と一致するか確認します。
         if ($sanitized_value && $sanitized_value === $value) {
           header("{$name}: {$sanitized_value}");
         } else {
           // ヘッダー設定に失敗した場合、ログに記録するか処理します。
           // エラー処理によっては、例外をスローするか、デフォルトのまま続行することもできます。
+          error_log("Failed setting header - original name: '$name', sanitized name: '$sanitized_name', original value: '$value', sanitized value: '$sanitized_value'");
           http_response_code(500);
           if ($DEBUG) print("Failed setting header - original: '$value', sanitized: '$sanitized_value'");
           exit;
