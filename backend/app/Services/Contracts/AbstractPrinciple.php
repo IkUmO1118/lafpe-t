@@ -1,9 +1,9 @@
 <?php
 
-namespace app\Services\Contracts;
+namespace App\Services\Contracts;
 
-use app\Services\Contracts\Principle;
-use config\PrincipleConfig;
+use App\Services\Contracts\Principle;
+use Config\PrincipleConfig;
 use Exception;
 
 abstract class AbstractPrinciple implements Principle

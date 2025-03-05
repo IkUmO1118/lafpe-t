@@ -2,7 +2,7 @@
 
 namespace Routing;
 
-use app\Controllers\DiagnosisController;
+use App\Controllers\DiagnosisController;
 use Helpers\ValidationHelper;
 use Response\HTTPRenderer;
 use Response\Render\JSONRenderer;

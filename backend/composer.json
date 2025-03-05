@@ -1,16 +1,16 @@
 {
   "name": "ikumo1118/backend",
   "scripts": {
-    "run": "php -S localhost:8000",
+    "server": "php -S localhost:8000",
     "test": "./vendor/bin/phpunit"
   },
   "autoload": {
     "psr-4": {
-      "app\\": "app/",
+      "App\\": "app/",
       "Controllers\\": "app/Controllers/",
       "Services\\": "app/Services/",
       "Contracts\\": "app/Services/Contracts/",
-      "config\\": "config/",
+      "Config\\": "config/",
       "Helpers\\": "Helpers/",
       "Response\\": "Response/",
       "Render\\": "Response/Render/",

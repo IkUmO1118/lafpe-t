@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Services\Contracts;
+namespace App\Services\Contracts;
 
 interface Principle
 {

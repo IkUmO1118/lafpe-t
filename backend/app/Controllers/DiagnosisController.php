@@ -1,13 +1,13 @@
 <?php
 
-namespace app\Controllers;
+namespace App\Controllers;
 
-use app\Services\CalcPrinciple1;
-use app\Services\CalcPrinciple2;
-use app\Services\CalcPrinciple3;
-use app\Services\CalcPrinciple4;
-use app\Services\CalcPrinciple5;
-use app\Services\CalcPrincipleDP;
+use App\Services\CalcPrinciple1;
+use App\Services\CalcPrinciple2;
+use App\Services\CalcPrinciple3;
+use App\Services\CalcPrinciple4;
+use App\Services\CalcPrinciple5;
+use App\Services\CalcPrincipleDP;
 use Exception;
 
 class DiagnosisController

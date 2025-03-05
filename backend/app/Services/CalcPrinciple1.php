@@ -1,8 +1,8 @@
 <?php
 
-namespace app\Services;
+namespace App\Services;
 
-use app\Services\Contracts\AbstractPrinciple;
+use App\Services\Contracts\AbstractPrinciple;
 
 class CalcPrinciple1 extends AbstractPrinciple
 {
