@@ -34,10 +34,17 @@ class CalcPrinciple1 extends AbstractPrinciple
     $hasChecked = false;
 
     foreach ($resQ3 as $rackKey => $rackValue) {
+      if ($rackValue['isChecked'] === null) {
+        throw new \Exception("isChecked value cannot be null");
+      }
+
       if (isset($rackValue['isChecked']) && $rackValue['isChecked']) {
         $hasChecked = true;
-        if (!isset($rackValue['times']) || !isset($rackValue['per'])) {
-          throw new Exception("Required parameters 'times' and 'per' are missing for checked rack: " . $rackKey);
+        if (!isset($rackValue['per']) || $rackValue['per'] === null) {
+          throw new \Exception("Per value cannot be null for checked rack");
+        }
+        if (!isset($rackValue['times']) || $rackValue['times'] === null) {
+          throw new \Exception("Times value cannot be null for checked rack");
         }
 
         $times = $rackValue['times'];

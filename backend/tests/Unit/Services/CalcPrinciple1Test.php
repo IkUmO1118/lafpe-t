@@ -4,7 +4,6 @@ namespace Tests\Unit\Services;
 
 use PHPUnit\Framework\TestCase;
 use App\Services\CalcPrinciple1;
-use ReflectionClass;
 
 class CalcPrinciple1Test extends TestCase
 {
@@ -165,6 +164,36 @@ class CalcPrinciple1Test extends TestCase
         'isolator' => ['isChecked' => false]
       ],
       'Q13' => [-1] //invalid value
+    ];
+
+    $principle1 = new CalcPrinciple1($data);
+    $principle1->calculate();
+  }
+
+  public function testNullPerParameter()
+  {
+    $this->expectException(\Exception::class);
+
+    $data = [
+      'Q3' => [
+        'positiveRack' => ['isChecked' => true, 'per' => null, 'times' => 3],
+      ],
+      'Q13' => [0]
+    ];
+
+    $principle1 = new CalcPrinciple1($data);
+    $principle1->calculate();
+  }
+
+  public function testNullTimesParameter()
+  {
+    $this->expectException(\Exception::class);
+
+    $data = [
+      'Q3' => [
+        'positiveRack' => ['isChecked' => true, 'per' => 0, 'times' => null],
+      ],
+      'Q13' => [0]
     ];
 
     $principle1 = new CalcPrinciple1($data);
