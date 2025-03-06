@@ -8,14 +8,6 @@ use ReflectionClass;
 
 class CalcPrinciple1Test extends TestCase
 {
-  private function invokeMethod(&$object, $methodName, array $parameters = [])
-  {
-    $reflection = new ReflectionClass(get_class($object));
-    $method = $reflection->getMethod($methodName);
-    $method->setAccessible(true);
-    return $method->invokeArgs($object, $parameters);
-  }
-
   public function testCalculate_FullData()
   {
     $data = [
