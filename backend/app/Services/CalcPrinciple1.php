@@ -21,9 +21,23 @@ class CalcPrinciple1 extends AbstractPrinciple
   private function calcQ3(): void
   {
     $resQ3 = $this->res['Q3'];
+    $requiredRacks = [
+      'openRack',
+      'IVCRack',
+      'positiveRack',
+      'negativeRack',
+      'oneWayAirflowRack',
+      'isolator'
+    ];
 
     if (!isset($resQ3) || empty($resQ3)) {
       throw new \Exception("Empty data for Q3");
+    }
+
+    foreach ($requiredRacks as $rack) {
+      if (!isset($resQ3[$rack])) {
+        throw new \Exception("Missing required racks in Q3");
+      }
     }
 
     $totalStaticPoint = $this->staticPoints['Q3'] ?? 0;

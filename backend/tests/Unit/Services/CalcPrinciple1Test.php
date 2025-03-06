@@ -302,4 +302,25 @@ class CalcPrinciple1Test extends TestCase
     $principle1 = new CalcPrinciple1($data);
     $principle1->calculate();
   }
+
+  public function testQ3_MissingRequiredRacks()
+  {
+    $this->expectException(\Exception::class);
+    $this->expectExceptionMessage("Missing required racks in Q3");
+
+    $data = [
+      'Q3' => [
+        'openRack' => ['isChecked' => false],
+        'IVCRack' => ['isChecked' => false],
+        'positiveRack' => ['isChecked' => true, 'per' => 0, 'times' => 3],
+        'negativeRack' => ['isChecked' => false],
+        // oneWayAirflowRack is missing
+        'isolator' => ['isChecked' => false]
+      ],
+      'Q13' => [0]
+    ];
+
+    $principle1 = new CalcPrinciple1($data);
+    $principle1->calculate();
+  }
 }
