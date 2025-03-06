@@ -94,9 +94,29 @@ class CalcPrinciple1Test extends TestCase
     $this->expectException(\Exception::class);
 
     $incompleteData = [
-      'Q13' => [0] // Q3が欠落している
+      'Q13' => [0] // Missing Q3
     ];
 
     new CalcPrinciple1($incompleteData);
+  }
+
+  public function testCalcQ3_AllRacksFalse()
+  {
+    $this->expectException(\Exception::class);
+
+    $data = [
+      'Q3' => [
+        'openRack' => ['isChecked' => false],
+        'IVCRack' => ['isChecked' => false],
+        'positiveRack' => ['isChecked' => false],
+        'negativeRack' => ['isChecked' => false],
+        'oneWayAirflowRack' => ['isChecked' => false],
+        'isolator' => ['isChecked' => false]
+      ],
+      'Q13' => [0]
+    ];
+
+    $principle1 = new CalcPrinciple1($data);
+    $principle1->calculate();
   }
 }

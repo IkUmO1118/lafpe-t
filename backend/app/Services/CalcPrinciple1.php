@@ -31,8 +31,11 @@ class CalcPrinciple1 extends AbstractPrinciple
 
     $this->addTotalScore($totalStaticPoint);
 
+    $hasChecked = false;
+
     foreach ($resQ3 as $rackKey => $rackValue) {
       if (isset($rackValue['isChecked']) && $rackValue['isChecked']) {
+        $hasChecked = true;
         if (!isset($rackValue['times']) || !isset($rackValue['per'])) {
           throw new Exception("Required parameters 'times' and 'per' are missing for checked rack: " . $rackKey);
         }
@@ -41,6 +44,10 @@ class CalcPrinciple1 extends AbstractPrinciple
 
         $totalDynamicPoint += $this->dynamicPoints['Q3'][$rackKey][$times];
       }
+    }
+
+    if (!$hasChecked) {
+      throw new Exception("At least one rack must be checked for Q3");
     }
 
     $this->addTotalScore($totalDynamicPoint);
