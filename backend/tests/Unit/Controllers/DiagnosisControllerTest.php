@@ -10,26 +10,26 @@ class DiagnosisControllerTest extends TestCase
   public function testStore_FullData()
   {
     $data = [
-      'Q1' => ['0', '1'],
-      'Q2' => ['0'],
+      'Q1' => [0],
+      'Q2' => [0, 1],
       'Q3' => [
-        'openRack' => ['isChecked' => true, 'times' => 2],
+        'openRack' => ['isChecked' => false],
         'IVCRack' => ['isChecked' => false],
-        'positiveRack' => ['isChecked' => true, 'times' => 3],
+        'positiveRack' => ['isChecked' => true, 'per' => 0, 'times' => 3],
         'negativeRack' => ['isChecked' => false],
-        'oneWayAirflowRack' => ['isChecked' => true, 'times' => 2],
+        'oneWayAirflowRack' => ['isChecked' => true, 'per' => 4, 'times' => 2],
         'isolator' => ['isChecked' => false]
       ],
       'Q4' => 1,
-      'Q5' => 1,
-      'Q6' => 1,
-      'Q7' => ['0', '1'],
-      'Q8' => ['1', '2'],
-      'Q9' => ['1', '2'],
-      'Q10' => ['1', '2'],
-      'Q11' => ['1', '2'],
-      'Q12' => ['0', '1'],
-      'Q13' => ['0', '1']
+      'Q5' => 0,
+      'Q6' => 2,
+      'Q7' => [1],
+      'Q8' => [0],
+      'Q9' => [0, 1],
+      'Q10' => [3],
+      'Q11' => [0, 1],
+      'Q12' => [1, 2, 4, 8, 11, 12],
+      'Q13' => [0]
     ];
 
 
