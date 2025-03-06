@@ -51,7 +51,7 @@ class DiagnosisController
       'principleDP' => $principleDP->calculate(),
     ];
 
-    if (!$result) throw new Exception("Could not find a single part in database");
+    if (!$result) throw new Exception('Failed to store diagnosis data');
 
     return $result;
   }
