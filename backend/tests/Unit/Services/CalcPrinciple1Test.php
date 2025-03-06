@@ -137,4 +137,25 @@ class CalcPrinciple1Test extends TestCase
     $principle1 = new CalcPrinciple1($data);
     $principle1->calculate();
   }
+
+  public function testQ13_TooManyValues()
+  {
+    $this->expectException(\Exception::class);
+    $this->expectExceptionMessage("Q13 array must contain 2 or fewer values");
+
+    $data = [
+      'Q3' => [
+        'openRack' => ['isChecked' => false],
+        'IVCRack' => ['isChecked' => false],
+        'positiveRack' => ['isChecked' => true, 'per' => 0, 'times' => 3],
+        'negativeRack' => ['isChecked' => false],
+        'oneWayAirflowRack' => ['isChecked' => true, 'per' => 4, 'times' => 2],
+        'isolator' => ['isChecked' => false]
+      ],
+      'Q13' => [0, 1, 2] //too many values
+    ];
+
+    $principle1 = new CalcPrinciple1($data);
+    $principle1->calculate();
+  }
 }
