@@ -176,7 +176,12 @@ class CalcPrinciple1Test extends TestCase
 
     $data = [
       'Q3' => [
+        'openRack' => ['isChecked' => false],
+        'IVCRack' => ['isChecked' => false],
         'positiveRack' => ['isChecked' => true, 'per' => null, 'times' => 3],
+        'negativeRack' => ['isChecked' => false],
+        'oneWayAirflowRack' => ['isChecked' => true, 'per' => 4, 'times' => 2],
+        'isolator' => ['isChecked' => false]
       ],
       'Q13' => [0]
     ];
@@ -191,7 +196,12 @@ class CalcPrinciple1Test extends TestCase
 
     $data = [
       'Q3' => [
+        'openRack' => ['isChecked' => false],
+        'IVCRack' => ['isChecked' => false],
         'positiveRack' => ['isChecked' => true, 'per' => 0, 'times' => null],
+        'negativeRack' => ['isChecked' => false],
+        'oneWayAirflowRack' => ['isChecked' => true, 'per' => 4, 'times' => 2],
+        'isolator' => ['isChecked' => false]
       ],
       'Q13' => [0]
     ];
@@ -206,12 +216,53 @@ class CalcPrinciple1Test extends TestCase
 
     $data = [
       'Q3' => [
+        'openRack' => ['isChecked' => false],
+        'IVCRack' => ['isChecked' => false],
         'positiveRack' => ['isChecked' => true, 'per' => 0, 'times' => 3],
+        'negativeRack' => ['isChecked' => false],
+        'oneWayAirflowRack' => ['isChecked' => true, 'per' => 4, 'times' => 2],
+        'isolator' => ['isChecked' => false]
       ],
       'Q13' => [null]
     ];
 
     $principle1 = new CalcPrinciple1($data);
     $principle1->calculate();
+  }
+
+  public function testQ13_ExactlyTwoValues()
+  {
+    $data = [
+      'Q3' => [
+        'openRack' => ['isChecked' => false],
+        'IVCRack' => ['isChecked' => false],
+        'positiveRack' => ['isChecked' => true, 'per' => 0, 'times' => 3],
+        'negativeRack' => ['isChecked' => false],
+        'oneWayAirflowRack' => ['isChecked' => true, 'per' => 4, 'times' => 2],
+        'isolator' => ['isChecked' => false]
+      ],
+      'Q13' => [0, 1] // 正確に2つの値
+    ];
+    $principle1 = new CalcPrinciple1($data);
+    $score = $principle1->calculate();
+    $this->assertIsFloat($score);
+  }
+
+  public function testQ3_MinMaxValues()
+  {
+    $data = [
+      'Q3' => [
+        'openRack' => ['isChecked' => false],
+        'IVCRack' => ['isChecked' => false],
+        'positiveRack' => ['isChecked' => true, 'per' => 0, 'times' => 0], //最小値
+        'negativeRack' => ['isChecked' => false],
+        'oneWayAirflowRack' => ['isChecked' => true, 'per' => 4, 'times' => 3], //最大値
+        'isolator' => ['isChecked' => false]
+      ],
+      'Q13' => [0]
+    ];
+    $principle1 = new CalcPrinciple1($data);
+    $score = $principle1->calculate();
+    $this->assertIsFloat($score);
   }
 }
