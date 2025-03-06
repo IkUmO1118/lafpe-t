@@ -88,4 +88,15 @@ class CalcPrinciple1Test extends TestCase
     $principle1 = new CalcPrinciple1($data);
     $principle1->calculate();
   }
+
+  public function testConstructor_MissingQuestion()
+  {
+    $this->expectException(\Exception::class);
+
+    $incompleteData = [
+      'Q13' => [0] // Q3が欠落している
+    ];
+
+    new CalcPrinciple1($incompleteData);
+  }
 }
