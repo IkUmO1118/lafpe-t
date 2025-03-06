@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Services\Contracts\AbstractPrinciple;
+use Exception;
 
 class CalcPrinciple1 extends AbstractPrinciple
 {
@@ -29,9 +30,13 @@ class CalcPrinciple1 extends AbstractPrinciple
 
       foreach ($resQ3 as $rackKey => $rackValue) {
         if (isset($rackValue['isChecked']) && $rackValue['isChecked']) {
-          $times = $rackValue['times'] ?? 0;
+          if (!isset($rackValue['times']) || !isset($rackValue['per'])) {
+            throw new Exception("Required parameters 'times' and 'per' are missing for checked rack: " . $rackKey);
+          }
 
-          $totalDynamicPoint += $this->dynamicPoints['Q3'][$rackKey][$times] ?? 0;
+          $times = $rackValue['times'];
+
+          $totalDynamicPoint += $this->dynamicPoints['Q3'][$rackKey][$times];
         }
       }
 
