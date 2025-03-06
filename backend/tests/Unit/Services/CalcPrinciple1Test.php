@@ -265,4 +265,41 @@ class CalcPrinciple1Test extends TestCase
     $score = $principle1->calculate();
     $this->assertIsFloat($score);
   }
+
+  public function testQ3_InvalidDataTypes()
+  {
+    $this->expectException(\Exception::class);
+    $data = [
+      'Q3' => [
+        'openRack' => ['isChecked' => false],
+        'IVCRack' => ['isChecked' => false],
+        'positiveRack' => ['isChecked' => true, 'per' => "invalid", 'times' => "3"], // 文字列型
+        'negativeRack' => ['isChecked' => false],
+        'oneWayAirflowRack' => ['isChecked' => true, 'per' => 4, 'times' => 2],
+        'isolator' => ['isChecked' => false]
+      ],
+      'Q13' => ["0"]
+    ];
+    $principle1 = new CalcPrinciple1($data);
+    $principle1->calculate();
+  }
+
+  public function testQ13_InvalidDataTypes()
+  {
+    $this->expectException(\Exception::class);
+
+    $data = [
+      'Q3' => [
+        'openRack' => ['isChecked' => false],
+        'IVCRack' => ['isChecked' => false],
+        'positiveRack' => ['isChecked' => true, 'per' => 0, 'times' => 3],
+        'negativeRack' => ['isChecked' => false],
+        'oneWayAirflowRack' => ['isChecked' => true, 'per' => 4, 'times' => 2],
+        'isolator' => ['isChecked' => false]
+      ],
+      'Q13' => ["0"]
+    ];
+    $principle1 = new CalcPrinciple1($data);
+    $principle1->calculate();
+  }
 }

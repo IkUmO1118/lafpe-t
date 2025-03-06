@@ -40,14 +40,14 @@ class CalcPrinciple1 extends AbstractPrinciple
 
       if (isset($rackValue['isChecked']) && $rackValue['isChecked']) {
         $hasChecked = true;
-        if (!isset($rackValue['per']) || $rackValue['per'] === null) {
-          throw new \Exception("Per value cannot be null for checked rack");
+        if (!isset($rackValue['per']) || $rackValue['per'] === null || !is_numeric($rackValue['per'])) {
+          throw new \Exception("Per value cannot be null and numeric for checked rack");
         }
-        if (!isset($rackValue['times']) || $rackValue['times'] === null) {
-          throw new \Exception("Times value cannot be null for checked rack");
+        if (!isset($rackValue['times']) || $rackValue['times'] === null || !is_numeric($rackValue['times'])) {
+          throw new \Exception("Times value cannot be null and numeric for checked rack");
         }
 
-        $times = $rackValue['times'];
+        $times = (int)$rackValue['times'];
 
         if (!isset($this->dynamicPoints['Q3'][$rackKey][$times])) {
           throw new Exception("Invalid value for rack {$rackKey}: times value {$times} not found in configuration");
@@ -75,8 +75,8 @@ class CalcPrinciple1 extends AbstractPrinciple
       throw new \Exception("Q13 array must contain 2 or fewer values");
     }
     foreach ($resQ13 as $value) {
-      if ($value === null) {
-        throw new \Exception("Q13 array elements cannot be null");
+      if ($value === null || (!is_int($value) && !is_float($value))) {
+        throw new \Exception("Q13 array elements cannot be null and must be numeric");
       }
     }
 
