@@ -33,7 +33,7 @@ class CalcPrinciple1Test extends TestCase
     $principle1 = new CalcPrinciple1($data);
     $score = $principle1->calculate();
 
-    $this->assertIsFloat($score);
+    $this->assertEquals(7.5, $score);
   }
 
   public function testCheckedRack_WithoutParameters()
@@ -89,12 +89,30 @@ class CalcPrinciple1Test extends TestCase
     $principle1->calculate();
   }
 
-  public function testConstructor_MissingQuestion()
+  public function testConstructor_MissingQ3()
   {
     $this->expectException(\Exception::class);
 
     $incompleteData = [
-      'Q13' => [0] // Missing Q3
+      'Q13' => [0]
+    ];
+
+    new CalcPrinciple1($incompleteData);
+  }
+
+  public function testConstructor_MissingQ13()
+  {
+    $this->expectException(\Exception::class);
+
+    $incompleteData = [
+      'Q3' => [
+        'openRack' => ['isChecked' => false],
+        'IVCRack' => ['isChecked' => false],
+        'positiveRack' => ['isChecked' => true, 'per' => 0, 'times' => 3],
+        'negativeRack' => ['isChecked' => false],
+        'oneWayAirflowRack' => ['isChecked' => true, 'per' => 4, 'times' => 2],
+        'isolator' => ['isChecked' => false]
+      ]
     ];
 
     new CalcPrinciple1($incompleteData);
