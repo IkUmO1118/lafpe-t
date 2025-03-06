@@ -158,4 +158,24 @@ class CalcPrinciple1Test extends TestCase
     $principle1 = new CalcPrinciple1($data);
     $principle1->calculate();
   }
+
+  public function testInvalidDynamicPointValue()
+  {
+    $this->expectException(\Exception::class);
+
+    $data = [
+      'Q3' => [
+        'openRack' => ['isChecked' => false],
+        'IVCRack' => ['isChecked' => false],
+        'positiveRack' => ['isChecked' => true, 'per' => 0, 'times' => 3],
+        'negativeRack' => ['isChecked' => false],
+        'oneWayAirflowRack' => ['isChecked' => true, 'per' => 4, 'times' => 99], //invalid value
+        'isolator' => ['isChecked' => false]
+      ],
+      'Q13' => [-1] //invalid value
+    ];
+
+    $principle1 = new CalcPrinciple1($data);
+    $principle1->calculate();
+  }
 }

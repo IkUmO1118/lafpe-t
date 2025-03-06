@@ -42,6 +42,10 @@ class CalcPrinciple1 extends AbstractPrinciple
 
         $times = $rackValue['times'];
 
+        if (!isset($this->dynamicPoints['Q3'][$rackKey][$times])) {
+          throw new Exception("Invalid value for rack {$rackKey}: times value {$times} not found in configuration");
+        }
+
         $totalDynamicPoint += $this->dynamicPoints['Q3'][$rackKey][$times];
       }
     }
@@ -70,6 +74,10 @@ class CalcPrinciple1 extends AbstractPrinciple
     $totalWeighting = array_reduce(
       $resQ13,
       function ($acc, $cur) {
+        if (!isset($this->weightings['Q13'][$cur])) {
+          throw new \Exception("Invalid weighting value for Q13: {$cur}");
+        }
+
         return $acc + ($this->weightings['Q13'][$cur] ?? 0);
       },
       0
