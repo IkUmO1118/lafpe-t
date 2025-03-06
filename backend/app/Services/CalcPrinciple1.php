@@ -23,7 +23,7 @@ class CalcPrinciple1 extends AbstractPrinciple
     $resQ3 = $this->res['Q3'];
 
     if (!isset($resQ3) || empty($resQ3)) {
-      throw new \Exception("Missing key in input array: Q3");
+      throw new \Exception("Empty data for Q3");
     }
 
     $totalStaticPoint = $this->staticPoints['Q3'] ?? 0;
@@ -51,7 +51,7 @@ class CalcPrinciple1 extends AbstractPrinciple
     $resQ13 = $this->res['Q13'];
 
     if (!isset($resQ13) || empty($resQ13)) {
-      throw new \Exception("Missing key in input array: Q13");
+      throw new \Exception("Empty data for Q13");
     }
 
     $totalStaticPoint = $this->staticPoints['Q13'] ?? 0;
