@@ -3,7 +3,7 @@
 namespace Tests\Unit\Controllers;
 
 use PHPUnit\Framework\TestCase;
-use app\Controllers\DiagnosisController;
+use App\Controllers\DiagnosisController;
 
 class DiagnosisControllerTest extends TestCase
 {
