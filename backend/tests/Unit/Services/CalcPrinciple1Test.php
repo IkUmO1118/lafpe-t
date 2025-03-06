@@ -170,7 +170,7 @@ class CalcPrinciple1Test extends TestCase
     $principle1->calculate();
   }
 
-  public function testNullPerParameter()
+  public function testQ3_NullPerParameter()
   {
     $this->expectException(\Exception::class);
 
@@ -185,7 +185,7 @@ class CalcPrinciple1Test extends TestCase
     $principle1->calculate();
   }
 
-  public function testNullTimesParameter()
+  public function testQ3_NullTimesParameter()
   {
     $this->expectException(\Exception::class);
 
@@ -194,6 +194,21 @@ class CalcPrinciple1Test extends TestCase
         'positiveRack' => ['isChecked' => true, 'per' => 0, 'times' => null],
       ],
       'Q13' => [0]
+    ];
+
+    $principle1 = new CalcPrinciple1($data);
+    $principle1->calculate();
+  }
+
+  public function testQ13_NullElement()
+  {
+    $this->expectException(\Exception::class);
+
+    $data = [
+      'Q3' => [
+        'positiveRack' => ['isChecked' => true, 'per' => 0, 'times' => 3],
+      ],
+      'Q13' => [null]
     ];
 
     $principle1 = new CalcPrinciple1($data);

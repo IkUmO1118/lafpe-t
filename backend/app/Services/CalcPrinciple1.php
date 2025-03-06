@@ -71,9 +71,13 @@ class CalcPrinciple1 extends AbstractPrinciple
     if (!isset($resQ13) || empty($resQ13)) {
       throw new \Exception("Empty data for Q13");
     }
-
     if (count($resQ13) > 2) {
       throw new \Exception("Q13 array must contain 2 or fewer values");
+    }
+    foreach ($resQ13 as $value) {
+      if ($value === null) {
+        throw new \Exception("Q13 array elements cannot be null");
+      }
     }
 
     $totalStaticPoint = $this->staticPoints['Q13'] ?? 0;
