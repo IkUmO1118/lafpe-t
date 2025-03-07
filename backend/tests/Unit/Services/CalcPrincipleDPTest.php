@@ -93,4 +93,30 @@ class CalcPrincipleDPTest extends TestCase
     $principle1 = new CalcPrincipleDP($data);
     $principle1->calculate();
   }
+
+  public function testQ4_NullElement()
+  {
+    $this->expectException(\Exception::class);
+
+    $data = [
+      'Q4' => null,
+      'Q11' => [0, 4]
+    ];
+
+    $principle1 = new CalcPrincipleDP($data);
+    $principle1->calculate();
+  }
+
+  public function test11_NullElement()
+  {
+    $this->expectException(\Exception::class);
+
+    $data = [
+      'Q4' => 1,
+      'Q11' => [null]
+    ];
+
+    $principle1 = new CalcPrincipleDP($data);
+    $principle1->calculate();
+  }
 }

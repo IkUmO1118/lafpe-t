@@ -22,13 +22,15 @@ class CalcPrincipleDP extends AbstractPrinciple
   {
     $resQ4 = $this->res['Q4'];
 
-    if ($resQ4 === 0 || $resQ4) {
-      if (!isset($this->weightings["Q4"][$resQ4])) {
-        throw new Exception("Invalid weighting value for Q4: {$resQ4}");
-      }
-
-      $this->addTotalScore($this->staticPoints["Q4"] * $this->weightings["Q4"][$resQ4]);
+    if (!isset($resQ4) || $resQ4 === null) {
+      throw new Exception("Q4 value cannot be null");
     }
+
+    if (!isset($this->weightings["Q4"][$resQ4])) {
+      throw new Exception("Invalid weighting value for Q4: {$resQ4}");
+    }
+
+    $this->addTotalScore($this->staticPoints["Q4"] * $this->weightings["Q4"][$resQ4]);
   }
 
   public function calcQ11(): void
@@ -41,6 +43,12 @@ class CalcPrincipleDP extends AbstractPrinciple
 
     if (count($resQ11) > 4) {
       throw new Exception("Too many values for Q11");
+    }
+
+    foreach ($resQ11 as $value) {
+      if ($value === null || (!is_int($value) && !is_float($value))) {
+        throw new Exception("Q11 array elementes cannot be null and must be numeric");
+      }
     }
 
     $totalStaticScore = $this->staticPoints["Q11"] ?? 0;
