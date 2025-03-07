@@ -59,6 +59,9 @@ class CalcPrinciple4Test extends TestCase
     $principle4->calculate();
   }
 
+  /**
+   * empty data
+   */
   public function testCalcQ1_EmptyData()
   {
     $this->expectException(\Exception::class);
@@ -178,6 +181,38 @@ class CalcPrinciple4Test extends TestCase
     $principle4->calculate();
   }
 
+  /**
+   * all racks are false
+   */
+  public function testCalcQ3_AllRacksFalse()
+  {
+    $this->expectException(\Exception::class);
+
+    $data = [
+      'Q1' => [0],
+      'Q2' => [0, 1],
+      'Q3' => [
+        'openRack' => ['isChecked' => false],
+        'IVCRack' => ['isChecked' => false],
+        'positiveRack' => ['isChecked' => false],
+        'negativeRack' => ['isChecked' => false],
+        'oneWayAirflowRack' => ['isChecked' => false],
+        'isolator' => ['isChecked' => false]
+      ],
+      'Q4' => 1,
+      'Q5' => 0,
+      'Q6' => 2,
+      'Q7' => [1],
+      'Q10' => [3],
+    ];
+
+    $principle4 = new CalcPrinciple4($data);
+    $principle4->calculate();
+  }
+
+  /**
+   * missing questions
+   */
   public function testConstructor_MissingQ1()
   {
     $this->expectException(\Exception::class);
@@ -356,6 +391,9 @@ class CalcPrinciple4Test extends TestCase
     new CalcPrinciple4($data);
   }
 
+  /**
+   * Too many values
+   */
   public function testQ1_TooManyValues()
   {
     $this->expectException(\Exception::class);
