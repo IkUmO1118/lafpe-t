@@ -61,22 +61,6 @@ class CalcPrincipleDPTest extends TestCase
   }
 
   /**
-   * too many values
-   */
-  public function testQ11_TooManyValues()
-  {
-    $this->expectException(\Exception::class);
-
-    $data = [
-      'Q4' => 1,
-      'Q11' => [0, 1, 2, 3, 4] //too many values
-    ];
-
-    $principleDP = new CalcPrincipleDP($data);
-    $principleDP->calculate();
-  }
-
-  /**
    * invalid value
    */
   public function testQ4_InvalidWeightingValue()
@@ -135,6 +119,18 @@ class CalcPrincipleDPTest extends TestCase
   /**
    * check boundary
    */
+  public function testQ11_TooManyValues()
+  {
+    $this->expectException(\Exception::class);
+
+    $data = [
+      'Q4' => 1,
+      'Q11' => [0, 1, 2, 3, 4] //too many values
+    ];
+
+    $principleDP = new CalcPrincipleDP($data);
+    $principleDP->calculate();
+  }
   public function testQ11_ExactlyFourValues()
   {
     $data = [

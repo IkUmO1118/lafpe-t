@@ -92,14 +92,23 @@ class CalcPrinciple5 extends AbstractPrinciple
       throw new Exception("Too many values for Q12");
     }
 
+    $validValues = [];
     foreach ($res12 as $value) {
       if ($value === null || (!is_int($value) && !is_float($value))) {
         throw new Exception("Q12 array elementes cannot be null and must be numeric");
       }
+
+      if ($value < 0 || $value > 14) {
+        throw new Exception("Q12 array elements must be between 0 and 14");
+      }
+
+      $validValues[intval($value)] = true;
     }
+
+    $uniqueValues = array_keys($validValues);
 
     $scoreMap = [0, 1, 3, 4, 6];
 
-    $this->addTotalScore($scoreMap[min(count($res12), 4)]);
+    $this->addTotalScore($scoreMap[min(count($uniqueValues), 4)]);
   }
 }

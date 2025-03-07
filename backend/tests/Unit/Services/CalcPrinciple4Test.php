@@ -392,7 +392,32 @@ class CalcPrinciple4Test extends TestCase
   }
 
   /**
-   * Too many values
+   * invalid value
+   */
+  public function testQ1_InvalidWeightingValue() {}
+  public function testQ2_InvalidWeightingValue() {}
+  public function testQ3_InvalidWeightingValue() {}
+  public function testQ4_InvalidWeightingValue() {}
+  public function testQ5_InvalidWeightingValue() {}
+  public function testQ6_InvalidWeightingValue() {}
+  public function testQ7_InvalidWeightingValue() {}
+  public function testQ10_InvalidWeightingValue() {}
+
+  /**
+   * check null
+   */
+  public function testQ1_NullElement() {}
+  public function testQ2_NullElement() {}
+  public function testQ3_NullPerParameter() {}
+  public function testQ3_NullTimesParameter() {}
+  public function testQ4_NullElement() {}
+  public function testQ5_NullElement() {}
+  public function testQ6_NullElement() {}
+  public function testQ7_NullElement() {}
+  public function testQ10_NullElement() {}
+
+  /**
+   * check boundary
    */
   public function testQ1_TooManyValues()
   {
@@ -495,19 +520,29 @@ class CalcPrinciple4Test extends TestCase
     $principle4->calculate();
   }
 
-  /**
-   * invalid value
-   */
+  public function testQ1_ExactlyTwoValues() {}
+  public function testQ2_ExactlyTwoValues() {}
+  public function testQ7_ExactlyTwoValues() {}
+  public function testQ10_ExactlyFourValues() {}
 
-  /**
-   * check null
-   */
+  public function testQ3_MinMaxValues() {}
 
-  /**
-   * check boundary
-   */
+  public function testQ4_MinValue() {}
+  public function testQ4_MaxValue() {}
+  public function testQ5_MinValue() {}
+  public function testQ5_MaxValue() {}
+  public function testQ6_MinValue() {}
+  public function testQ6_MaxValue() {}
 
   /**
    * invalid data types
    */
+  public function testQ1_InvalidDataType() {}
+  public function testQ2_InvalidDataType() {}
+  public function testQ3_InvalidDataType() {}
+  public function testQ4_InvalidDataType() {}
+  public function testQ5_InvalidDataType() {}
+  public function testQ6_InvalidDataType() {}
+  public function testQ7_InvalidDataType() {}
+  public function testQ10_InvalidDataType() {}
 }

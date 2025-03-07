@@ -157,29 +157,6 @@ class CalcPrinciple5Test extends TestCase
   }
 
   /**
-   * too many values
-   */
-  public function testQ12_TooManyValues()
-  {
-    $this->expectException(\Exception::class);
-
-    $data = [
-      'Q3' => [
-        'openRack' => ['isChecked' => false],
-        'IVCRack' => ['isChecked' => false],
-        'positiveRack' => ['isChecked' => true, 'per' => 0, 'times' => 3],
-        'negativeRack' => ['isChecked' => false],
-        'oneWayAirflowRack' => ['isChecked' => true, 'per' => 4, 'times' => 2],
-        'isolator' => ['isChecked' => false]
-      ],
-      "Q12" => [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15] //too many values
-    ];
-
-    $principle5 = new CalcPrinciple5($data);
-    $principle5->calculate();
-  }
-
-  /**
    * invalid value
    */
   public function testQ3_InvalidWeightingValue()
@@ -192,10 +169,29 @@ class CalcPrinciple5Test extends TestCase
         'IVCRack' => ['isChecked' => false],
         'positiveRack' => ['isChecked' => true, 'per' => 0, 'times' => 3],
         'negativeRack' => ['isChecked' => false],
-        'oneWayAirflowRack' => ['isChecked' => true, 'per' => 4, 'times' => 99], //Invalid value
+        'oneWayAirflowRack' => ['isChecked' => true, 'per' => 99, 'times' => 99], //Invalid value
         'isolator' => ['isChecked' => false]
       ],
       'Q12' => [1, 2, 4, 8, 11, 12],
+    ];
+
+    $principle5 = new CalcPrinciple5($data);
+    $principle5->calculate();
+  }
+  public function testQ12_InvalidWeightingValue()
+  {
+    $this->expectException(\Exception::class);
+
+    $data = [
+      'Q3' => [
+        'openRack' => ['isChecked' => false],
+        'IVCRack' => ['isChecked' => false],
+        'positiveRack' => ['isChecked' => true, 'per' => 0, 'times' => 3],
+        'negativeRack' => ['isChecked' => false],
+        'oneWayAirflowRack' => ['isChecked' => true, 'per' => 4, 'times' => 2],
+        'isolator' => ['isChecked' => false]
+      ],
+      'Q12' => [1, 2, 4, 8, 11, 15],
     ];
 
     $principle5 = new CalcPrinciple5($data);
@@ -266,7 +262,26 @@ class CalcPrinciple5Test extends TestCase
   /**
    * check boundary
    */
-  public function testQ13_ExactlyTwoValues()
+  public function testQ12_TooManyValues()
+  {
+    $this->expectException(\Exception::class);
+
+    $data = [
+      'Q3' => [
+        'openRack' => ['isChecked' => false],
+        'IVCRack' => ['isChecked' => false],
+        'positiveRack' => ['isChecked' => true, 'per' => 0, 'times' => 3],
+        'negativeRack' => ['isChecked' => false],
+        'oneWayAirflowRack' => ['isChecked' => true, 'per' => 4, 'times' => 2],
+        'isolator' => ['isChecked' => false]
+      ],
+      "Q12" => [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15] //too many values
+    ];
+
+    $principle5 = new CalcPrinciple5($data);
+    $principle5->calculate();
+  }
+  public function testQ12_ExactlyTwoValues()
   {
     $data = [
       'Q3' => [
