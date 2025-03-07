@@ -494,4 +494,20 @@ class CalcPrinciple4Test extends TestCase
     $principle4 = new CalcPrinciple4($data);
     $principle4->calculate();
   }
+
+  /**
+   * invalid value
+   */
+
+  /**
+   * check null
+   */
+
+  /**
+   * check boundary
+   */
+
+  /**
+   * invalid data types
+   */
 }

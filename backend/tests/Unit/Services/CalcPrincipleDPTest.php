@@ -20,6 +20,9 @@ class CalcPrincipleDPTest extends TestCase
     $this->assertEquals(5.0, $score);
   }
 
+  /**
+   * empty data
+   */
   public function testCalcQ11_EmptyData()
   {
     $this->expectException(\Exception::class);
@@ -33,6 +36,9 @@ class CalcPrincipleDPTest extends TestCase
     $principleDP->calculate();
   }
 
+  /**
+   * missing
+   */
   public function testConstructor_MissingQ4()
   {
     $this->expectException(\Exception::class);
@@ -54,6 +60,9 @@ class CalcPrincipleDPTest extends TestCase
     new CalcPrincipleDP($data);
   }
 
+  /**
+   * too many values
+   */
   public function testQ11_TooManyValues()
   {
     $this->expectException(\Exception::class);
@@ -67,6 +76,9 @@ class CalcPrincipleDPTest extends TestCase
     $principleDP->calculate();
   }
 
+  /**
+   * invalid value
+   */
   public function testQ4_InvalidWeightingValue()
   {
     $this->expectException(\Exception::class);
@@ -92,6 +104,9 @@ class CalcPrincipleDPTest extends TestCase
     $principleDP->calculate();
   }
 
+  /**
+   * check null
+   */
   public function testQ4_NullElement()
   {
     $this->expectException(\Exception::class);
@@ -117,6 +132,9 @@ class CalcPrincipleDPTest extends TestCase
     $principleDP->calculate();
   }
 
+  /**
+   * check boundary
+   */
   public function testQ11_ExactlyFourValues()
   {
     $data = [
@@ -128,7 +146,6 @@ class CalcPrincipleDPTest extends TestCase
     $score = $principleDP->calculate();
     $this->assertIsFloat($score);
   }
-
   public function testQ4_MinValue()
   {
     $data = [
@@ -152,6 +169,9 @@ class CalcPrincipleDPTest extends TestCase
     $this->assertIsFloat($score);
   }
 
+  /**
+   * invalid data types
+   */
   public function testQ4_InvalidDataType()
   {
     $this->expectException(\Exception::class);

@@ -47,6 +47,9 @@ class CalcPrinciple5Test extends TestCase
     $principle5->calculate();
   }
 
+  /**
+   * empty data
+   */
   public function testCalcQ3_EmptyData()
   {
     $this->expectException(\Exception::class);
@@ -79,6 +82,9 @@ class CalcPrinciple5Test extends TestCase
     $principle5->calculate();
   }
 
+  /**
+   * missing
+   */
   public function testConstructor_MissingQ3()
   {
     $this->expectException(\Exception::class);
@@ -106,7 +112,30 @@ class CalcPrinciple5Test extends TestCase
 
     new CalcPrinciple5($data);
   }
+  public function testQ3_MissingRequiredRacks()
+  {
+    $this->expectException(\Exception::class);
+    $this->expectExceptionMessage("Missing required racks in Q3");
 
+    $data = [
+      'Q3' => [
+        'openRack' => ['isChecked' => false],
+        'IVCRack' => ['isChecked' => false],
+        'positiveRack' => ['isChecked' => true, 'per' => 0, 'times' => 3],
+        'negativeRack' => ['isChecked' => false],
+        // oneWayAirflowRack is missing
+        'isolator' => ['isChecked' => false]
+      ],
+      'Q12' => [1, 2, 4, 8, 11, 12]
+    ];
+
+    $principle5 = new CalcPrinciple5($data);
+    $principle5->calculate();
+  }
+
+  /**
+   * all racks are false
+   */
   public function testCalcQ3_AllRacksFalse()
   {
     $this->expectException(\Exception::class);
@@ -127,6 +156,9 @@ class CalcPrinciple5Test extends TestCase
     $principle5->calculate();
   }
 
+  /**
+   * too many values
+   */
   public function testQ12_TooManyValues()
   {
     $this->expectException(\Exception::class);
@@ -147,6 +179,9 @@ class CalcPrinciple5Test extends TestCase
     $principle5->calculate();
   }
 
+  /**
+   * invalid value
+   */
   public function testQ3_InvalidWeightingValue()
   {
     $this->expectException(\Exception::class);
@@ -167,6 +202,9 @@ class CalcPrinciple5Test extends TestCase
     $principle5->calculate();
   }
 
+  /**
+   * check null
+   */
   public function testQ3_NullPerParameter()
   {
     $this->expectException(\Exception::class);
@@ -225,6 +263,9 @@ class CalcPrinciple5Test extends TestCase
     $principle5->calculate();
   }
 
+  /**
+   * check boundary
+   */
   public function testQ13_ExactlyTwoValues()
   {
     $data = [
@@ -242,7 +283,6 @@ class CalcPrinciple5Test extends TestCase
     $score = $principle5->calculate();
     $this->assertIsFloat($score);
   }
-
   public function testQ3_MinMaxValues()
   {
     $data = [
@@ -261,6 +301,9 @@ class CalcPrinciple5Test extends TestCase
     $this->assertIsFloat($score);
   }
 
+  /**
+   * invalid data types
+   */
   public function testQ3_InvalidDataTypes()
   {
     $this->expectException(\Exception::class);
@@ -278,7 +321,6 @@ class CalcPrinciple5Test extends TestCase
     $principle5 = new CalcPrinciple5($data);
     $principle5->calculate();
   }
-
   public function testQ12_InvalidDataTypes()
   {
     $this->expectException(\Exception::class);
@@ -293,27 +335,6 @@ class CalcPrinciple5Test extends TestCase
       ],
       'Q12' => ["1", "2", "4", "8", "11", "12"]
     ];
-    $principle5 = new CalcPrinciple5($data);
-    $principle5->calculate();
-  }
-
-  public function testQ3_MissingRequiredRacks()
-  {
-    $this->expectException(\Exception::class);
-    $this->expectExceptionMessage("Missing required racks in Q3");
-
-    $data = [
-      'Q3' => [
-        'openRack' => ['isChecked' => false],
-        'IVCRack' => ['isChecked' => false],
-        'positiveRack' => ['isChecked' => true, 'per' => 0, 'times' => 3],
-        'negativeRack' => ['isChecked' => false],
-        // oneWayAirflowRack is missing
-        'isolator' => ['isChecked' => false]
-      ],
-      'Q12' => [1, 2, 4, 8, 11, 12]
-    ];
-
     $principle5 = new CalcPrinciple5($data);
     $principle5->calculate();
   }
