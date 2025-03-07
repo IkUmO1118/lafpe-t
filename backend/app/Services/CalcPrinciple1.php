@@ -86,7 +86,7 @@ class CalcPrinciple1 extends AbstractPrinciple
       throw new \Exception("Empty data for Q13");
     }
     if (count($resQ13) > 2) {
-      throw new \Exception("Q13 array must contain 2 or fewer values");
+      throw new \Exception("Too many values for Q13");
     }
     foreach ($resQ13 as $value) {
       if ($value === null || (!is_int($value) && !is_float($value))) {

@@ -54,4 +54,17 @@ class CalcPrincipleDPTest extends TestCase
 
     new CalcPrincipleDP($data);
   }
+
+  public function testQ11_TooManyValues()
+  {
+    $this->expectException(\Exception::class);
+
+    $data = [
+      'Q4' => 1,
+      'Q11' => [0, 1, 2] //too many values
+    ];
+
+    $principle1 = new CalcPrincipleDP($data);
+    $principle1->calculate();
+  }
 }

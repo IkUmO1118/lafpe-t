@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Services\Contracts\AbstractPrinciple;
+use Exception;
 
 class CalcPrincipleDP extends AbstractPrinciple
 {
@@ -30,18 +31,24 @@ class CalcPrincipleDP extends AbstractPrinciple
   {
     $resQ11 = $this->res["Q11"];
 
-    if (isset($resQ11) && !empty($resQ11)) {
-      $totalStaticScore = $this->staticPoints["Q11"] ?? 0;
-
-      $totalWeighting = array_reduce(
-        $resQ11,
-        function ($acc, $cur) {
-          return $acc + ($this->weightings["Q11"][$cur] ?? 0);
-        },
-        0
-      );
-
-      $this->addTotalScore($totalStaticScore * $totalWeighting);
+    if (!isset($resQ11) || empty($resQ11)) {
+      throw new Exception("Empty data for Q11");
     }
+
+    if (count($resQ11) > 2) {
+      throw new Exception("Too many values for Q11");
+    }
+
+    $totalStaticScore = $this->staticPoints["Q11"] ?? 0;
+
+    $totalWeighting = array_reduce(
+      $resQ11,
+      function ($acc, $cur) {
+        return $acc + ($this->weightings["Q11"][$cur] ?? 0);
+      },
+      0
+    );
+
+    $this->addTotalScore($totalStaticScore * $totalWeighting);
   }
 }

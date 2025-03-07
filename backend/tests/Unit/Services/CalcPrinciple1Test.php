@@ -132,7 +132,7 @@ class CalcPrinciple1Test extends TestCase
   public function testQ13_TooManyValues()
   {
     $this->expectException(\Exception::class);
-    $this->expectExceptionMessage("Q13 array must contain 2 or fewer values");
+    $this->expectExceptionMessage("Too many values for Q13");
 
     $data = [
       'Q3' => [
