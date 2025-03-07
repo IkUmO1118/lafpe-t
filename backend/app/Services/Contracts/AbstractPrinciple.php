@@ -64,7 +64,7 @@ abstract class AbstractPrinciple implements Principle
 
   public function getTotalScore(): float
   {
-    return $this->totalScore;
+    return round($this->totalScore, 2);
   }
 
   public function addTotalScore(float $score): void
