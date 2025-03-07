@@ -177,4 +177,105 @@ class CalcPrinciple4Test extends TestCase
     $principle4 = new CalcPrinciple4($data);
     $principle4->calculate();
   }
+
+  public function testQ1_TooManyValues()
+  {
+    $this->expectException(\Exception::class);
+
+    $data = [
+      'Q1' => [0, 1, 2], //too many values
+      'Q2' => [0, 1],
+      'Q3' => [
+        'openRack' => ['isChecked' => false],
+        'IVCRack' => ['isChecked' => false],
+        'positiveRack' => ['isChecked' => true, 'per' => 0, 'times' => 3],
+        'negativeRack' => ['isChecked' => false],
+        'oneWayAirflowRack' => ['isChecked' => true, 'per' => 4, 'times' => 2],
+        'isolator' => ['isChecked' => false]
+      ],
+      'Q4' => 1,
+      'Q5' => 0,
+      'Q6' => 2,
+      'Q7' => [1],
+      'Q10' => [3],
+    ];
+
+    $principle4 = new CalcPrinciple4($data);
+    $principle4->calculate();
+  }
+  public function testQ2_TooManyValues()
+  {
+    $this->expectException(\Exception::class);
+
+    $data = [
+      'Q1' => [0],
+      'Q2' => [0, 1, 2], //too many values
+      'Q3' => [
+        'openRack' => ['isChecked' => false],
+        'IVCRack' => ['isChecked' => false],
+        'positiveRack' => ['isChecked' => true, 'per' => 0, 'times' => 3],
+        'negativeRack' => ['isChecked' => false],
+        'oneWayAirflowRack' => ['isChecked' => true, 'per' => 4, 'times' => 2],
+        'isolator' => ['isChecked' => false]
+      ],
+      'Q4' => 1,
+      'Q5' => 0,
+      'Q6' => 2,
+      'Q7' => [1],
+      'Q10' => [3],
+    ];
+
+    $principle4 = new CalcPrinciple4($data);
+    $principle4->calculate();
+  }
+  public function testQ7_TooManyValues()
+  {
+    $this->expectException(\Exception::class);
+
+    $data = [
+      'Q1' => [0],
+      'Q2' => [0, 1],
+      'Q3' => [
+        'openRack' => ['isChecked' => false],
+        'IVCRack' => ['isChecked' => false],
+        'positiveRack' => ['isChecked' => true, 'per' => 0, 'times' => 3],
+        'negativeRack' => ['isChecked' => false],
+        'oneWayAirflowRack' => ['isChecked' => true, 'per' => 4, 'times' => 2],
+        'isolator' => ['isChecked' => false]
+      ],
+      'Q4' => 1,
+      'Q5' => 0,
+      'Q6' => 2,
+      'Q7' => [0, 1, 2], //too many values
+      'Q10' => [3],
+    ];
+
+    $principle4 = new CalcPrinciple4($data);
+    $principle4->calculate();
+  }
+  public function testQ10_TooManyValues()
+  {
+    $this->expectException(\Exception::class);
+
+    $data = [
+      'Q1' => [0],
+      'Q2' => [0, 1],
+      'Q3' => [
+        'openRack' => ['isChecked' => false],
+        'IVCRack' => ['isChecked' => false],
+        'positiveRack' => ['isChecked' => true, 'per' => 0, 'times' => 3],
+        'negativeRack' => ['isChecked' => false],
+        'oneWayAirflowRack' => ['isChecked' => true, 'per' => 4, 'times' => 2],
+        'isolator' => ['isChecked' => false]
+      ],
+      'Q4' => 1,
+      'Q5' => 0,
+      'Q6' => 2,
+      'Q7' => [1],
+      'Q10' => [0, 1, 2, 3, 4], //too many values
+    ];
+
+    $principle4 = new CalcPrinciple4($data);
+    $principle4->calculate();
+  }
 }
