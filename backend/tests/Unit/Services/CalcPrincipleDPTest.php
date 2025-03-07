@@ -61,7 +61,33 @@ class CalcPrincipleDPTest extends TestCase
 
     $data = [
       'Q4' => 1,
-      'Q11' => [0, 1, 2] //too many values
+      'Q11' => [0, 1, 2, 3, 4] //too many values
+    ];
+
+    $principle1 = new CalcPrincipleDP($data);
+    $principle1->calculate();
+  }
+
+  public function testQ4_InvalidDynamicPointValue()
+  {
+    $this->expectException(\Exception::class);
+
+    $data = [
+      'Q4' => 3, //invalid value
+      'Q11' => [0, 1]
+    ];
+
+    $principle1 = new CalcPrincipleDP($data);
+    $principle1->calculate();
+  }
+
+  public function testQ11_InvalidDynamicPointValue()
+  {
+    $this->expectException(\Exception::class);
+
+    $data = [
+      'Q4' => 3,
+      'Q11' => [0, 4] //invalid value
     ];
 
     $principle1 = new CalcPrincipleDP($data);

@@ -23,6 +23,10 @@ class CalcPrincipleDP extends AbstractPrinciple
     $resQ4 = $this->res['Q4'];
 
     if ($resQ4 === 0 || $resQ4) {
+      if (!isset($this->weightings["Q4"][$resQ4])) {
+        throw new Exception("Invalid weighting value for Q4: {$resQ4}");
+      }
+
       $this->addTotalScore($this->staticPoints["Q4"] * $this->weightings["Q4"][$resQ4]);
     }
   }
@@ -35,7 +39,7 @@ class CalcPrincipleDP extends AbstractPrinciple
       throw new Exception("Empty data for Q11");
     }
 
-    if (count($resQ11) > 2) {
+    if (count($resQ11) > 4) {
       throw new Exception("Too many values for Q11");
     }
 
@@ -44,6 +48,9 @@ class CalcPrincipleDP extends AbstractPrinciple
     $totalWeighting = array_reduce(
       $resQ11,
       function ($acc, $cur) {
+        if (!isset($this->weightings["Q11"][$cur])) {
+          throw new Exception("Invalid weighting value for Q11: {$cur}");
+        }
         return $acc + ($this->weightings["Q11"][$cur] ?? 0);
       },
       0
