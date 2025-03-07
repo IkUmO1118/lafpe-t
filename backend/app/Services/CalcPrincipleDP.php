@@ -26,6 +26,10 @@ class CalcPrincipleDP extends AbstractPrinciple
       throw new Exception("Q4 value cannot be null");
     }
 
+    if (!is_int($resQ4) && !is_float($resQ4)) {
+      throw new Exception("Q4 value must be numeric");
+    }
+
     if (!isset($this->weightings["Q4"][$resQ4])) {
       throw new Exception("Invalid weighting value for Q4: {$resQ4}");
     }

@@ -107,7 +107,7 @@ class CalcPrincipleDPTest extends TestCase
     $principle1->calculate();
   }
 
-  public function test11_NullElement()
+  public function testQ11_NullElement()
   {
     $this->expectException(\Exception::class);
 
@@ -118,5 +118,41 @@ class CalcPrincipleDPTest extends TestCase
 
     $principle1 = new CalcPrincipleDP($data);
     $principle1->calculate();
+  }
+
+  public function testQ11_ExactlyFourValues()
+  {
+    $data = [
+      'Q4' => 1,
+      'Q11' => [0, 1, 2, 3] //正確に4つの値
+    ];
+
+    $principle1 = new CalcPrincipleDP($data);
+    $score = $principle1->calculate();
+    $this->assertIsFloat($score);
+  }
+
+  public function testQ4_MinValue()
+  {
+    $data = [
+      'Q4' => 0,
+      'Q11' => [0, 1]
+    ];
+
+    $principle1 = new CalcPrincipleDP($data);
+    $score = $principle1->calculate();
+    $this->assertIsFloat($score);
+  }
+
+  public function testQ4_MaxValue()
+  {
+    $data = [
+      'Q4' => 2,
+      'Q11' => [0, 1]
+    ];
+
+    $principle1 = new CalcPrincipleDP($data);
+    $score = $principle1->calculate();
+    $this->assertIsFloat($score);
   }
 }
