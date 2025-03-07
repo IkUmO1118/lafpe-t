@@ -86,7 +86,7 @@ class CalcPrincipleDPTest extends TestCase
     $this->expectException(\Exception::class);
 
     $data = [
-      'Q4' => 3,
+      'Q4' => 1,
       'Q11' => [0, 4] //invalid value
     ];
 
@@ -100,7 +100,7 @@ class CalcPrincipleDPTest extends TestCase
 
     $data = [
       'Q4' => null,
-      'Q11' => [0, 4]
+      'Q11' => [0, 1]
     ];
 
     $principle1 = new CalcPrincipleDP($data);
@@ -135,7 +135,7 @@ class CalcPrincipleDPTest extends TestCase
   public function testQ4_MinValue()
   {
     $data = [
-      'Q4' => 0,
+      'Q4' => 0, //min avalue
       'Q11' => [0, 1]
     ];
 
@@ -147,12 +147,38 @@ class CalcPrincipleDPTest extends TestCase
   public function testQ4_MaxValue()
   {
     $data = [
-      'Q4' => 2,
+      'Q4' => 2, //max value
       'Q11' => [0, 1]
     ];
 
     $principle1 = new CalcPrincipleDP($data);
     $score = $principle1->calculate();
     $this->assertIsFloat($score);
+  }
+
+  public function testQ4_InvalidDataType()
+  {
+    $this->expectException(\Exception::class);
+
+    $data = [
+      'Q4' => '0',
+      'Q11' => [0, 1]
+    ];
+
+    $principle1 = new CalcPrincipleDP($data);
+    $principle1->calculate();
+  }
+
+  public function testQ11_InvalidDataType()
+  {
+    $this->expectException(\Exception::class);
+
+    $data = [
+      'Q4' => 1,
+      'Q11' => [0, "1"]
+    ];
+
+    $principle1 = new CalcPrincipleDP($data);
+    $principle1->calculate();
   }
 }
