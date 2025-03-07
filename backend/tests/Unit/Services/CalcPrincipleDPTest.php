@@ -68,7 +68,7 @@ class CalcPrincipleDPTest extends TestCase
     $principleDP->calculate();
   }
 
-  public function testQ4_InvalidDynamicPointValue()
+  public function testQ4_InvalidWeightingValue()
   {
     $this->expectException(\Exception::class);
 
@@ -81,7 +81,7 @@ class CalcPrincipleDPTest extends TestCase
     $principleDP->calculate();
   }
 
-  public function testQ11_InvalidDynamicPointValue()
+  public function testQ11_InvalidWeightingValue()
   {
     $this->expectException(\Exception::class);
 

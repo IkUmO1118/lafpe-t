@@ -150,7 +150,7 @@ class CalcPrinciple1Test extends TestCase
     $principle1->calculate();
   }
 
-  public function testInvalidDynamicPointValue()
+  public function testQ3_InvalidDynamicPointValue()
   {
     $this->expectException(\Exception::class);
 
@@ -163,7 +163,27 @@ class CalcPrinciple1Test extends TestCase
         'oneWayAirflowRack' => ['isChecked' => true, 'per' => 4, 'times' => 99], //invalid value
         'isolator' => ['isChecked' => false]
       ],
-      'Q13' => [-1] //invalid value
+      'Q13' => [0, 1, 2]
+    ];
+
+    $principle1 = new CalcPrinciple1($data);
+    $principle1->calculate();
+  }
+
+  public function testQ13_InvalidWeightingValue()
+  {
+    $this->expectException(\Exception::class);
+
+    $data = [
+      'Q3' => [
+        'openRack' => ['isChecked' => false],
+        'IVCRack' => ['isChecked' => false],
+        'positiveRack' => ['isChecked' => true, 'per' => 0, 'times' => 3],
+        'negativeRack' => ['isChecked' => false],
+        'oneWayAirflowRack' => ['isChecked' => true, 'per' => 4, 'times' => 2],
+        'isolator' => ['isChecked' => false]
+      ],
+      'Q13' => [-1]
     ];
 
     $principle1 = new CalcPrinciple1($data);
@@ -278,7 +298,7 @@ class CalcPrinciple1Test extends TestCase
         'oneWayAirflowRack' => ['isChecked' => true, 'per' => 4, 'times' => 2],
         'isolator' => ['isChecked' => false]
       ],
-      'Q13' => ["0"]
+      'Q13' => [0]
     ];
     $principle1 = new CalcPrinciple1($data);
     $principle1->calculate();

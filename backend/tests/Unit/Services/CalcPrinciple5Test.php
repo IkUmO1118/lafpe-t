@@ -149,7 +149,7 @@ class CalcPrinciple5Test extends TestCase
     $principle5->calculate();
   }
 
-  public function testQ3_InvalidStaticPointValue()
+  public function testQ3_InvalidWeightingValue()
   {
     $this->expectException(\Exception::class);
 
