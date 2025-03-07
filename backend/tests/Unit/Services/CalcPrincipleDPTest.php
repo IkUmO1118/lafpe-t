@@ -14,8 +14,8 @@ class CalcPrincipleDPTest extends TestCase
       'Q11' => [0, 1],
     ];
 
-    $principle1 = new CalcPrincipleDP($data);
-    $score = $principle1->calculate();
+    $principleDP = new CalcPrincipleDP($data);
+    $score = $principleDP->calculate();
 
     $this->assertEquals(5.0, $score);
   }
@@ -29,8 +29,8 @@ class CalcPrincipleDPTest extends TestCase
       'Q11' => [],
     ];
 
-    $principle1 = new CalcPrincipleDP($data);
-    $principle1->calculate();
+    $principleDP = new CalcPrincipleDP($data);
+    $principleDP->calculate();
   }
 
   public function testConstructor_MissingQ4()
@@ -64,8 +64,8 @@ class CalcPrincipleDPTest extends TestCase
       'Q11' => [0, 1, 2, 3, 4] //too many values
     ];
 
-    $principle1 = new CalcPrincipleDP($data);
-    $principle1->calculate();
+    $principleDP = new CalcPrincipleDP($data);
+    $principleDP->calculate();
   }
 
   public function testQ4_InvalidDynamicPointValue()
@@ -77,8 +77,8 @@ class CalcPrincipleDPTest extends TestCase
       'Q11' => [0, 1]
     ];
 
-    $principle1 = new CalcPrincipleDP($data);
-    $principle1->calculate();
+    $principleDP = new CalcPrincipleDP($data);
+    $principleDP->calculate();
   }
 
   public function testQ11_InvalidDynamicPointValue()
@@ -90,8 +90,8 @@ class CalcPrincipleDPTest extends TestCase
       'Q11' => [0, 4] //invalid value
     ];
 
-    $principle1 = new CalcPrincipleDP($data);
-    $principle1->calculate();
+    $principleDP = new CalcPrincipleDP($data);
+    $principleDP->calculate();
   }
 
   public function testQ4_NullElement()
@@ -103,8 +103,8 @@ class CalcPrincipleDPTest extends TestCase
       'Q11' => [0, 1]
     ];
 
-    $principle1 = new CalcPrincipleDP($data);
-    $principle1->calculate();
+    $principleDP = new CalcPrincipleDP($data);
+    $principleDP->calculate();
   }
 
   public function testQ11_NullElement()
@@ -116,8 +116,8 @@ class CalcPrincipleDPTest extends TestCase
       'Q11' => [null]
     ];
 
-    $principle1 = new CalcPrincipleDP($data);
-    $principle1->calculate();
+    $principleDP = new CalcPrincipleDP($data);
+    $principleDP->calculate();
   }
 
   public function testQ11_ExactlyFourValues()
@@ -127,8 +127,8 @@ class CalcPrincipleDPTest extends TestCase
       'Q11' => [0, 1, 2, 3] //正確に4つの値
     ];
 
-    $principle1 = new CalcPrincipleDP($data);
-    $score = $principle1->calculate();
+    $principleDP = new CalcPrincipleDP($data);
+    $score = $principleDP->calculate();
     $this->assertIsFloat($score);
   }
 
@@ -139,8 +139,8 @@ class CalcPrincipleDPTest extends TestCase
       'Q11' => [0, 1]
     ];
 
-    $principle1 = new CalcPrincipleDP($data);
-    $score = $principle1->calculate();
+    $principleDP = new CalcPrincipleDP($data);
+    $score = $principleDP->calculate();
     $this->assertIsFloat($score);
   }
 
@@ -151,8 +151,8 @@ class CalcPrincipleDPTest extends TestCase
       'Q11' => [0, 1]
     ];
 
-    $principle1 = new CalcPrincipleDP($data);
-    $score = $principle1->calculate();
+    $principleDP = new CalcPrincipleDP($data);
+    $score = $principleDP->calculate();
     $this->assertIsFloat($score);
   }
 
@@ -165,8 +165,8 @@ class CalcPrincipleDPTest extends TestCase
       'Q11' => [0, 1]
     ];
 
-    $principle1 = new CalcPrincipleDP($data);
-    $principle1->calculate();
+    $principleDP = new CalcPrincipleDP($data);
+    $principleDP->calculate();
   }
 
   public function testQ11_InvalidDataType()
@@ -178,7 +178,7 @@ class CalcPrincipleDPTest extends TestCase
       'Q11' => [0, "1"]
     ];
 
-    $principle1 = new CalcPrincipleDP($data);
-    $principle1->calculate();
+    $principleDP = new CalcPrincipleDP($data);
+    $principleDP->calculate();
   }
 }
