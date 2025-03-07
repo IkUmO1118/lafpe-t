@@ -27,7 +27,7 @@ class CalcPrinciple1Test extends TestCase
     $this->assertEquals(7.5, $score);
   }
 
-  public function testCheckedRack_WithoutParameters()
+  public function testCalcQ3_WithoutParameters()
   {
     $this->expectException(\Exception::class);
 
