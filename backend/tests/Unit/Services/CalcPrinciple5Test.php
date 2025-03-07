@@ -59,7 +59,6 @@ class CalcPrinciple5Test extends TestCase
     $principle5 = new CalcPrinciple5($data);
     $principle5->calculate();
   }
-
   public function testCalcQ12_EmptyData()
   {
     $this->expectException(\Exception::class);
@@ -90,7 +89,6 @@ class CalcPrinciple5Test extends TestCase
 
     new CalcPrinciple5($incompleteData);
   }
-
   public function testConstructor_MissingQ12()
   {
     $this->expectException(\Exception::class);
@@ -188,7 +186,6 @@ class CalcPrinciple5Test extends TestCase
     $principle5 = new CalcPrinciple5($data);
     $principle5->calculate();
   }
-
   public function testQ3_NullTimesParameter()
   {
     $this->expectException(\Exception::class);
@@ -208,7 +205,6 @@ class CalcPrinciple5Test extends TestCase
     $principle5 = new CalcPrinciple5($data);
     $principle5->calculate();
   }
-
   public function testQ12_NullElement()
   {
     $this->expectException(\Exception::class);

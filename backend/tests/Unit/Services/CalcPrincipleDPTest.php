@@ -43,7 +43,6 @@ class CalcPrincipleDPTest extends TestCase
 
     new CalcPrincipleDP($data);
   }
-
   public function testConstructor_MissingQ11()
   {
     $this->expectException(\Exception::class);
@@ -80,7 +79,6 @@ class CalcPrincipleDPTest extends TestCase
     $principleDP = new CalcPrincipleDP($data);
     $principleDP->calculate();
   }
-
   public function testQ11_InvalidWeightingValue()
   {
     $this->expectException(\Exception::class);
@@ -106,7 +104,6 @@ class CalcPrincipleDPTest extends TestCase
     $principleDP = new CalcPrincipleDP($data);
     $principleDP->calculate();
   }
-
   public function testQ11_NullElement()
   {
     $this->expectException(\Exception::class);
@@ -143,7 +140,6 @@ class CalcPrincipleDPTest extends TestCase
     $score = $principleDP->calculate();
     $this->assertIsFloat($score);
   }
-
   public function testQ4_MaxValue()
   {
     $data = [
@@ -168,7 +164,6 @@ class CalcPrincipleDPTest extends TestCase
     $principleDP = new CalcPrincipleDP($data);
     $principleDP->calculate();
   }
-
   public function testQ11_InvalidDataType()
   {
     $this->expectException(\Exception::class);
