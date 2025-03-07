@@ -19,4 +19,17 @@ class CalcPrincipleDPTest extends TestCase
 
     $this->assertEquals(5.0, $score);
   }
+
+  public function testCalcQ11_EmptyData()
+  {
+    $this->expectException(\Exception::class);
+
+    $data = [
+      'Q4' => 1,
+      'Q11' => [],
+    ];
+
+    $principle1 = new CalcPrincipleDP($data);
+    $principle1->calculate();
+  }
 }
