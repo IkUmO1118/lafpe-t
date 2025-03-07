@@ -32,4 +32,26 @@ class CalcPrincipleDPTest extends TestCase
     $principle1 = new CalcPrincipleDP($data);
     $principle1->calculate();
   }
+
+  public function testConstructor_MissingQ4()
+  {
+    $this->expectException(\Exception::class);
+
+    $data = [
+      'Q11' => [0, 1],
+    ];
+
+    new CalcPrincipleDP($data);
+  }
+
+  public function testConstructor_MissingQ11()
+  {
+    $this->expectException(\Exception::class);
+
+    $data = [
+      'Q4' => 1,
+    ];
+
+    new CalcPrincipleDP($data);
+  }
 }
