@@ -281,7 +281,7 @@ class CalcPrinciple5Test extends TestCase
     $principle5 = new CalcPrinciple5($data);
     $principle5->calculate();
   }
-  public function testQ12_ExactlyTwoValues()
+  public function testQ12_ExactlyFifteenValues()
   {
     $data = [
       'Q3' => [

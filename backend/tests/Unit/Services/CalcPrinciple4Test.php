@@ -911,19 +911,272 @@ class CalcPrinciple4Test extends TestCase
     $principle4->calculate();
   }
 
-  public function testQ1_ExactlyTwoValues() {}
-  public function testQ2_ExactlyTwoValues() {}
-  public function testQ7_ExactlyTwoValues() {}
-  public function testQ10_ExactlyFourValues() {}
+  public function testQ1_ExactlyTwoValues()
+  {
+    $data = [
+      'Q1' => [0, 1],
+      'Q2' => [0, 1],
+      'Q3' => [
+        'openRack' => ['isChecked' => false],
+        'IVCRack' => ['isChecked' => false],
+        'positiveRack' => ['isChecked' => true, 'per' => 0, 'times' => 3],
+        'negativeRack' => ['isChecked' => false],
+        'oneWayAirflowRack' => ['isChecked' => true, 'per' => 4, 'times' => 2],
+        'isolator' => ['isChecked' => false]
+      ],
+      'Q4' => 1,
+      'Q5' => 0,
+      'Q6' => 2,
+      'Q7' => [1],
+      'Q10' => [3],
+    ];
 
-  public function testQ3_MinMaxValues() {}
+    $principle4 = new CalcPrinciple4($data);
+    $score = $principle4->calculate();
+    $this->assertIsFloat($score);
+  }
+  public function testQ2_ExactlyTwoValues()
+  {
+    $data = [
+      'Q1' => [0],
+      'Q2' => [0, 1],
+      'Q3' => [
+        'openRack' => ['isChecked' => false],
+        'IVCRack' => ['isChecked' => false],
+        'positiveRack' => ['isChecked' => true, 'per' => 0, 'times' => 3],
+        'negativeRack' => ['isChecked' => false],
+        'oneWayAirflowRack' => ['isChecked' => true, 'per' => 4, 'times' => 2],
+        'isolator' => ['isChecked' => false]
+      ],
+      'Q4' => 1,
+      'Q5' => 0,
+      'Q6' => 2,
+      'Q7' => [1],
+      'Q10' => [3],
+    ];
 
-  public function testQ4_MinValue() {}
-  public function testQ4_MaxValue() {}
-  public function testQ5_MinValue() {}
-  public function testQ5_MaxValue() {}
-  public function testQ6_MinValue() {}
-  public function testQ6_MaxValue() {}
+    $principle4 = new CalcPrinciple4($data);
+    $score = $principle4->calculate();
+    $this->assertIsFloat($score);
+  }
+  public function testQ7_ExactlyTwoValues()
+  {
+    $data = [
+      'Q1' => [0],
+      'Q2' => [0, 1],
+      'Q3' => [
+        'openRack' => ['isChecked' => false],
+        'IVCRack' => ['isChecked' => false],
+        'positiveRack' => ['isChecked' => true, 'per' => 0, 'times' => 3],
+        'negativeRack' => ['isChecked' => false],
+        'oneWayAirflowRack' => ['isChecked' => true, 'per' => 4, 'times' => 2],
+        'isolator' => ['isChecked' => false]
+      ],
+      'Q4' => 1,
+      'Q5' => 0,
+      'Q6' => 2,
+      'Q7' => [0, 1],
+      'Q10' => [3],
+    ];
+
+    $principle4 = new CalcPrinciple4($data);
+    $score = $principle4->calculate();
+    $this->assertIsFloat($score);
+  }
+  public function testQ10_ExactlyFourValues()
+  {
+    $data = [
+      'Q1' => [0],
+      'Q2' => [0, 1],
+      'Q3' => [
+        'openRack' => ['isChecked' => false],
+        'IVCRack' => ['isChecked' => false],
+        'positiveRack' => ['isChecked' => true, 'per' => 0, 'times' => 3],
+        'negativeRack' => ['isChecked' => false],
+        'oneWayAirflowRack' => ['isChecked' => true, 'per' => 4, 'times' => 2],
+        'isolator' => ['isChecked' => false]
+      ],
+      'Q4' => 1,
+      'Q5' => 0,
+      'Q6' => 2,
+      'Q7' => [1],
+      'Q10' => [0, 1, 2, 3],
+    ];
+
+    $principle4 = new CalcPrinciple4($data);
+    $score = $principle4->calculate();
+    $this->assertIsFloat($score);
+  }
+
+  public function testQ3_MinMaxValues()
+  {
+    $data = [
+      'Q1' => [0],
+      'Q2' => [0, 1],
+      'Q3' => [
+        'openRack' => ['isChecked' => false],
+        'IVCRack' => ['isChecked' => false],
+        'positiveRack' => ['isChecked' => true, 'per' => 0, 'times' => 0],
+        'negativeRack' => ['isChecked' => false],
+        'oneWayAirflowRack' => ['isChecked' => true, 'per' => 4, 'times' => 3],
+        'isolator' => ['isChecked' => false]
+      ],
+      'Q4' => 1,
+      'Q5' => 0,
+      'Q6' => 2,
+      'Q7' => [1],
+      'Q10' => [3],
+    ];
+
+    $principle4 = new CalcPrinciple4($data);
+    $score = $principle4->calculate();
+    $this->assertIsFloat($score);
+  }
+
+  public function testQ4_MinValue()
+  {
+    $data = [
+      'Q1' => [0],
+      'Q2' => [0, 1],
+      'Q3' => [
+        'openRack' => ['isChecked' => false],
+        'IVCRack' => ['isChecked' => false],
+        'positiveRack' => ['isChecked' => true, 'per' => 0, 'times' => 3],
+        'negativeRack' => ['isChecked' => false],
+        'oneWayAirflowRack' => ['isChecked' => true, 'per' => 4, 'times' => 2],
+        'isolator' => ['isChecked' => false]
+      ],
+      'Q4' => 0,
+      'Q5' => 0,
+      'Q6' => 2,
+      'Q7' => [1],
+      'Q10' => [3],
+    ];
+
+    $principle4 = new CalcPrinciple4($data);
+    $score = $principle4->calculate();
+    $this->assertIsFloat($score);
+  }
+  public function testQ4_MaxValue()
+  {
+    $data = [
+      'Q1' => [0],
+      'Q2' => [0, 1],
+      'Q3' => [
+        'openRack' => ['isChecked' => false],
+        'IVCRack' => ['isChecked' => false],
+        'positiveRack' => ['isChecked' => true, 'per' => 0, 'times' => 3],
+        'negativeRack' => ['isChecked' => false],
+        'oneWayAirflowRack' => ['isChecked' => true, 'per' => 4, 'times' => 2],
+        'isolator' => ['isChecked' => false]
+      ],
+      'Q4' => 2,
+      'Q5' => 0,
+      'Q6' => 2,
+      'Q7' => [1],
+      'Q10' => [3],
+    ];
+
+    $principle4 = new CalcPrinciple4($data);
+    $score = $principle4->calculate();
+    $this->assertIsFloat($score);
+  }
+  public function testQ5_MinValue()
+  {
+    $data = [
+      'Q1' => [0],
+      'Q2' => [0, 1],
+      'Q3' => [
+        'openRack' => ['isChecked' => false],
+        'IVCRack' => ['isChecked' => false],
+        'positiveRack' => ['isChecked' => true, 'per' => 0, 'times' => 3],
+        'negativeRack' => ['isChecked' => false],
+        'oneWayAirflowRack' => ['isChecked' => true, 'per' => 4, 'times' => 2],
+        'isolator' => ['isChecked' => false]
+      ],
+      'Q4' => 1,
+      'Q5' => 0,
+      'Q6' => 2,
+      'Q7' => [1],
+      'Q10' => [3],
+    ];
+
+    $principle4 = new CalcPrinciple4($data);
+    $score = $principle4->calculate();
+    $this->assertIsFloat($score);
+  }
+  public function testQ5_MaxValue()
+  {
+    $data = [
+      'Q1' => [0],
+      'Q2' => [0, 1],
+      'Q3' => [
+        'openRack' => ['isChecked' => false],
+        'IVCRack' => ['isChecked' => false],
+        'positiveRack' => ['isChecked' => true, 'per' => 0, 'times' => 3],
+        'negativeRack' => ['isChecked' => false],
+        'oneWayAirflowRack' => ['isChecked' => true, 'per' => 4, 'times' => 2],
+        'isolator' => ['isChecked' => false]
+      ],
+      'Q4' => 1,
+      'Q5' => 2,
+      'Q6' => 2,
+      'Q7' => [1],
+      'Q10' => [3],
+    ];
+
+    $principle4 = new CalcPrinciple4($data);
+    $score = $principle4->calculate();
+    $this->assertIsFloat($score);
+  }
+  public function testQ6_MinValue()
+  {
+    $data = [
+      'Q1' => [0],
+      'Q2' => [0, 1],
+      'Q3' => [
+        'openRack' => ['isChecked' => false],
+        'IVCRack' => ['isChecked' => false],
+        'positiveRack' => ['isChecked' => true, 'per' => 0, 'times' => 3],
+        'negativeRack' => ['isChecked' => false],
+        'oneWayAirflowRack' => ['isChecked' => true, 'per' => 4, 'times' => 2],
+        'isolator' => ['isChecked' => false]
+      ],
+      'Q4' => 1,
+      'Q5' => 0,
+      'Q6' => 0,
+      'Q7' => [1],
+      'Q10' => [3],
+    ];
+
+    $principle4 = new CalcPrinciple4($data);
+    $score = $principle4->calculate();
+    $this->assertIsFloat($score);
+  }
+  public function testQ6_MaxValue()
+  {
+    $data = [
+      'Q1' => [0],
+      'Q2' => [0, 1],
+      'Q3' => [
+        'openRack' => ['isChecked' => false],
+        'IVCRack' => ['isChecked' => false],
+        'positiveRack' => ['isChecked' => true, 'per' => 0, 'times' => 3],
+        'negativeRack' => ['isChecked' => false],
+        'oneWayAirflowRack' => ['isChecked' => true, 'per' => 4, 'times' => 2],
+        'isolator' => ['isChecked' => false]
+      ],
+      'Q4' => 1,
+      'Q5' => 0,
+      'Q6' => 2,
+      'Q7' => [1],
+      'Q10' => [3],
+    ];
+
+    $principle4 = new CalcPrinciple4($data);
+    $score = $principle4->calculate();
+    $this->assertIsFloat($score);
+  }
 
   /**
    * invalid data types

@@ -250,7 +250,7 @@ class CalcPrinciple4 extends AbstractPrinciple
     if (!isset($resQ10) || empty($resQ10)) {
       throw new \Exception("Empty data for Q10");
     }
-    if (count($resQ10) > 2) {
+    if (count($resQ10) > 4) {
       throw new \Exception("Too many values for Q10");
     }
     foreach ($resQ10 as $value) {
