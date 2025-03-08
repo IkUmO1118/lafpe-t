@@ -118,8 +118,8 @@ class CalcPrinciple4 extends AbstractPrinciple
     $hasChecked = false;
 
     foreach ($resQ3 as $rackKey => $rackValue) {
-      if ($rackValue['isChecked'] === null) {
-        throw new Exception('isChecked value cannot be null');
+      if ($rackValue['isChecked'] === null || !is_bool($rackValue['isChecked'])) {
+        throw new Exception('isChecked value cannot be null and must be boolean');
       }
 
       if (isset($rackValue['isChecked']) && $rackValue['isChecked']) {
