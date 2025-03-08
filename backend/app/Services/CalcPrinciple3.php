@@ -87,87 +87,159 @@ class CalcPrinciple3 extends AbstractPrinciple
     $this->addTotalScore($totalWeighting * $totalStaticPoint);
   }
 
-  private function calcQ4(): void
+  public function calcQ4(): void
   {
     $resQ4 = $this->res['Q4'];
 
-    if ($resQ4 === 0 || $resQ4) {
-      $this->addTotalScore($this->staticPoints["Q4"] * $this->weightings["Q4"][$resQ4]);
+    if (!isset($resQ4) || $resQ4 === null) {
+      throw new Exception("Q4 value cannot be null");
     }
+
+    if (!is_int($resQ4) && !is_float($resQ4)) {
+      throw new Exception("Q4 value must be numeric");
+    }
+
+    if (!isset($this->weightings["Q4"][$resQ4])) {
+      throw new Exception("Invalid weighting value for Q4: {$resQ4}");
+    }
+
+    $this->addTotalScore($this->staticPoints["Q4"] * $this->weightings["Q4"][$resQ4]);
   }
 
-  private function calcQ5(): void
+  public function calcQ5(): void
   {
     $resQ5 = $this->res['Q5'];
 
-    if ($resQ5 === 0 || $resQ5) {
-      $this->addTotalScore($this->staticPoints["Q5"] * $this->weightings["Q5"][$resQ5]);
+    if (!isset($resQ5) || $resQ5 === null) {
+      throw new Exception("Q5 value cannot be null");
     }
+
+    if (!is_int($resQ5) && !is_float($resQ5)) {
+      throw new Exception("Q5 value must be numeric");
+    }
+
+    if (!isset($this->weightings["Q5"][$resQ5])) {
+      throw new Exception("Invalid weighting value for Q5: {$resQ5}");
+    }
+
+    $this->addTotalScore($this->staticPoints["Q5"] * $this->weightings["Q5"][$resQ5]);
   }
 
-  private function calcQ6(): void
+  public function calcQ6(): void
   {
     $resQ6 = $this->res['Q6'];
 
-    if ($resQ6 === 0 || $resQ6) {
-      $this->addTotalScore($this->staticPoints["Q6"] * $this->weightings["Q6"][$resQ6]);
+    if (!isset($resQ6) || $resQ6 === null) {
+      throw new Exception("Q6 value cannot be null");
     }
+
+    if (!is_int($resQ6) && !is_float($resQ6)) {
+      throw new Exception("Q6 value must be numeric");
+    }
+
+    if (!isset($this->weightings["Q6"][$resQ6])) {
+      throw new Exception("Invalid weighting value for Q6: {$resQ6}");
+    }
+
+    $this->addTotalScore($this->staticPoints["Q6"] * $this->weightings["Q6"][$resQ6]);
   }
 
   private function calcQ7(): void
   {
     $resQ7 = $this->res['Q7'];
 
-    if (isset($resQ7) && !empty($resQ7)) {
-      $totalStaticScore = $this->staticPoints["Q7"] ?? 0;
-
-      $totalWeighting = array_reduce(
-        $resQ7,
-        function ($acc, $cur) {
-          return $acc + ($this->weightings["Q7"][$cur] ?? 0);
-        },
-        0
-      );
-
-      $this->addTotalScore($totalStaticScore * $totalWeighting);
+    if (!isset($resQ7) || empty($resQ7)) {
+      throw new \Exception("Empty data for Q7");
     }
+    if (count($resQ7) > 2) {
+      throw new \Exception("Too many values for Q7");
+    }
+    foreach ($resQ7 as $value) {
+      if ($value === null || (!is_int($value) && !is_float($value))) {
+        throw new \Exception("Q7 array elements cannot be null and must be numeric");
+      }
+    }
+
+    $totalStaticPoint = $this->staticPoints['Q7'] ?? 0;
+
+    $totalWeighting = array_reduce(
+      $resQ7,
+      function ($acc, $cur) {
+        if (!isset($this->weightings['Q7'][$cur])) {
+          throw new \Exception("Invalid weighting value for Q7: {$cur}");
+        }
+
+        return $acc + ($this->weightings['Q7'][$cur] ?? 0);
+      },
+      0
+    );
+
+    $this->addTotalScore($totalStaticPoint * $totalWeighting);
   }
 
   private function calcQ8(): void
   {
     $resQ8 = $this->res['Q8'];
 
-    if (isset($resQ8) && !empty($resQ8)) {
-      $totalStaticScore = $this->staticPoints["Q8"] ?? 0;
-
-      $totalWeighting = array_reduce(
-        $resQ8,
-        function ($acc, $cur) {
-          return $acc + ($this->weightings["Q8"][$cur] ?? 0);
-        },
-        0
-      );
-
-      $this->addTotalScore($totalStaticScore * $totalWeighting);
+    if (!isset($resQ8) || empty($resQ8)) {
+      throw new \Exception("Empty data for Q8");
     }
+    if (count($resQ8) > 4) {
+      throw new \Exception("Too many values for Q8");
+    }
+    foreach ($resQ8 as $value) {
+      if ($value === null || (!is_int($value) && !is_float($value))) {
+        throw new \Exception("Q8 array elements cannot be null and must be numeric");
+      }
+    }
+
+    $totalStaticPoint = $this->staticPoints['Q8'] ?? 0;
+
+    $totalWeighting = array_reduce(
+      $resQ8,
+      function ($acc, $cur) {
+        if (!isset($this->weightings['Q8'][$cur])) {
+          throw new \Exception("Invalid weighting value for Q8: {$cur}");
+        }
+
+        return $acc + ($this->weightings['Q8'][$cur] ?? 0);
+      },
+      0
+    );
+
+    $this->addTotalScore($totalStaticPoint * $totalWeighting);
   }
 
   private function calcQ9(): void
   {
     $resQ9 = $this->res['Q9'];
 
-    if (isset($resQ9) && !empty($resQ9)) {
-      $totalStaticScore = $this->staticPoints["Q9"] ?? 0;
-
-      $totalWeighting = array_reduce(
-        $resQ9,
-        function ($acc, $cur) {
-          return $acc + ($this->weightings["Q9"][$cur] ?? 0);
-        },
-        0
-      );
-
-      $this->addTotalScore($totalStaticScore * $totalWeighting);
+    if (!isset($resQ9) || empty($resQ9)) {
+      throw new \Exception("Empty data for Q9");
     }
+    if (count($resQ9) > 4) {
+      throw new \Exception("Too many values for Q9");
+    }
+    foreach ($resQ9 as $value) {
+      if ($value === null || (!is_int($value) && !is_float($value))) {
+        throw new \Exception("Q9 array elements cannot be null and must be numeric");
+      }
+    }
+
+    $totalStaticPoint = $this->staticPoints['Q9'] ?? 0;
+
+    $totalWeighting = array_reduce(
+      $resQ9,
+      function ($acc, $cur) {
+        if (!isset($this->weightings['Q9'][$cur])) {
+          throw new \Exception("Invalid weighting value for Q9: {$cur}");
+        }
+
+        return $acc + ($this->weightings['Q9'][$cur] ?? 0);
+      },
+      0
+    );
+
+    $this->addTotalScore($totalStaticPoint * $totalWeighting);
   }
 }
