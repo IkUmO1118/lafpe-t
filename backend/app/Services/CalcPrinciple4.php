@@ -153,6 +153,7 @@ class CalcPrinciple4 extends AbstractPrinciple
 
     $this->addTotalScore($totalWeighting * $totalStaticPoint);
   }
+
   public function calcQ4(): void
   {
     $resQ4 = $this->res['Q4'];

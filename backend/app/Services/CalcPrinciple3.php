@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Services\Contracts\AbstractPrinciple;
+use Exception;
 
 class CalcPrinciple3 extends AbstractPrinciple
 {
@@ -25,24 +26,65 @@ class CalcPrinciple3 extends AbstractPrinciple
   private function calcQ3(): void
   {
     $resQ3 = $this->res['Q3'];
+    $requiredRacks = [
+      'openRack',
+      'IVCRack',
+      'positiveRack',
+      'negativeRack',
+      'oneWayAirflowRack',
+      'isolator'
+    ];
 
-    if (isset($resQ3) && !empty($resQ3)) {
-      $totalStaticPoint = $this->staticPoints['Q3'] ?? 0;
-      $totalWeighting = 0;
+    if (!isset($resQ3) || empty($resQ3)) {
+      throw new Exception("Empty data for Q3");
+    }
 
-      foreach ($resQ3 as $rackKey => $rackValue) {
-        if (isset($rackValue['isChecked']) && $rackValue['isChecked']) {
+    foreach ($requiredRacks as $rack) {
+      if (!isset($resQ3[$rack])) {
+        throw new \Exception("Missing required racks in Q3");
+      }
+    }
 
-          $rackWeight  = $this->weightings['Q3'][$rackKey]['rackWeighting'] ?? 0;
-          $perWeight   = $this->weightings['Q3'][$rackKey]['perWeighting'][$rackValue['per']] ?? 0;
-          $timesWeight = $this->weightings['Q3'][$rackKey]['timesWeighting'][$rackValue['times']] ?? 0;
+    $totalStaticPoint = $this->staticPoints['Q3'] ?? 0;
+    $totalWeighting = 0;
 
-          $totalWeighting += $rackWeight * $perWeight * $timesWeight;
-        }
+    $hasChecked = false;
+
+    foreach ($resQ3 as $rackKey => $rackValue) {
+      if ($rackValue['isChecked'] === null || !is_bool($rackValue['isChecked'])) {
+        throw new Exception('isChecked value cannot be null and must be boolean');
       }
 
-      $this->addTotalScore($totalWeighting * $totalStaticPoint);
+      if (isset($rackValue['isChecked']) && $rackValue['isChecked']) {
+        $hasChecked = true;
+
+        if (!isset($rackValue['per']) || $rackValue['per'] === null || (!is_int($rackValue['per']) && !is_float($rackValue['per']))) {
+          throw new Exception("Per value cannot be null and numeric for checked rack");
+        }
+        if (!isset($rackValue['times']) || $rackValue['times'] === null || (!is_int($rackValue['times']) && !is_float($rackValue['times']))) {
+          throw new Exception("Times value cannot be null and numeric for checked rack");
+        }
+
+        $per = $rackValue['per'];
+        $times = $rackValue['times'];
+
+        if (!isset($this->weightings['Q3'][$rackKey]['perWeighting'][$per]) || !isset($this->weightings['Q3'][$rackKey]['timesWeighting'][$times])) {
+          throw new Exception("Invalid value for rack {$rackKey}: times and per not found in configuration");
+        }
+
+        $rackWeight  = $this->weightings['Q3'][$rackKey]['rackWeighting'] ?? 0;
+        $perWeight   = $this->weightings['Q3'][$rackKey]['perWeighting'][$per] ?? 0;
+        $timesWeight = $this->weightings['Q3'][$rackKey]['timesWeighting'][$times] ?? 0;
+
+        $totalWeighting += $rackWeight * $perWeight * $timesWeight;
+      }
     }
+
+    if (!$hasChecked) {
+      throw new Exception("At least one rack must be checked for Q3");
+    }
+
+    $this->addTotalScore($totalWeighting * $totalStaticPoint);
   }
 
   private function calcQ4(): void
