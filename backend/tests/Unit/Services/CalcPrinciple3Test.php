@@ -172,20 +172,159 @@ class CalcPrinciple3Test extends TestCase
       'Q9' => [0, 1],
     ];
 
-    $principle4 = new CalcPrinciple3($data);
-    $principle4->calculate();
+    $principle3 = new CalcPrinciple3($data);
+    $principle3->calculate();
   }
 
   /**
    * missing questions
    */
-  public function testConstructor_MissingQ3() {}
-  public function testConstructor_MissingQ4() {}
-  public function testConstructor_MissingQ5() {}
-  public function testConstructor_MissingQ6() {}
-  public function testConstructor_MissingQ7() {}
-  public function testConstructor_MissingQ8() {}
-  public function testConstructor_MissingQ9() {}
+  public function testConstructor_MissingQ3()
+  {
+    $this->expectException(\Exception::class);
+
+    $data = [
+      'Q4' => 1,
+      'Q5' => 0,
+      'Q6' => 2,
+      'Q7' => [1],
+      'Q8' => [0],
+      'Q9' => [0, 1],
+    ];
+
+    new CalcPrinciple3($data);
+  }
+  public function testConstructor_MissingQ4()
+  {
+    $this->expectException(\Exception::class);
+
+    $data = [
+      'Q3' => [
+        'openRack' => ['isChecked' => false],
+        'IVCRack' => ['isChecked' => false],
+        'positiveRack' => ['isChecked' => true, 'per' => 0, 'times' => 3],
+        'negativeRack' => ['isChecked' => false],
+        'oneWayAirflowRack' => ['isChecked' => true, 'per' => 4, 'times' => 2],
+        'isolator' => ['isChecked' => false]
+      ],
+      'Q5' => 0,
+      'Q6' => 2,
+      'Q7' => [1],
+      'Q8' => [0],
+      'Q9' => [0, 1],
+    ];
+
+    new CalcPrinciple3($data);
+  }
+  public function testConstructor_MissingQ5()
+  {
+    $this->expectException(\Exception::class);
+
+    $data = [
+      'Q3' => [
+        'openRack' => ['isChecked' => false],
+        'IVCRack' => ['isChecked' => false],
+        'positiveRack' => ['isChecked' => true, 'per' => 0, 'times' => 3],
+        'negativeRack' => ['isChecked' => false],
+        'oneWayAirflowRack' => ['isChecked' => true, 'per' => 4, 'times' => 2],
+        'isolator' => ['isChecked' => false]
+      ],
+      'Q4' => 1,
+      'Q6' => 2,
+      'Q7' => [1],
+      'Q8' => [0],
+      'Q9' => [0, 1],
+    ];
+
+    new CalcPrinciple3($data);
+  }
+  public function testConstructor_MissingQ6()
+  {
+    $this->expectException(\Exception::class);
+
+    $data = [
+      'Q3' => [
+        'openRack' => ['isChecked' => false],
+        'IVCRack' => ['isChecked' => false],
+        'positiveRack' => ['isChecked' => true, 'per' => 0, 'times' => 3],
+        'negativeRack' => ['isChecked' => false],
+        'oneWayAirflowRack' => ['isChecked' => true, 'per' => 4, 'times' => 2],
+        'isolator' => ['isChecked' => false]
+      ],
+      'Q4' => 1,
+      'Q5' => 0,
+      'Q7' => [1],
+      'Q8' => [0],
+      'Q9' => [0, 1],
+    ];
+
+    new CalcPrinciple3($data);
+  }
+  public function testConstructor_MissingQ7()
+  {
+    $this->expectException(\Exception::class);
+
+    $data = [
+      'Q3' => [
+        'openRack' => ['isChecked' => false],
+        'IVCRack' => ['isChecked' => false],
+        'positiveRack' => ['isChecked' => true, 'per' => 0, 'times' => 3],
+        'negativeRack' => ['isChecked' => false],
+        'oneWayAirflowRack' => ['isChecked' => true, 'per' => 4, 'times' => 2],
+        'isolator' => ['isChecked' => false]
+      ],
+      'Q4' => 1,
+      'Q5' => 0,
+      'Q6' => 2,
+      'Q8' => [0],
+      'Q9' => [0, 1],
+    ];
+
+    new CalcPrinciple3($data);
+  }
+  public function testConstructor_MissingQ8()
+  {
+    $this->expectException(\Exception::class);
+
+    $data = [
+      'Q3' => [
+        'openRack' => ['isChecked' => false],
+        'IVCRack' => ['isChecked' => false],
+        'positiveRack' => ['isChecked' => true, 'per' => 0, 'times' => 3],
+        'negativeRack' => ['isChecked' => false],
+        'oneWayAirflowRack' => ['isChecked' => true, 'per' => 4, 'times' => 2],
+        'isolator' => ['isChecked' => false]
+      ],
+      'Q4' => 1,
+      'Q5' => 0,
+      'Q6' => 2,
+      'Q7' => [1],
+      'Q9' => [0, 1],
+    ];
+
+    new CalcPrinciple3($data);
+  }
+  public function testConstructor_MissingQ9()
+  {
+    $this->expectException(\Exception::class);
+
+    $data = [
+      'Q3' => [
+        'openRack' => ['isChecked' => false],
+        'IVCRack' => ['isChecked' => false],
+        'positiveRack' => ['isChecked' => true, 'per' => 0, 'times' => 3],
+        'negativeRack' => ['isChecked' => false],
+        'oneWayAirflowRack' => ['isChecked' => true, 'per' => 4, 'times' => 2],
+        'isolator' => ['isChecked' => false]
+      ],
+      'Q4' => 1,
+      'Q5' => 0,
+      'Q6' => 2,
+      'Q8' => [0],
+    ];
+
+    new CalcPrinciple3($data);
+  }
 
   /**
    * invalid value
