@@ -329,13 +329,167 @@ class CalcPrinciple3Test extends TestCase
   /**
    * invalid value
    */
-  public function testQ3_InvalidWeightingValue() {}
-  public function testQ4_InvalidWeightingValue() {}
-  public function testQ5_InvalidWeightingValue() {}
-  public function testQ6_InvalidWeightingValue() {}
-  public function testQ7_InvalidWeightingValue() {}
-  public function testQ8_InvalidWeightingValue() {}
-  public function testQ9_InvalidWeightingValue() {}
+  public function testQ3_InvalidWeightingValue()
+  {
+    $this->expectException(\Exception::class);
+    $data = [
+      'Q3' => [
+        'openRack' => ['isChecked' => false],
+        'IVCRack' => ['isChecked' => false],
+        'positiveRack' => ['isChecked' => true, 'per' => 0, 'times' => 99],
+        'negativeRack' => ['isChecked' => false],
+        'oneWayAirflowRack' => ['isChecked' => true, 'per' => 4, 'times' => 2],
+        'isolator' => ['isChecked' => false]
+      ],
+      'Q4' => 1,
+      'Q5' => 0,
+      'Q6' => 2,
+      'Q7' => [1],
+      'Q8' => [0],
+      'Q9' => [0, 1],
+    ];
+
+    $principle3 = new CalcPrinciple3($data);
+    $principle3->calculate();
+  }
+  public function testQ4_InvalidWeightingValue()
+  {
+    $this->expectException(\Exception::class);
+    $data = [
+      'Q3' => [
+        'openRack' => ['isChecked' => false],
+        'IVCRack' => ['isChecked' => false],
+        'positiveRack' => ['isChecked' => true, 'per' => 0, 'times' => 3],
+        'negativeRack' => ['isChecked' => false],
+        'oneWayAirflowRack' => ['isChecked' => true, 'per' => 4, 'times' => 2],
+        'isolator' => ['isChecked' => false]
+      ],
+      'Q4' => 99,
+      'Q5' => 0,
+      'Q6' => 2,
+      'Q7' => [1],
+      'Q8' => [0],
+      'Q9' => [0, 1],
+    ];
+
+    $principle3 = new CalcPrinciple3($data);
+    $principle3->calculate();
+  }
+  public function testQ5_InvalidWeightingValue()
+  {
+    $this->expectException(\Exception::class);
+    $data = [
+      'Q3' => [
+        'openRack' => ['isChecked' => false],
+        'IVCRack' => ['isChecked' => false],
+        'positiveRack' => ['isChecked' => true, 'per' => 0, 'times' => 3],
+        'negativeRack' => ['isChecked' => false],
+        'oneWayAirflowRack' => ['isChecked' => true, 'per' => 4, 'times' => 2],
+        'isolator' => ['isChecked' => false]
+      ],
+      'Q4' => 1,
+      'Q5' => 99,
+      'Q6' => 2,
+      'Q7' => [1],
+      'Q8' => [0],
+      'Q9' => [0, 1],
+    ];
+
+    $principle3 = new CalcPrinciple3($data);
+    $principle3->calculate();
+  }
+  public function testQ6_InvalidWeightingValue()
+  {
+    $this->expectException(\Exception::class);
+    $data = [
+      'Q3' => [
+        'openRack' => ['isChecked' => false],
+        'IVCRack' => ['isChecked' => false],
+        'positiveRack' => ['isChecked' => true, 'per' => 0, 'times' => 3],
+        'negativeRack' => ['isChecked' => false],
+        'oneWayAirflowRack' => ['isChecked' => true, 'per' => 4, 'times' => 2],
+        'isolator' => ['isChecked' => false]
+      ],
+      'Q4' => 1,
+      'Q5' => 0,
+      'Q6' => 99,
+      'Q7' => [1],
+      'Q8' => [0],
+      'Q9' => [0, 1],
+    ];
+
+    $principle3 = new CalcPrinciple3($data);
+    $principle3->calculate();
+  }
+  public function testQ7_InvalidWeightingValue()
+  {
+    $this->expectException(\Exception::class);
+    $data = [
+      'Q3' => [
+        'openRack' => ['isChecked' => false],
+        'IVCRack' => ['isChecked' => false],
+        'positiveRack' => ['isChecked' => true, 'per' => 0, 'times' => 3],
+        'negativeRack' => ['isChecked' => false],
+        'oneWayAirflowRack' => ['isChecked' => true, 'per' => 4, 'times' => 2],
+        'isolator' => ['isChecked' => false]
+      ],
+      'Q4' => 1,
+      'Q5' => 0,
+      'Q6' => 2,
+      'Q7' => [99],
+      'Q8' => [0],
+      'Q9' => [0, 1],
+    ];
+
+    $principle3 = new CalcPrinciple3($data);
+    $principle3->calculate();
+  }
+  public function testQ8_InvalidWeightingValue()
+  {
+    $this->expectException(\Exception::class);
+    $data = [
+      'Q3' => [
+        'openRack' => ['isChecked' => false],
+        'IVCRack' => ['isChecked' => false],
+        'positiveRack' => ['isChecked' => true, 'per' => 0, 'times' => 3],
+        'negativeRack' => ['isChecked' => false],
+        'oneWayAirflowRack' => ['isChecked' => true, 'per' => 4, 'times' => 2],
+        'isolator' => ['isChecked' => false]
+      ],
+      'Q4' => 1,
+      'Q5' => 0,
+      'Q6' => 2,
+      'Q7' => [1],
+      'Q8' => [99],
+      'Q9' => [0, 1],
+    ];
+
+    $principle3 = new CalcPrinciple3($data);
+    $principle3->calculate();
+  }
+  public function testQ9_InvalidWeightingValue()
+  {
+    $this->expectException(\Exception::class);
+    $data = [
+      'Q3' => [
+        'openRack' => ['isChecked' => false],
+        'IVCRack' => ['isChecked' => false],
+        'positiveRack' => ['isChecked' => true, 'per' => 0, 'times' => 3],
+        'negativeRack' => ['isChecked' => false],
+        'oneWayAirflowRack' => ['isChecked' => true, 'per' => 4, 'times' => 2],
+        'isolator' => ['isChecked' => false]
+      ],
+      'Q4' => 1,
+      'Q5' => 0,
+      'Q6' => 2,
+      'Q7' => [1],
+      'Q8' => [0],
+      'Q9' => [0, 99],
+    ];
+
+    $principle3 = new CalcPrinciple3($data);
+    $principle3->calculate();
+  }
 
   /**
    * check null
