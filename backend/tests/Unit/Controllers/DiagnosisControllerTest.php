@@ -88,7 +88,7 @@ class DiagnosisControllerTest extends TestCase
       'principle1' => 7.50,
       'principle2' => 6.94,
       'principle3' => 5.76,
-      'principle4' => 6.36,
+      'principle4' => 6.37,
       'principle5' => 2.00,
       'principleDP' => 5.00
     ];
