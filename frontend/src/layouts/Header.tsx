@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
+import { NavLink } from "react-router-dom";
+import Button from "../components/Button";
 
 const Header: React.FC = () => {
   const [stickyVisible, setStickyVisible] = useState(false);
@@ -26,77 +28,86 @@ const Header: React.FC = () => {
   return (
     <>
       {/* 通常ヘッダー */}
-      <header ref={normalHeaderRef} className="bg-[#f5f5f5] py-[20px]">
-        <div className="mx-auto flex w-[90%] max-w-[1200px] items-center justify-between rounded-[10px] bg-white px-[25px] py-[15px] transition-all duration-300">
-          <div className="text-[20px] font-bold text-[#333]">
-            実験動物施設性能診断ツール
+      <header
+        ref={normalHeaderRef}
+        className="border-1 border-neutral-300/50 bg-neutral-50"
+      >
+        <div className="mx-auto flex max-w-[1440px] flex-col items-center gap-6 py-5">
+          <div className="text-2xl font-bold tracking-tight text-cyan-950">
+            実験動物施設総合評価
           </div>
-          <div className="flex">
-            <a
-              href="#"
-              className="ml-[25px] font-medium text-[#555] transition-colors duration-300 hover:text-[#164e63]"
+          <li className="flex items-center gap-10">
+            <NavLink
+              to="home"
+              className="text-sm text-neutral-700 hover:underline"
             >
               ホーム
-            </a>
-            <a
-              href="#"
-              className="ml-[25px] font-medium text-[#555] transition-colors duration-300 hover:text-[#164e63]"
+            </NavLink>
+            <NavLink
+              to="diagnosis"
+              className="text-sm text-neutral-700 hover:underline"
             >
               性能診断
-            </a>
-            <a
-              href="#"
-              className="ml-[25px] font-medium text-[#555] transition-colors duration-300 hover:text-[#164e63]"
+            </NavLink>
+            <NavLink
+              to="contact"
+              className="text-sm text-neutral-700 hover:underline"
             >
               お問い合わせ
-            </a>
-          </div>
-          <a
-            href="#"
-            className="rounded-[4px] bg-[#164e63] px-[20px] py-[10px] font-bold text-white transition-colors duration-300 hover:bg-[#0e3a4a]"
-          >
-            診断する
-          </a>
+            </NavLink>
+            <Button
+              as="link"
+              type="primary"
+              className="cursor-pointer rounded-full px-5 py-2 text-sm font-bold decoration-0 duration-75"
+            >
+              診断する
+            </Button>
+          </li>
         </div>
       </header>
 
       {/* スクロール時に表示するstickyヘッダー */}
       <header
-        className={`fixed top-2 left-0 z-[1000] w-full transition-opacity duration-300 ${
-          stickyVisible ? "opacity-100" : "opacity-0"
+        className={`fixed top-2 left-0 z-[1000] block w-full transition-opacity duration-200 ${
+          stickyVisible
+            ? "pointer-events-auto opacity-100"
+            : "pointer-events-none opacity-0"
         }`}
       >
         {/* 背景色は付与せず、中央のコンテナにのみ白い背景を設定 */}
-        <div className="mx-auto flex w-[90%] max-w-[1200px] items-center justify-between rounded-none bg-white px-[25px] py-[10px] shadow-[0_4px_10px_rgba(0,0,0,0.15)]">
-          <div className="text-[20px] font-bold text-[#333]">
-            実験動物施設性能診断ツール
+        <div className="mx-auto flex w-[90%] max-w-[1200px] items-center justify-between rounded-full bg-white px-20 py-3 shadow-[0_4px_10px_rgba(0,0,0,0.15)]">
+          <div className="text-lg font-bold tracking-tight text-cyan-950">
+            実験動物施設総合評価
           </div>
-          <div className="flex">
-            <a
-              href="#"
-              className="ml-[25px] font-medium text-[#555] transition-colors duration-300 hover:text-[#164e63]"
+          <div className="flex items-center gap-12">
+            <div className="flex gap-10">
+              <NavLink
+                to="home"
+                className="text-sm text-neutral-800 hover:underline"
+              >
+                ホーム
+              </NavLink>
+              <NavLink
+                to="diagnosis"
+                className="text-sm text-neutral-800 hover:underline"
+              >
+                性能診断
+              </NavLink>
+              <NavLink
+                to="contact"
+                className="text-sm text-neutral-800 hover:underline"
+              >
+                お問い合わせ
+              </NavLink>
+            </div>
+            <Button
+              as="link"
+              type="primary"
+              className="cursor-pointer rounded-sm px-5 py-2 text-sm font-bold decoration-0 duration-75"
             >
-              ホーム
-            </a>
-            <a
-              href="#"
-              className="ml-[25px] font-medium text-[#555] transition-colors duration-300 hover:text-[#164e63]"
-            >
-              性能診断
-            </a>
-            <a
-              href="#"
-              className="ml-[25px] font-medium text-[#555] transition-colors duration-300 hover:text-[#164e63]"
-            >
-              お問い合わせ
-            </a>
+              診断する
+            </Button>
           </div>
-          <a
-            href="#"
-            className="rounded-[4px] bg-[#164e63] px-[20px] py-[10px] font-bold text-white transition-colors duration-300 hover:bg-[#0e3a4a]"
-          >
-            診断する
-          </a>
         </div>
       </header>
     </>
