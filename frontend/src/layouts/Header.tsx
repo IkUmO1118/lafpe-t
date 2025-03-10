@@ -30,7 +30,7 @@ function Header() {
       {/* 通常ヘッダー */}
       <header
         ref={normalHeaderRef}
-        className="border-1 border-neutral-300/50 bg-neutral-50"
+        className="border-b border-neutral-300/50 bg-neutral-50"
       >
         <div className="mx-auto flex max-w-[1440px] flex-col items-center gap-6 py-5">
           <div className="text-2xl font-bold tracking-tight text-cyan-950">
@@ -75,7 +75,7 @@ function Header() {
         }`}
       >
         {/* 背景色は付与せず、中央のコンテナにのみ白い背景を設定 */}
-        <div className="mx-auto flex w-8/10 max-w-[1440px] items-center justify-between rounded-full bg-white px-20 py-3 shadow-md">
+        <div className="mx-auto flex w-10/12 max-w-[1440px] items-center justify-between rounded-full border border-neutral-300/50 bg-neutral-50 px-20 py-3 shadow-md">
           <div className="text-lg font-bold tracking-tight text-cyan-950">
             実験動物施設総合評価
           </div>
