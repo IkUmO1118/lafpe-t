@@ -18,7 +18,7 @@ function Button({
       ? "bg-cyan-900 text-neutral-50 hover:bg-cyan-950"
       : "border border-cyan-900 text-cyan-900";
 
-  const combinedClassName = `${typeClass} ${className}`;
+  const combinedClassName = `cursor-pointer ${typeClass} ${className} decoration-0 transition-all duration-300`;
 
   if (as === "link") {
     return <a className={combinedClassName}>{children}</a>;

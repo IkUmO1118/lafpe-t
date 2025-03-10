@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { NavLink } from "react-router-dom";
 import Button from "../components/Button";
 
-const Header: React.FC = () => {
+function Header() {
   const [stickyVisible, setStickyVisible] = useState(false);
   const normalHeaderRef = useRef<HTMLElement | null>(null);
 
@@ -58,7 +58,7 @@ const Header: React.FC = () => {
             <Button
               as="link"
               type="primary"
-              className="cursor-pointer rounded-full px-5 py-2 text-sm font-bold decoration-0 duration-75"
+              className="rounded-full px-5 py-2 text-sm font-bold"
             >
               診断する
             </Button>
@@ -68,14 +68,14 @@ const Header: React.FC = () => {
 
       {/* スクロール時に表示するstickyヘッダー */}
       <header
-        className={`fixed top-2 left-0 z-[1000] block w-full transition-opacity duration-200 ${
+        className={`fixed left-0 z-[1000] block w-full transition-all duration-200 ${
           stickyVisible
-            ? "pointer-events-auto opacity-100"
-            : "pointer-events-none opacity-0"
+            ? "pointer-events-auto top-2 translate-y-0 transform opacity-100"
+            : "pointer-events-none top-2 -translate-y-full transform opacity-0"
         }`}
       >
         {/* 背景色は付与せず、中央のコンテナにのみ白い背景を設定 */}
-        <div className="mx-auto flex w-[90%] max-w-[1200px] items-center justify-between rounded-full bg-white px-20 py-3 shadow-[0_4px_10px_rgba(0,0,0,0.15)]">
+        <div className="mx-auto flex w-8/10 max-w-[1440px] items-center justify-between rounded-full bg-white px-20 py-3 shadow-md">
           <div className="text-lg font-bold tracking-tight text-cyan-950">
             実験動物施設総合評価
           </div>
@@ -112,6 +112,6 @@ const Header: React.FC = () => {
       </header>
     </>
   );
-};
+}
 
 export default Header;
