@@ -169,7 +169,6 @@ function Home() {
       <p>test</p>
       <p>test</p>
       <p>test</p>
-      <p>test</p>
       <CallToAction />
     </div>
   );
