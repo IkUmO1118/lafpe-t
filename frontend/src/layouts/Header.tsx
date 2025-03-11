@@ -34,7 +34,7 @@ function Header() {
       >
         <div className="mx-auto flex max-w-[1440px] flex-col items-center gap-6 py-5">
           <div className="text-2xl font-bold tracking-tight text-cyan-950">
-            実験動物施設総合評価
+            実験動物施設性能診断ツール(試)
           </div>
           <li className="flex items-center gap-10">
             <NavLink
@@ -53,7 +53,7 @@ function Header() {
               to="contact"
               className="text-sm text-neutral-700 hover:underline"
             >
-              お問い合わせ
+              ご意見・ご感想
             </NavLink>
             <Button
               as="link"
@@ -77,7 +77,7 @@ function Header() {
         {/* 背景色は付与せず、中央のコンテナにのみ白い背景を設定 */}
         <div className="mx-auto flex w-10/12 max-w-[1440px] items-center justify-between rounded-full border border-neutral-300/50 bg-neutral-50 px-20 py-3 shadow-md">
           <div className="text-lg font-bold tracking-tight text-cyan-950">
-            実験動物施設総合評価
+            実験動物施設性能診断ツール(試)
           </div>
           <div className="flex items-center gap-12">
             <div className="flex gap-10">
@@ -97,7 +97,7 @@ function Header() {
                 to="contact"
                 className="text-sm text-neutral-800 hover:underline"
               >
-                お問い合わせ
+                ご意見・ご感想
               </NavLink>
             </div>
             <Button
