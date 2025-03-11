@@ -57,7 +57,7 @@ function Header() {
             </NavLink>
             <Button
               as="link"
-              type="primary"
+              type="fill"
               className="rounded-full px-5 py-2 text-sm font-bold"
             >
               診断する
@@ -102,7 +102,8 @@ function Header() {
             </div>
             <Button
               as="link"
-              type="primary"
+              type="fill"
+              color="primary"
               className="cursor-pointer rounded-sm px-5 py-2 text-sm font-bold decoration-0 duration-75"
             >
               診断する

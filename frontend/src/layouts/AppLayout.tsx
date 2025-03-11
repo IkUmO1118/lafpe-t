@@ -6,7 +6,9 @@ function AppLayout() {
   return (
     <div className="h-screen bg-neutral-50">
       <Header />
-      <Outlet />
+      <main className="bg-neutral-50">
+        <Outlet />
+      </main>
       <Footer />
     </div>
   );

@@ -16,15 +16,32 @@ const renderSquareShape = (props) => {
   return <rect x={cx - 4} y={cy - 4} width={8} height={8} fill="#0e7490" />;
 };
 
-const PrincipleRadarChart = () => {
+// プロップスの型定義
+interface PrincipleRadarChartProps {
+  principle1?: number;
+  principle2?: number;
+  principle3?: number;
+  principle4?: number;
+  principle5?: number;
+  dp?: number;
+}
+
+const PrincipleRadarChart = ({
+  principle1,
+  principle2,
+  principle3,
+  principle4,
+  principle5,
+  dp,
+}: PrincipleRadarChartProps) => {
   // 修正したデータ - 基準値を全て5に統一、評価結果も10を最大とする範囲で調整
   const data = [
-    { principle: "原則1", 評価結果: 7.5, 基準値: 5 },
-    { principle: "原則2", 評価結果: 6.94, 基準値: 5 },
-    { principle: "原則3", 評価結果: 5.76, 基準値: 5 },
-    { principle: "原則4", 評価結果: 6.36, 基準値: 5 },
-    { principle: "原則5", 評価結果: 2, 基準値: 5 },
-    { principle: "DP", 評価結果: 5, 基準値: 5 },
+    { principle: "原則1", 評価結果: principle1, 基準値: 5 },
+    { principle: "原則2", 評価結果: principle2, 基準値: 5 },
+    { principle: "原則3", 評価結果: principle3, 基準値: 5 },
+    { principle: "原則4", 評価結果: principle4, 基準値: 5 },
+    { principle: "原則5", 評価結果: principle5, 基準値: 5 },
+    { principle: "DP", 評価結果: dp, 基準値: 5 },
   ];
 
   const customTicks: TickItem[] = [0, 2, 4, 6, 8, 10];
