@@ -50,7 +50,7 @@ function Header() {
               性能診断
             </NavLink>
             <NavLink
-              to="contact"
+              to="feedback"
               className="text-sm text-neutral-700 hover:underline"
             >
               ご意見・ご感想
@@ -94,7 +94,7 @@ function Header() {
                 性能診断
               </NavLink>
               <NavLink
-                to="contact"
+                to="feedback"
                 className="text-sm text-neutral-800 hover:underline"
               >
                 ご意見・ご感想
