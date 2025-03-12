@@ -47,8 +47,7 @@ const PrincipleRadarChart = ({
   const customTicks: TickItem[] = [0, 2, 4, 6, 8, 10];
 
   return (
-    <div className="flex h-96 w-full flex-col items-center">
-      <h2 className="mb-4 text-xl font-bold">原則評価チャート</h2>
+    <div className="flex h-96 w-full items-center">
       <ResponsiveContainer width="100%" height="100%">
         <RadarChart cx="50%" cy="50%" outerRadius="70%" data={data}>
           <PolarGrid gridType="polygon" />
