@@ -1,7 +1,9 @@
 function EvaluationBasis() {
   return (
-    <div className="flex flex-col items-center justify-center gap-20 bg-linear-to-b from-neutral-100 to-slate-100 px-28 py-20">
-      <h2 className="text-4xl font-black text-neutral-950">評価軸について</h2>
+    <div className="flex flex-col items-center justify-center gap-15 bg-linear-to-b from-neutral-100 to-slate-100 px-28 py-20">
+      <h2 className="mb-5 text-4xl font-black text-neutral-950">
+        評価軸について
+      </h2>
       <div className="grid w-full grid-cols-2 gap-x-5 gap-y-10">
         <div className="flex flex-col">
           <div className="self-start rounded-t-lg bg-cyan-900 px-5 py-2.5 text-base font-bold text-neutral-50">
@@ -118,6 +120,11 @@ function EvaluationBasis() {
           </div>
         </div>
       </div>
+      <p className="text-sm text-neutral-600">
+        注）なお現時点で，本ツールは小動物飼育に対応した評価に限定しています。中大型動物や哺乳動物以外の生物については検討中です。
+        <br />
+        注）本ツールでは、メールアドレス等を含む使用者に関する情報は一切収集いたしません。
+      </p>
     </div>
   );
 }
