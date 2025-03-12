@@ -3,9 +3,11 @@
 namespace Routing;
 
 use App\Controllers\DiagnosisController;
+use App\Controllers\PDFController;
 use Helpers\ValidationHelper;
 use Response\HTTPRenderer;
 use Response\Render\JSONRenderer;
+use Response\Render\PDFRenderer;
 
 return [
   "api/diagnosis" => [
@@ -23,7 +25,8 @@ return [
       $data = ValidationHelper::checkRequiredQuestions($requestData);
 
       $controller = new DiagnosisController($data);
-      $diagnosis = $controller->update();
+      // $diagnosis = $controller->update();
+      $diagnosis = $controller->store();
       return new JSONRenderer(['diagnosis' => $diagnosis]);
     }
   ]
