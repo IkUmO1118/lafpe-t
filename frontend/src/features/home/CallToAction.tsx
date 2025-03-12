@@ -24,7 +24,7 @@ function CallToAction() {
             as="button"
             type="fill"
             color="white"
-            className="rounded-sm px-10 py-4 text-base font-medium"
+            className="rounded-sm px-10 py-4 text-base font-bold"
           >
             診断を開始
           </Button>
