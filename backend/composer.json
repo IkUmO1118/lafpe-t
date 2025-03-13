@@ -11,6 +11,7 @@
       "Services\\": "app/Services/",
       "Contracts\\": "app/Services/Contracts/",
       "Config\\": "config/",
+      "Exceptions\\": "/Exceptions",
       "Helpers\\": "Helpers/",
       "Response\\": "Response/",
       "Render\\": "Response/Render/",
@@ -36,5 +37,8 @@
   ],
   "require-dev": {
     "phpunit/phpunit": "^10"
+  },
+  "require": {
+    "google/apiclient": "^2.0"
   }
 }
