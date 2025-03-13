@@ -6,7 +6,7 @@ use InvalidArgumentException;
 
 class ValidationHelper
 {
-  public static function checkRequiredQuestions($data): array
+  public static function checkRequiredQuestions(array $data): array
   {
     if (!is_array($data)) {
       throw new InvalidArgumentException('The provided value is not a valid data.');
@@ -23,14 +23,30 @@ class ValidationHelper
     return $data;
   }
 
-  public static function string(string $value): string
+  public static function string(array $value): array
   {
-    $sanitized = htmlspecialchars($value, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+    if (!isset($value["message"]) || !is_string($value["message"])) {
+      throw new InvalidArgumentException('The provided value must be a string.');
+    }
 
-    if (empty($sanitized) && $sanitized !== '0') {
+    $message = trim($value["message"]);
+
+    if (mb_strlen($message, 'UTF-8') > 255) {
+      throw new InvalidArgumentException('The provided value exceeds the maximum length of 255 characters.');
+    }
+
+    $message = preg_replace('/[\x00-\x1F\x7F]/u', '', $message);
+
+    if (preg_match('/(UNION|SELECT|INSERT|UPDATE|DELETE|DROP|--)/i', $message)) {
+      throw new InvalidArgumentException('Invalid input detected.');
+    }
+
+    $sanitized = htmlspecialchars(strip_tags($message), ENT_QUOTES | ENT_HTML5, 'UTF-8');
+
+    if ($sanitized === '' && $sanitized !== '0') {
       throw new InvalidArgumentException('The provided value is not a valid string.');
     }
 
-    return $sanitized;
+    return ['message' => $sanitized];
   }
 }
