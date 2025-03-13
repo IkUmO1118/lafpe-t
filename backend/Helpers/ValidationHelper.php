@@ -22,4 +22,15 @@ class ValidationHelper
 
     return $data;
   }
+
+  public static function string(string $value): string
+  {
+    $sanitized = htmlspecialchars($value, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+
+    if (empty($sanitized) && $sanitized !== '0') {
+      throw new InvalidArgumentException('The provided value is not a valid string.');
+    }
+
+    return $sanitized;
+  }
 }
