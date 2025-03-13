@@ -3,11 +3,10 @@
 namespace Routing;
 
 use App\Controllers\DiagnosisController;
-use App\Controllers\PDFController;
+use App\Controllers\FeedbackFormController;
 use Helpers\ValidationHelper;
 use Response\HTTPRenderer;
 use Response\Render\JSONRenderer;
-use Response\Render\PDFRenderer;
 
 return [
   "api/diagnosis" => [
@@ -27,7 +26,17 @@ return [
       $controller = new DiagnosisController($data);
       // $diagnosis = $controller->update();
       $diagnosis = $controller->store();
-      return new JSONRenderer(['diagnosis' => $diagnosis]);
+      return new JSONRenderer(['message' => 'success', 'diagnosis' => $diagnosis]);
+    }
+  ],
+  "api/feedback" => [
+    'POST' => function (): HTTPRenderer {
+      $requestData = json_decode(file_get_contents('php://input'), true);
+      $data = ValidationHelper::string($requestData);
+
+      $controller = new FeedbackFormController($data);
+      $result = $controller->store();
+      return new JSONRenderer($result);
     }
   ]
 ];
