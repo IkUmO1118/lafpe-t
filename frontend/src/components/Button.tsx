@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 interface ButtonProps {
   as?: "link" | "button";
@@ -29,10 +30,14 @@ function Button({
     },
   };
 
-  const combinedClassName = `cursor-pointer  ${typeClass[type][color]} ${className} decoration-0 transition-all duration-300`;
+  const combinedClassName = `cursor-pointer ${typeClass[type][color]} ${className} decoration-0 transition-all duration-300`;
 
   if (as === "link") {
-    return <a className={combinedClassName}>{children}</a>;
+    return (
+      <NavLink to="/" className={combinedClassName}>
+        {children}
+      </NavLink>
+    );
   }
 
   if (as === "button") {
