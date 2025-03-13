@@ -1,6 +1,14 @@
-function EvaluationImage() {
+import { forwardRef, ForwardedRef } from "react";
+
+const EvaluationImage = forwardRef(function EvaluationImage(
+  _props,
+  ref: ForwardedRef<HTMLDivElement>,
+) {
   return (
-    <div className="flex flex-col items-center justify-center gap-14 py-20">
+    <div
+      ref={ref}
+      className="flex flex-col items-center justify-center gap-14 py-20"
+    >
       <h2 className="text-4xl font-black text-neutral-950">
         評価結果の表示イメージ
       </h2>
@@ -11,6 +19,6 @@ function EvaluationImage() {
       />
     </div>
   );
-}
+});
 
 export default EvaluationImage;

@@ -1,6 +1,10 @@
 import Button from "../../components/Button";
 
-function Hero() {
+interface HeroProps {
+  scrollToEvaluation: () => void;
+}
+
+function Hero({ scrollToEvaluation }: HeroProps) {
   return (
     <div className="flex flex-col items-center justify-center gap-10 pt-20 pb-16">
       <h1 className="text-5xl font-bold text-cyan-950">
@@ -22,6 +26,7 @@ function Hero() {
           type="outline"
           color="primary"
           className="rounded-sm px-6 py-4 text-base font-medium"
+          onClick={scrollToEvaluation}
         >
           ツールについて
         </Button>
