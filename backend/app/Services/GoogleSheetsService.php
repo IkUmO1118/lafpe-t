@@ -29,7 +29,6 @@ class GoogleSheetsService
 
       // 設定値の読み込み
       $settings = new Settings();
-      // $this->spreadsheetId = "10SPNI5Hw_SWlXwXnlnzJA_x1wACATdTQRmsOoOU9ebM";
       $this->spreadsheetId = $settings->env("GOOGLE_SPREADSHEET_ID");
       if (empty($this->spreadsheetId)) {
         throw new Exception('スプレッドシートIDが設定されていません');
