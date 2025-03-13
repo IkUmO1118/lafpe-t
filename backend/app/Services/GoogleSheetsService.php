@@ -24,14 +24,14 @@ class GoogleSheetsService
     try {
       // .envファイルの読み込みを確認
       if (!file_exists(dirname(__DIR__, 2) . '/.env')) {
-        throw new Exception('.envファイルが見つかりません');
+        throw new Exception('.env file not found');
       }
 
       // 設定値の読み込み
       $settings = new Settings();
       $this->spreadsheetId = $settings->env("GOOGLE_SPREADSHEET_ID");
       if (empty($this->spreadsheetId)) {
-        throw new Exception('スプレッドシートIDが設定されていません');
+        throw new Exception('Spreadsheet ID is not set');
       }
 
       $this->range = 'フィードバック!A2:B';
@@ -39,13 +39,13 @@ class GoogleSheetsService
       // 認証ファイルのパスを解決
       $keyFilePath = $settings->env('GOOGLE_APPLICATION_CREDENTIALS');
       if (empty($keyFilePath)) {
-        throw new Exception('Google API認証情報のパスが設定されていません');
+        throw new Exception('Google API credentials path is not set');
       }
 
       // プロジェクトルートからの相対パスを絶対パスに変換
       $absolutePath = dirname(__DIR__, 2) . '/' . $keyFilePath;
       if (!file_exists($absolutePath)) {
-        throw new Exception('Google API認証ファイルが見つかりません: ' . $absolutePath);
+        throw new Exception('Google API authentication file not found: ' . $absolutePath);
       }
 
       $client = new Google_Client();
@@ -54,7 +54,7 @@ class GoogleSheetsService
 
       $this->service = new Google_Service_Sheets($client);
     } catch (Exception $e) {
-      throw new Exception('Google Sheetsサービスの初期化に失敗しました: ' . $e->getMessage());
+      throw new Exception('Initialization of Google Sheets service failed: ' . $e->getMessage());
     }
   }
 

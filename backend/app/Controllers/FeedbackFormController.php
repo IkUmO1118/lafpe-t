@@ -5,7 +5,7 @@ namespace App\Controllers;
 use App\Services\GoogleSheetsService;
 use Exception;
 
-class ContactFormController
+class FeedbackFormController
 {
   private array $data = [];
   private GoogleSheetsService $sheetsService;
