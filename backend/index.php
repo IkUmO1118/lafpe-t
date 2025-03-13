@@ -42,6 +42,9 @@ header('Access-Control-Allow-Credentials: true');
 // デバッグ用のフラグ
 $DEBUG = true;
 
+// タイムゾーンを日本時間に設定
+date_default_timezone_set('Asia/Tokyo');
+
 // ルーティングファイルのインクルード
 $routes = include(__DIR__ . '/Routing/routes.php');
 
