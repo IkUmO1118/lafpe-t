@@ -1,58 +1,54 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { Slot } from "@radix-ui/react-slot";
+import { cva, VariantProps } from "class-variance-authority";
+import { cn } from "../lib/utils";
 
-interface ButtonProps {
-  as: "link" | "button";
-  className?: string;
-  type: "fill" | "outline";
-  color: "primary" | "white";
-  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  to?: string;
-  children: React.ReactNode;
+const buttonVariants = cva(
+  "cursor-pointer decoration-0 transition-all duration-300",
+  {
+    variants: {
+      variant: {
+        fillPrimary: "bg-cyan-900 text-white hover:bg-cyan-950",
+        fillWhite:
+          "bg-white text-cyan-900 outline outline-2 outline-transparent outline-offset-[-2px] hover:outline-cyan-800 duration-300 transition-all ease-in",
+        outlinePrimary:
+          "border border-cyan-900 text-cyan-900 outline outline-transparent outline-2 outline-offset-[-2px] hover:outline-2 hover:outline-cyan-900 transition-all duration-300 ease-in",
+        outlineWhite:
+          "border border-neutral-50 text-neutral-50 outline outline-transparent outline-2 outline-offset-[-2px] hover:outline-2 hover:outline-neutral-50 transition-all duration-300 ease-in",
+      },
+      size: {
+        sm: "rounded-sm px-5 py-2 text-sm font-medium", //header
+        base: "rounded-sm px-6 py-4 text-base font-bold", //Hero section
+        wide: "w-full rounded-sm py-3 font-bold", //feedback
+        lg: "rounded-sm px-10 py-4 text-base font-medium", // cta
+        xl: "rounded-sm px-10 py-3 text-base font-medium", // download pdf
+      },
+    },
+    defaultVariants: {
+      variant: "fillPrimary",
+      size: "base",
+    },
+  },
+);
+
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    VariantProps<typeof buttonVariants> {
+  asChild?: boolean;
 }
 
-function Button({
-  as = "link",
-  children,
-  className = "",
-  type = "fill",
-  color = "primary",
-  onClick,
-  to = "/",
-}: ButtonProps) {
-  const typeClass = {
-    fill: {
-      primary: "bg-cyan-900 text-white hover:bg-cyan-950",
-      white:
-        "bg-white text-cyan-900 outline outline-2 outline-transparent outline-offset-[-2px] hover:outline-cyan-800 duration-300 transition-all ease-in",
-    },
-    outline: {
-      primary:
-        "border border-cyan-900 text-cyan-900 outline outline-transparent outline-2 outline-offset-[-2px] hover:outline-2 hover:outline-cyan-900 transition-all duration-300 ease-in",
-      white:
-        "border border-neutral-50 text-neutral-50 outline outline-transparent outline-2 outline-offset-[-2px] hover:outline-2 hover:outline-neutral-50 transition-all duration-300 ease-in",
-    },
-  };
-
-  const combinedClassName = `cursor-pointer ${typeClass[type][color]} ${className} decoration-0 transition-all duration-300`;
-
-  if (as === "link") {
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, variant, size, asChild = false, ...props }, ref) => {
+    const Comp = asChild ? Slot : "button";
     return (
-      <NavLink to={to} className={combinedClassName}>
-        {children}
-      </NavLink>
+      <Comp
+        className={cn(buttonVariants({ variant, size, className }))}
+        ref={ref}
+        {...props}
+      />
     );
-  }
+  },
+);
+Button.displayName = "Button";
 
-  if (as === "button") {
-    return (
-      <button className={combinedClassName} onClick={onClick}>
-        {children}
-      </button>
-    );
-  }
-
-  return null;
-}
-
-export default Button;
+export { Button };
