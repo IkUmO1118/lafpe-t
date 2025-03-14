@@ -6,10 +6,12 @@ import PageNotFound from "./pages/PageNotFound";
 import Diagnosis from "./pages/Diagnosis";
 import AppLayout from "./layouts/AppLayout";
 import Feedback from "./pages/Feedback";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         <Route element={<AppLayout />}>
           <Route index element={<Navigate replace to="home" />} />

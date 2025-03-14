@@ -1,10 +1,13 @@
-import Button from "../../components/Button";
+import { useNavigate } from "react-router-dom";
+import { Button } from "../../components/Button";
 
 interface HeroProps {
   scrollToEvaluation: () => void;
 }
 
 function Hero({ scrollToEvaluation }: HeroProps) {
+  const navigate = useNavigate();
+
   return (
     <div className="flex flex-col items-center justify-center gap-10 pt-20 pb-16">
       <h1 className="text-5xl font-bold text-cyan-950">
@@ -14,19 +17,15 @@ function Hero({ scrollToEvaluation }: HeroProps) {
       </h1>
       <div className="flex gap-4">
         <Button
-          as="link"
-          type="fill"
-          color="primary"
-          to="/diagnosis"
-          className="rounded-sm px-6 py-4 text-base font-bold"
+          variant="fillPrimary"
+          size="base"
+          onClick={() => navigate("/diagnosis")}
         >
           診断を開始する
         </Button>
         <Button
-          as="button"
-          type="outline"
-          color="primary"
-          className="rounded-sm px-6 py-4 text-base font-medium"
+          variant="outlinePrimary"
+          size="base"
           onClick={scrollToEvaluation}
         >
           ツールについて

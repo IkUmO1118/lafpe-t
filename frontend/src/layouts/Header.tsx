@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from "react";
-import { NavLink } from "react-router-dom";
-import Button from "../components/Button";
+import { NavLink, useNavigate } from "react-router-dom";
+import { Button } from "../components/Button";
 
 function Header() {
+  const navigate = useNavigate();
   const [stickyVisible, setStickyVisible] = useState(false);
   const normalHeaderRef = useRef<HTMLElement | null>(null);
 
@@ -56,11 +57,9 @@ function Header() {
               ご意見・ご感想
             </NavLink>
             <Button
-              as="link"
-              type="fill"
-              to="/diagnosis"
-              color="primary"
-              className="rounded-full px-5 py-2 text-sm font-medium"
+              variant="fillPrimary"
+              size="sm"
+              onClick={() => navigate("/diagnosis")}
             >
               診断する
             </Button>
@@ -103,11 +102,9 @@ function Header() {
               </NavLink>
             </div>
             <Button
-              as="link"
-              type="fill"
-              color="primary"
-              to="/diagnosis"
-              className="cursor-pointer rounded-sm px-5 py-2 text-sm font-medium decoration-0 duration-75"
+              variant="fillPrimary"
+              size="sm"
+              onClick={() => navigate("/diagnosis")}
             >
               診断する
             </Button>

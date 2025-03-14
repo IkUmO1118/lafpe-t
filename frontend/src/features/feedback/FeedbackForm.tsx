@@ -1,5 +1,5 @@
 import { useState, FormEvent } from "react";
-import Button from "../../components/Button";
+import { Button } from "../../components/Button";
 
 function FeedbackForm() {
   const [message, setMessage] = useState("");
@@ -93,13 +93,11 @@ function FeedbackForm() {
       </form>
 
       <Button
-        as="button"
-        type="fill"
-        color="primary"
-        className="w-full rounded-sm py-3 font-bold"
+        variant="fillPrimary"
+        size="wide"
         onClick={(e) => handleSubmit(e)}
       >
-        送信する
+        {status.submitting ? "送信中..." : "送信する"}
       </Button>
     </div>
   );

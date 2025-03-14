@@ -1,10 +1,12 @@
-import Button from "../../components/Button";
+import { useNavigate } from "react-router-dom";
+import { Button } from "../../components/Button";
 
 interface HeroProps {
   scrollToEvaluation: () => void;
 }
 
 function CallToAction({ scrollToEvaluation }: HeroProps) {
+  const navigate = useNavigate();
   return (
     <section className="relative mb-14 h-[370px] w-full">
       <svg
@@ -25,21 +27,13 @@ function CallToAction({ scrollToEvaluation }: HeroProps) {
         </div>
         <div className="flex items-center justify-center gap-4">
           <Button
-            as="link"
-            type="fill"
-            color="white"
-            to="/diagnosis"
-            className="rounded-sm px-10 py-4 text-base font-bold"
+            variant="fillWhite"
+            size="lg"
+            onClick={() => navigate("/diagnosis")}
           >
             診断を開始
           </Button>
-          <Button
-            as="button"
-            type="outline"
-            color="white"
-            onClick={scrollToEvaluation}
-            className="rounded-sm px-10 py-4 text-base font-medium"
-          >
+          <Button variant="outlineWhite" size="lg" onClick={scrollToEvaluation}>
             ツールについて
           </Button>
         </div>
