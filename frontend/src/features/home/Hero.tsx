@@ -14,9 +14,10 @@ function Hero({ scrollToEvaluation }: HeroProps) {
       </h1>
       <div className="flex gap-4">
         <Button
-          as="button"
+          as="link"
           type="fill"
           color="primary"
+          to="/diagnosis"
           className="rounded-sm px-6 py-4 text-base font-bold"
         >
           診断を開始する

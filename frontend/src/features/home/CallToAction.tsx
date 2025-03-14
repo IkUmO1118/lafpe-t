@@ -1,6 +1,10 @@
 import Button from "../../components/Button";
 
-function CallToAction() {
+interface HeroProps {
+  scrollToEvaluation: () => void;
+}
+
+function CallToAction({ scrollToEvaluation }: HeroProps) {
   return (
     <section className="relative mb-14 h-[370px] w-full">
       <svg
@@ -21,9 +25,10 @@ function CallToAction() {
         </div>
         <div className="flex items-center justify-center gap-4">
           <Button
-            as="button"
+            as="link"
             type="fill"
             color="white"
+            to="/diagnosis"
             className="rounded-sm px-10 py-4 text-base font-bold"
           >
             診断を開始
@@ -32,6 +37,7 @@ function CallToAction() {
             as="button"
             type="outline"
             color="white"
+            onClick={scrollToEvaluation}
             className="rounded-sm px-10 py-4 text-base font-medium"
           >
             ツールについて

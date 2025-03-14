@@ -21,7 +21,7 @@ function Home() {
       <ToolBanner />
       <EvaluationImage ref={evaluationImageRef} />
       <EvaluationBasis />
-      <CallToAction />
+      <CallToAction scrollToEvaluation={scrollToEvaluation} />
     </section>
   );
 }
