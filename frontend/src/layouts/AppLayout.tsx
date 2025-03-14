@@ -4,9 +4,9 @@ import Footer from "./Footer";
 
 function AppLayout() {
   return (
-    <div className="h-screen bg-neutral-50">
+    <div className="flex min-h-screen flex-col bg-neutral-50">
       <Header />
-      <main className="bg-neutral-50">
+      <main className="flex-1 bg-neutral-50">
         <Outlet />
       </main>
       <Footer />

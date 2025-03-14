@@ -38,19 +38,19 @@ function Header() {
           </div>
           <li className="flex items-center gap-10">
             <NavLink
-              to="home"
+              to="/home"
               className="text-sm text-neutral-700 hover:underline"
             >
               ホーム
             </NavLink>
             <NavLink
-              to="diagnosis"
+              to="/diagnosis"
               className="text-sm text-neutral-700 hover:underline"
             >
               性能診断
             </NavLink>
             <NavLink
-              to="feedback"
+              to="/feedback"
               className="text-sm text-neutral-700 hover:underline"
             >
               ご意見・ご感想
@@ -58,7 +58,9 @@ function Header() {
             <Button
               as="link"
               type="fill"
-              className="rounded-full px-5 py-2 text-sm font-bold"
+              to="/diagnosis"
+              color="primary"
+              className="rounded-full px-5 py-2 text-sm font-medium"
             >
               診断する
             </Button>
@@ -88,13 +90,13 @@ function Header() {
                 ホーム
               </NavLink>
               <NavLink
-                to="diagnosis"
+                to="/diagnosis"
                 className="text-sm text-neutral-800 hover:underline"
               >
                 性能診断
               </NavLink>
               <NavLink
-                to="feedback"
+                to="/feedback"
                 className="text-sm text-neutral-800 hover:underline"
               >
                 ご意見・ご感想
@@ -104,7 +106,8 @@ function Header() {
               as="link"
               type="fill"
               color="primary"
-              className="cursor-pointer rounded-sm px-5 py-2 text-sm font-bold decoration-0 duration-75"
+              to="/diagnosis"
+              className="cursor-pointer rounded-sm px-5 py-2 text-sm font-medium decoration-0 duration-75"
             >
               診断する
             </Button>
