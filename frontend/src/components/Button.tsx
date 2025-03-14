@@ -6,7 +6,7 @@ interface ButtonProps {
   className?: string;
   type: "fill" | "outline";
   color: "primary" | "white";
-  onClick?: () => void;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   to?: string;
   children: React.ReactNode;
 }
