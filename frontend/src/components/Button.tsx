@@ -2,10 +2,12 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 interface ButtonProps {
-  as?: "link" | "button";
+  as: "link" | "button";
   className?: string;
-  type?: "fill" | "outline";
-  color?: "primary" | "white";
+  type: "fill" | "outline";
+  color: "primary" | "white";
+  onClick?: () => void;
+  to?: string;
   children: React.ReactNode;
 }
 
@@ -15,6 +17,8 @@ function Button({
   className = "",
   type = "fill",
   color = "primary",
+  onClick,
+  to = "/",
 }: ButtonProps) {
   const typeClass = {
     fill: {
@@ -34,14 +38,18 @@ function Button({
 
   if (as === "link") {
     return (
-      <NavLink to="/" className={combinedClassName}>
+      <NavLink to={to} className={combinedClassName}>
         {children}
       </NavLink>
     );
   }
 
   if (as === "button") {
-    return <button className={combinedClassName}>{children}</button>;
+    return (
+      <button className={combinedClassName} onClick={onClick}>
+        {children}
+      </button>
+    );
   }
 
   return null;
