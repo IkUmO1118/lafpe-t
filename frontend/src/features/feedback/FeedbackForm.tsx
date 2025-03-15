@@ -11,7 +11,7 @@ function FeedbackForm() {
     if (!message.trim()) return;
 
     postFeedback(message, {
-      onSuccess: () => {
+      onSettled: () => {
         setMessage("");
       },
     });

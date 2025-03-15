@@ -8,7 +8,9 @@ export function usePostFeedback() {
     onSuccess: () => {
       toast.success("フィードバックを送信しました");
     },
-    onError: (err) => toast.error(err.message),
+    onError: () => {
+      toast.error("フィードバックの送信に失敗しました。");
+    },
   });
 
   return { isPosting, postFeedback };
