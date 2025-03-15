@@ -1,69 +1,20 @@
-import { useState, FormEvent } from "react";
+import { useState } from "react";
 import { Button } from "../../components/Button";
+import { usePostFeedback } from "./usePostFeedback";
+import SpinnerMini from "../../components/SpinnerMini";
 
 function FeedbackForm() {
   const [message, setMessage] = useState("");
-  const [status, setStatus] = useState<{
-    submitting: boolean;
-    submitted: boolean;
-    error: string | null;
-  }>({
-    submitting: false,
-    submitted: false,
-    error: null,
-  });
+  const { isPosting, postFeedback } = usePostFeedback();
 
-  const handleSubmit = async (
-    e: React.MouseEvent<HTMLButtonElement> | FormEvent<HTMLFormElement>,
-  ) => {
-    e.preventDefault();
+  const handleSubmit = () => {
+    if (!message.trim()) return;
 
-    if (!message.trim()) {
-      setStatus({
-        ...status,
-        error: "メッセージを入力してください",
-      });
-      return;
-    }
-
-    setStatus({
-      submitting: true,
-      submitted: false,
-      error: null,
+    postFeedback(message, {
+      onSuccess: () => {
+        setMessage("");
+      },
     });
-
-    try {
-      const response = await fetch(
-        `${import.meta.env.VITE_DEV_API_URL}/api/feedback`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ message }),
-        },
-      );
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || "送信に失敗しました");
-      }
-
-      setStatus({
-        submitting: false,
-        submitted: true,
-        error: null,
-      });
-
-      setMessage("");
-    } catch (error) {
-      setStatus({
-        submitting: false,
-        submitted: false,
-        error: (error as Error).message,
-      });
-    }
   };
 
   return (
@@ -95,9 +46,10 @@ function FeedbackForm() {
       <Button
         variant="fillPrimary"
         size="wide"
-        onClick={(e) => handleSubmit(e)}
+        disabled={isPosting}
+        onClick={handleSubmit}
       >
-        {status.submitting ? "送信中..." : "送信する"}
+        {isPosting ? <SpinnerMini /> : "送信する"}
       </Button>
     </div>
   );
