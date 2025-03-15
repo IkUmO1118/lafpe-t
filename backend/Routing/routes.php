@@ -55,7 +55,7 @@ return [
         return new JSONRenderer([
           'status' => 'error',
           'message' => 'Required data missing'
-        ], 400);
+        ]);
       }
 
       $controller = new PDFController($requestData);
