@@ -1,6 +1,6 @@
 function SpinnerMini() {
   return (
-    <div className="h-6 w-6 animate-spin rounded-full border-2 border-solid border-current border-t-transparent"></div>
+    <div className="mx-auto h-5 w-5 animate-spin rounded-full border-2 border-solid border-cyan-50 border-t-transparent"></div>
   );
 }
 

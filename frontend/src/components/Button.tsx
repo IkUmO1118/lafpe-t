@@ -19,7 +19,7 @@ const buttonVariants = cva(
       size: {
         sm: "rounded-sm px-5 py-2 text-sm font-medium", //header
         base: "rounded-sm px-6 py-4 text-base font-bold", //Hero section
-        wide: "w-full rounded-sm py-3 font-bold", //feedback
+        wide: "min-h-12 w-full rounded-sm py-3 font-bold", //feedback
         lg: "rounded-sm px-10 py-4 text-base font-medium", // cta
         xl: "rounded-sm px-10 py-3 text-base font-medium", // download pdf
       },
