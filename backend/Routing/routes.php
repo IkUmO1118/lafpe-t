@@ -59,7 +59,12 @@ return [
       }
 
       $controller = new PDFController($requestData);
-      return $controller->generatePDF();
+      $pdfContent = $controller->generatePDF();
+
+      return new BinaryRenderer($pdfContent, [
+        'Content-Type' => 'application/pdf',
+        'Content-Disposition' => 'attachment; filename=diagnosis-result.pdf'
+      ]);
     }
   ]
 ];
