@@ -22,7 +22,7 @@ class FeedbackFormController
    * @return array 処理結果
    * @throws Exception 保存に失敗した場合
    */
-  public function store(): array
+  public function store(): void
   {
     try {
       // 必須フィールドのチェック
@@ -45,11 +45,6 @@ class FeedbackFormController
       if (!$result) {
         throw new Exception('Failed to store message data');
       }
-
-      return [
-        'success' => true,
-        'message' => 'Message successfully stored'
-      ];
     } catch (Exception $e) {
       throw new Exception('Error storing message: ' . $e->getMessage());
     }
