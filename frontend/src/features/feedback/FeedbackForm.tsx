@@ -5,17 +5,27 @@ import SpinnerMini from "../../components/SpinnerMini";
 
 function FeedbackForm() {
   const [message, setMessage] = useState("");
+  const [error, setError] = useState(false);
   const { isPosting, postFeedback } = usePostFeedback();
 
-  const handleSubmit = () => {
-    if (!message.trim()) return;
+  function handleSubmit() {
+    if (!message.trim()) {
+      setError(true);
+      return;
+    }
 
-    postFeedback(message, {
-      onSettled: () => {
-        setMessage("");
-      },
-    });
-  };
+    const isConfirmed = window.confirm(
+      `以下の内容で送信してよろしいですか？\n\n${message}`,
+    );
+
+    if (isConfirmed) {
+      postFeedback(message, {
+        onSettled: () => {
+          setMessage("");
+        },
+      });
+    }
+  }
 
   return (
     <div className="flex h-full flex-col gap-9 px-24">
@@ -28,7 +38,7 @@ function FeedbackForm() {
       <form className="group relative min-h-[450px] flex-1">
         <label
           htmlFor="feedback"
-          className="absolute -top-2 left-4 z-10 bg-neutral-50 px-0.5 text-xs text-neutral-600 transition-colors duration-200 group-focus-within:text-cyan-700"
+          className={`absolute -top-2 left-4 z-10 bg-neutral-50 px-0.5 text-xs transition-colors duration-200 ${error ? "text-red-600" : "text-neutral-600 group-focus-within:text-cyan-700"}`}
         >
           ご意見や感想を入力してください*
         </label>
@@ -38,7 +48,10 @@ function FeedbackForm() {
           className="h-full w-full rounded-md border border-neutral-500 p-4 transition-all focus:border-cyan-800 focus:ring-2 focus:ring-cyan-800 focus:outline-none"
           placeholder="例: 原則1の数値がイメージと異なった印象を受けた。"
           required
-          onChange={(e) => setMessage(e.target.value)}
+          onChange={(e) => {
+            setError(false);
+            setMessage(e.target.value);
+          }}
           value={message}
         ></textarea>
       </form>
