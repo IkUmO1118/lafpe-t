@@ -23,7 +23,8 @@ class PDFController
   {
     try {
       $diagnosticResults = $this->data['diagnosticResults'];
-      $pdfContent = $this->pdfService->createDiagnosisPDF($diagnosticResults);
+      $questionAnswers = $this->data['questionAnswers'];
+      $pdfContent = $this->pdfService->createDiagnosisPDF($diagnosticResults, $questionAnswers);
 
       return $pdfContent;
     } catch (Exception $e) {
