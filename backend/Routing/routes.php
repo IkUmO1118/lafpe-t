@@ -5,6 +5,7 @@ namespace Routing;
 use App\Controllers\DiagnosisController;
 use App\Controllers\FeedbackFormController;
 use App\Controllers\PDFController;
+use Exception;
 use Helpers\ValidationHelper;
 use Response\HTTPRenderer;
 use Response\Render\BinaryRenderer;
@@ -53,13 +54,11 @@ return [
       $questionAnswers = ValidationHelper::checkRequiredQuestions($requestData['questionAnswers']);
 
       if (
+        !isset($requestData['chartImage']) ||
         !isset($diagnosticResults) ||
         !isset($questionAnswers)
       ) {
-        return new JSONRenderer([
-          'status' => 'error',
-          'message' => 'Required data missing'
-        ]);
+        throw new Exception("Required data missing");
       }
 
       $controller = new PDFController($requestData);
@@ -67,7 +66,7 @@ return [
 
       return new BinaryRenderer($pdfContent, [
         'Content-Type' => 'application/pdf',
-        'Content-Disposition' => 'attachment; filename=diagnosis-result.pdf'
+        'Content-Disposition' => 'attachment; filename=lafpe-t.pdf'
       ]);
     }
   ]

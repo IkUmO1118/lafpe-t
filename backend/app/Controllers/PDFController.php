@@ -22,9 +22,12 @@ class PDFController
   public function generatePDF(): string
   {
     try {
-      $diagnosticResults = $this->data['diagnosticResults'];
-      $questionAnswers = $this->data['questionAnswers'];
-      $pdfContent = $this->pdfService->createDiagnosisPDF($diagnosticResults, $questionAnswers);
+
+      $diagnosticResults = $this->data['diagnosticResults'] ?? [];
+      $questionAnswers = $this->data['questionAnswers'] ?? [];
+      $chartImage = $this->data['chartImage'] ?? '';
+
+      $pdfContent = $this->pdfService->createDiagnosisPDF($diagnosticResults, $questionAnswers, $chartImage);
 
       return $pdfContent;
     } catch (Exception $e) {

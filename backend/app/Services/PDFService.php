@@ -15,7 +15,7 @@ class PDFService
     $this->questionConfig = new QuestionConfig();
   }
 
-  public function createDiagnosisPDF(array $diagnosticResults, array $questionAnswers): string
+  public function createDiagnosisPDF(array $diagnosticResults, array $questionAnswers, string $chartImage): string
   {
     try {
       $pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8');
@@ -25,6 +25,7 @@ class PDFService
       $pdf->SetAutoPageBreak(true, 15);
       $pdf->AddPage();
 
+
       // 日本語フォントの設定
       $pdf->SetFont('kozminproregular', '', 11);
 
@@ -32,6 +33,13 @@ class PDFService
       $pdf->SetFont('kozminproregular', 'B', 16);
       $pdf->Cell(0, 10, '実験動物施設診断結果', 0, 1, 'C');
       $pdf->Ln(5);
+
+      //-----------------------------------------------------
+      // 画像データの処理
+      if (!empty($chartImage)) {
+        $pdf->Ln(5);
+        $this->processChartImage($pdf, $chartImage);
+      }
 
       //-----------------------------------------------------
       // 結果の表示
@@ -101,7 +109,9 @@ class PDFService
       $pdf->Ln(5);
       $pdf->Cell(0, 7, '作成日： ' . date('Y年m月d日'), 0, 1, 'R');
 
-      return $pdf->Output('', 'S');
+      // PDFを出力
+      $pdfContent = $pdf->Output('', 'S'); // 文字列として出力
+      return $pdfContent;
     } catch (Exception $e) {
       throw new Exception('PDF生成エラー: ' . $e->getMessage());
     }
@@ -154,5 +164,52 @@ class PDFService
     }
 
     $pdf->Ln(5);
+  }
+
+  private function processChartImage(TCPDF $pdf, string $chartImage): void
+  {
+    if (!empty($chartImage)) {
+      try {
+        // Base64部分のみを抽出
+        $base64Data = strpos($chartImage, ',') !== false
+          ? substr($chartImage, strpos($chartImage, ',') + 1)
+          : $chartImage;
+
+        // デコード
+        $imageData = base64_decode($base64Data);
+
+        // 一時ファイルに保存
+        $tempFile = tempnam(sys_get_temp_dir(), 'chart');
+        file_put_contents($tempFile, $imageData);
+
+        // 画像のサイズを計算（A4サイズに収まるよう調整）
+        $imageInfo = getimagesize($tempFile);
+        if ($imageInfo === false) {
+          throw new Exception('有効な画像ファイルではありません');
+        }
+
+        $pageWidth = $pdf->getPageWidth() - 30; // ページ幅から余白を引く
+        $ratio = $pageWidth / $imageInfo[0]; // アスペクト比を計算
+        $imgWidth = $pageWidth;
+        $imgHeight = $imageInfo[1] * $ratio;
+
+        // PDFに画像を追加
+        $pdf->Image($tempFile, 15, 40, $imgWidth, $imgHeight, 'PNG');
+
+        // 一時ファイルを削除
+        unlink($tempFile);
+
+        // 画像の後に改行を追加
+        $pdf->SetY(40 + $imgHeight + 10);
+      } catch (Exception $e) {
+        // 画像処理に失敗してもPDFの生成は続行
+        $pdf->SetY(40);
+        $pdf->Cell(0, 10, '※ 画像の表示に失敗しました: ' . $e->getMessage(), 0, 1, 'C');
+        $pdf->Ln(10);
+      }
+    } else {
+      $pdf->Cell(0, 10, '※ 画像データがありません', 0, 1, 'C');
+      $pdf->Ln(5);
+    }
   }
 }
