@@ -43,26 +43,26 @@ class PDFService
 
       //-----------------------------------------------------
       // 結果の表示
-      $pdf->SetFont('kozminproregular', 'B', 12);
-      $pdf->Cell(0, 8, '診断結果内容', 0, 1, 'L');
-      $pdf->Ln(2);
+      // $pdf->SetFont('kozminproregular', 'B', 12);
+      // $pdf->Cell(0, 8, '診断結果内容', 0, 1, 'L');
+      // $pdf->Ln(2);
 
-      $principleTypes = [
-        "principle1" => "原則１",
-        "principle2" => "原則２",
-        "principle3" => "原則３",
-        "principle4" => "原則４",
-        "principle5" => "原則５",
-        "principleDP" => "DP",
-      ];
+      // $principleTypes = [
+      //   "principle1" => "原則１",
+      //   "principle2" => "原則２",
+      //   "principle3" => "原則３",
+      //   "principle4" => "原則４",
+      //   "principle5" => "原則５",
+      //   "principleDP" => "DP",
+      // ];
 
-      $pdf->SetFont('kozminproregular', '', 11);
-      foreach ($diagnosticResults as $key => $value) {
-        if (is_numeric($value)) {
-          $pdf->Cell(80, 7, $principleTypes[$key] . '： ' . number_format($value, 2), 0, 1);
-        }
-      }
-      $pdf->Ln(10);
+      // $pdf->SetFont('kozminproregular', '', 11);
+      // foreach ($diagnosticResults as $key => $value) {
+      //   if (is_numeric($value)) {
+      //     $pdf->Cell(80, 7, $principleTypes[$key] . '： ' . number_format($value, 2), 0, 1);
+      //   }
+      // }
+      // $pdf->Ln(10);
 
       //-----------------------------------------------------
       // 設問と回答の表示
@@ -168,48 +168,70 @@ class PDFService
 
   private function processChartImage(TCPDF $pdf, string $chartImage): void
   {
-    if (!empty($chartImage)) {
-      try {
-        // Base64部分のみを抽出
-        $base64Data = strpos($chartImage, ',') !== false
-          ? substr($chartImage, strpos($chartImage, ',') + 1)
-          : $chartImage;
-
-        // デコード
-        $imageData = base64_decode($base64Data);
-
-        // 一時ファイルに保存
-        $tempFile = tempnam(sys_get_temp_dir(), 'chart');
-        file_put_contents($tempFile, $imageData);
-
-        // 画像のサイズを計算（A4サイズに収まるよう調整）
-        $imageInfo = getimagesize($tempFile);
-        if ($imageInfo === false) {
-          throw new Exception('有効な画像ファイルではありません');
-        }
-
-        $pageWidth = $pdf->getPageWidth() - 30; // ページ幅から余白を引く
-        $ratio = $pageWidth / $imageInfo[0]; // アスペクト比を計算
-        $imgWidth = $pageWidth;
-        $imgHeight = $imageInfo[1] * $ratio;
-
-        // PDFに画像を追加
-        $pdf->Image($tempFile, 15, 40, $imgWidth, $imgHeight, 'PNG');
-
-        // 一時ファイルを削除
-        unlink($tempFile);
-
-        // 画像の後に改行を追加
-        $pdf->SetY(40 + $imgHeight + 10);
-      } catch (Exception $e) {
-        // 画像処理に失敗してもPDFの生成は続行
-        $pdf->SetY(40);
-        $pdf->Cell(0, 10, '※ 画像の表示に失敗しました: ' . $e->getMessage(), 0, 1, 'C');
-        $pdf->Ln(10);
-      }
-    } else {
+    if (empty($chartImage)) {
       $pdf->Cell(0, 10, '※ 画像データがありません', 0, 1, 'C');
       $pdf->Ln(5);
+      return;
+    }
+
+    try {
+      // Base64部分のみを抽出（JPEG形式に対応）
+      $base64Data = preg_match('/^data:image\/jpeg;base64,(.*)$/', $chartImage, $matches)
+        ? $matches[1]
+        : (strpos($chartImage, ',') !== false
+          ? substr($chartImage, strpos($chartImage, ',') + 1)
+          : $chartImage);
+
+      // デコード
+      $imageData = base64_decode($base64Data, true);
+      if ($imageData === false) {
+        throw new Exception('画像データのBase64デコードに失敗しました');
+      }
+
+      // 一時ファイルに保存（拡張子をjpgに）
+      $tempFile = tempnam(sys_get_temp_dir(), 'chart') . '.jpg';
+      if (file_put_contents($tempFile, $imageData) === false) {
+        throw new Exception('一時ファイルの作成に失敗しました');
+      }
+
+      // 画像が有効かチェック
+      $imageInfo = getimagesize($tempFile);
+      if ($imageInfo === false || $imageInfo[2] !== IMAGETYPE_JPEG) {
+        throw new Exception('有効なJPEG画像ファイルではありません');
+      }
+
+      // 画像のサイズを計算（A4サイズに収まるよう調整）
+      $pageWidth = $pdf->getPageWidth() - 30; // ページ幅から余白を引く
+
+      $ratio = $pageWidth / $imageInfo[0]; // アスペクト比を計算
+      $imgWidth = $pageWidth;
+      $imgHeight = $imageInfo[1] * $ratio;
+
+      // 現在のページに十分なスペースがあるか確認
+      $currentY = $pdf->GetY();
+      if ($currentY + $imgHeight > $pdf->getPageHeight() - 20) {
+        $pdf->AddPage(); // 新しいページを追加
+        $currentY = $pdf->GetY();
+      }
+
+      // PDFに画像を追加（JPEG形式として指定）
+      $pdf->Image($tempFile, 15, $currentY, $imgWidth, $imgHeight, 'JPEG');
+
+      // 画像の後に改行を追加
+      $pdf->SetY($currentY + $imgHeight + 10);
+
+      // 一時ファイルを削除
+      if (file_exists($tempFile)) {
+        unlink($tempFile);
+      }
+
+      // 画像処理成功ログ
+      error_log('JPEG chart image successfully added to PDF');
+    } catch (Exception $e) {
+      // 画像処理に失敗してもPDFの生成は続行
+      error_log('Failed to process chart image: ' . $e->getMessage());
+      $pdf->Cell(0, 10, '※ 画像の表示に失敗しました: ' . $e->getMessage(), 0, 1, 'C');
+      $pdf->Ln(10);
     }
   }
 }
