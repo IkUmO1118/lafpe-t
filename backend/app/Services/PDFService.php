@@ -152,8 +152,15 @@ class PDFService
           $perValue = $answer[$rackKey]['per'];
           $timesValue = $answer[$rackKey]['times'];
 
-          $perText = isset($questionData['per'][$perValue]) ? $questionData['per'][$perValue] : '';
-          $timesText = isset($questionData['times'][$timesValue]) ? $questionData['times'][$timesValue] : '';
+          // $perText = isset($questionData['per'][$perValue]) ? $questionData['per'][$perValue] : '';
+          // $timesText = isset($questionData['times'][$timesValue]) ? $questionData['times'][$timesValue] : '';
+
+          $perText = isset($questionData['option']['per'][$perValue])
+            ? $questionData['option']['per'][$perValue]
+            : '';
+          $timesText = isset($questionData['option']['times'][$timesValue])
+            ? $questionData['option']['times'][$timesValue]
+            : '';
 
           $pdf->Cell(10, 7, '', 0);
           $pdf->Cell(0, 7, "使用割合： {$perText}", 0, 1);
