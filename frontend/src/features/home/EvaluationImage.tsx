@@ -13,7 +13,7 @@ const EvaluationImage = forwardRef(function EvaluationImage(
         評価結果の表示イメージ
       </h2>
       <img
-        src="/images/LAFPE-T_display-image.png"
+        src="/images/lafpe-t_graph.png"
         alt="display image"
         className="w-[600px]"
       />
