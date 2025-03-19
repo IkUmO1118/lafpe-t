@@ -1,6 +1,7 @@
 import { useState } from "react";
 import DiagnosisHeader from "./DiagnosisHeader";
 import { Button } from "../../components/Button";
+import DiagnosisForm from "./DiagnosisForm";
 
 function DiagnosisSection() {
   const [index, setIndex] = useState<number>(0);
@@ -10,16 +11,8 @@ function DiagnosisSection() {
       <div className="flex flex-col gap-12">
         <DiagnosisHeader index={index} setIndex={setIndex} />
 
-        <div className="flex w-1/2 flex-col gap-7 self-center">
-          <form className="flex flex-col gap-3">
-            <div className="self-center text-sm font-bold text-cyan-700">
-              設問&nbsp;{index + 1}
-            </div>
-            <p className="mb-2.5 border-b-2 border-dotted border-neutral-300 pb-2.5 text-base font-bold text-neutral-700">
-              施設の廊下方式を選択してください（複数選択可）
-            </p>
-          </form>
-          <div className="mb-5">form</div>
+        <div className="flex w-1/2 flex-col gap-12 self-center">
+          <DiagnosisForm index={index} />
           <Button
             className="self-center py-3 font-medium"
             onClick={() => {
