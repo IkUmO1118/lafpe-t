@@ -102,7 +102,7 @@ function DiagnosisForm({ index, setIndex }: DiagnosisFormProps) {
 
       return Object.entries(question.option).map(
         ([key, value], optionIndex) => (
-          <label key={key} className="flex items-center gap-2">
+          <label key={key} className="flex h-12 items-center gap-2">
             <input
               type="checkbox"
               id={`option-${key}`}
@@ -120,7 +120,7 @@ function DiagnosisForm({ index, setIndex }: DiagnosisFormProps) {
     else if (["Q4", "Q5", "Q6"].includes(questionNumber)) {
       return Object.entries(question.option).map(
         ([key, value], optionIndex) => (
-          <label key={key} className="flex items-center gap-2">
+          <label key={key} className="flex h-12 items-center gap-2">
             <input
               type="radio"
               id={`option-${key}`}
@@ -145,8 +145,8 @@ function DiagnosisForm({ index, setIndex }: DiagnosisFormProps) {
         const isChecked = optionValue.isChecked !== false;
 
         return (
-          <div key={key} className="mb-2">
-            <label className="flex items-center gap-2">
+          <div key={key} className="mb-4">
+            <label className="flex h-12 items-center gap-2">
               <input
                 type="checkbox"
                 id={`option-${key}`}
@@ -160,100 +160,85 @@ function DiagnosisForm({ index, setIndex }: DiagnosisFormProps) {
                   : (value as string)}
               </span>
             </label>
+
             {isChecked && (
-              <div className="mt-3 ml-6">
-                {/* 使用割合のテーブル */}
-                <div className="mb-4">
-                  <table className="w-full border-collapse bg-neutral-50">
-                    <thead>
-                      <tr>
-                        <th className="w-1/6 px-2 py-2 text-left text-sm text-neutral-700">
-                          使用割合
-                        </th>
-                        {Object.entries(question.per || {}).map(
-                          ([, perValue], idx) => (
-                            <th
-                              key={idx}
-                              className="w-1/6 text-center text-sm text-neutral-700"
-                            >
-                              {perValue as string}
-                            </th>
-                          ),
-                        )}
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td className="px-2 py-2 text-neutral-700"></td>
-                        {Object.entries(question.per || {}).map(([,], idx) => {
-                          const optionValue = nestedValue[value] || {
-                            isChecked: false,
-                            per: 0,
-                          };
-                          return (
-                            <td key={idx} className="text-center">
-                              <input
-                                type="radio"
-                                name={`usage-${key}`}
-                                checked={optionValue.per === idx}
-                                onChange={() => handleUsageRateChange(key, idx)}
-                                className="h-4 w-4 rounded-full border-2 border-neutral-400 text-cyan-700 accent-cyan-700"
-                              />
-                            </td>
-                          );
-                        })}
-                      </tr>
-                    </tbody>
-                  </table>
+              <div className="ml-6">
+                <div className="w-full">
+                  <div className="flex h-12 justify-between pr-4">
+                    <div className="flex-1 opacity-0">使用割合</div>
+                    {Object.entries(question.per || {}).map(
+                      ([, perValue], idx) => (
+                        <div className="flex flex-1 items-center justify-center">
+                          <div key={idx} className="text-base text-neutral-700">
+                            {perValue as string}
+                          </div>
+                        </div>
+                      ),
+                    )}
+                  </div>
+                  <div className="flex h-12 justify-between bg-neutral-100 pr-4">
+                    <div className="flex-1 self-center text-base text-neutral-700">
+                      使用割合
+                    </div>
+                    {Object.entries(question.per || {}).map(([,], idx) => {
+                      const optionValue = nestedValue[value] || {
+                        isChecked: false,
+                        per: 0,
+                      };
+                      return (
+                        <div className="flex flex-1 items-center justify-center">
+                          <div key={idx} className="text-base">
+                            <input
+                              type="radio"
+                              name={`usage-${key}`}
+                              checked={optionValue.per === idx}
+                              onChange={() => handleUsageRateChange(key, idx)}
+                              className="h-4 w-4 rounded-full border-2 border-neutral-400 text-cyan-700 accent-cyan-700"
+                            />
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
 
-                {/* 換気回数のテーブル */}
-                <div>
-                  <table className="w-full border-collapse bg-neutral-50">
-                    <thead>
-                      <tr>
-                        <th className="w-1/5 px-2 py-2 text-left text-sm text-neutral-700">
-                          飼育室の換気回数
-                        </th>
-                        {Object.entries(question.times || {}).map(
-                          ([, timesValue], idx) => (
-                            <th
-                              key={idx}
-                              className="w-1/5 text-center text-sm text-neutral-700"
-                            >
-                              {timesValue as string}
-                            </th>
-                          ),
-                        )}
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td className="px-2 py-2 text-neutral-700"></td>
-                        {Object.entries(question.times || {}).map(
-                          ([,], idx) => {
-                            const optionValue = nestedValue[value] || {
-                              isChecked: false,
-                              times: 0,
-                            };
-                            return (
-                              <td key={idx} className="text-center">
-                                <input
-                                  type="radio"
-                                  name={`ventilation-${key}`}
-                                  checked={optionValue.times === idx}
-                                  onChange={() =>
-                                    handleVentilationChange(key, idx)
-                                  }
-                                  className="h-4 w-4 rounded-full border-2 border-neutral-400 text-cyan-700 accent-cyan-700"
-                                />
-                              </td>
-                            );
-                          },
-                        )}
-                      </tr>
-                    </tbody>
-                  </table>
+                <div className="w-full">
+                  <div className="justify-betweenpr-4 flex h-12">
+                    <div className="flex-1 opacity-0">飼育室の換気回数</div>
+                    {Object.entries(question.times || {}).map(
+                      ([, timesValue], idx) => (
+                        <div className="flex flex-1 items-center justify-center">
+                          <div key={idx} className="text-base text-neutral-700">
+                            {timesValue as string}
+                          </div>
+                        </div>
+                      ),
+                    )}
+                  </div>
+                  <div className="flex h-12 justify-between bg-neutral-100 pr-4">
+                    <div className="flex-1 self-center text-base text-neutral-700">
+                      飼育室の換気回数
+                    </div>
+                    {Object.entries(question.times || {}).map(([,], idx) => {
+                      const optionValue = nestedValue[value] || {
+                        isChecked: false,
+                        times: 0,
+                      };
+                      return (
+                        <div className="flex flex-1 items-center justify-center">
+                          <div key={idx} className="text-base">
+                            <input
+                              type="radio"
+                              name={`ventilation-${key}`}
+                              checked={optionValue.times === idx}
+                              onChange={() => handleVentilationChange(key, idx)}
+                              className="h-4 w-4 rounded-full border-2 border-neutral-400 text-cyan-700 accent-cyan-700"
+                            />
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
               </div>
             )}
@@ -274,7 +259,7 @@ function DiagnosisForm({ index, setIndex }: DiagnosisFormProps) {
         {question.title}
       </p>
 
-      {renderFormInputs()}
+      <div className="mb-9">{renderFormInputs()}</div>
       <Button
         className="self-center py-3 font-medium"
         onClick={(e) => {
