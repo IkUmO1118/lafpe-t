@@ -1,10 +1,15 @@
 import { createContext } from "react";
-import { NestedOption, ScoresState } from "../types/diagnosis";
+import {
+  CheckboxScore,
+  NestedOption,
+  RadioScore,
+  ScoresState,
+} from "../types/diagnosis";
 
 export type ScoresContextValue = {
   scores: ScoresState;
-  addCheckboxScore: (question: string, score: number[]) => void;
-  addRadioScore: (question: string, score: number) => void;
+  addCheckboxScore: (question: string, score: CheckboxScore) => void;
+  addRadioScore: (question: string, score: RadioScore) => void;
   addNestedRadioScore: (
     question: string,
     score: { [key: string]: NestedOption },

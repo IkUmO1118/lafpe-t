@@ -1,13 +1,21 @@
 import { ReactNode, useReducer } from "react";
 import { ScoresContext, ScoresContextValue } from "./ScoresContext";
-import { NestedOption, ScoresState } from "../types/diagnosis";
+import {
+  CheckboxScore,
+  NestedOption,
+  RadioScore,
+  ScoresState,
+} from "../types/diagnosis";
 
 type Action =
   | {
       type: "ADD_CHECKBOX_SCORE";
-      payload: { question: string; score: number[] };
+      payload: { question: string; score: CheckboxScore };
     }
-  | { type: "ADD_RADIO_SCORE"; payload: { question: string; score: number } }
+  | {
+      type: "ADD_RADIO_SCORE";
+      payload: { question: string; score: RadioScore };
+    }
   | {
       type: "ADD_NESTED_SCORE";
       payload: { question: string; score: { [key: string]: NestedOption } };
