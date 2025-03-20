@@ -10,7 +10,9 @@ export interface QuestionOption {
 
 export interface Question {
   title: string;
-  option: QuestionOption;
+  option: { [key: string]: string };
+  per?: { [key: string]: string };
+  times?: { [key: string]: string };
 }
 
 export const getQuestion = (index: number): Question => {

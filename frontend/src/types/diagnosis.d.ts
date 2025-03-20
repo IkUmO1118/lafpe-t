@@ -3,13 +3,9 @@ export type CheckboxScore = number[];
 export type RadioScore = number | null;
 
 export type NestedOption = {
-  isChecked:
-    | false
-    | {
-        isChecked: true;
-        per: number;
-        times: number;
-      };
+  isChecked: boolean;
+  per?: number;
+  times?: number;
 };
 
 export type NestedRadioScore = {
@@ -19,10 +15,10 @@ export type NestedRadioScore = {
 export type QuestionKeys =
   | "Q1"
   | "Q2"
+  | "Q3"
   | "Q4"
   | "Q5"
   | "Q6"
-  | "Q3"
   | "Q7"
   | "Q8"
   | "Q9"
@@ -32,48 +28,17 @@ export type QuestionKeys =
   | "Q13";
 
 export type ScoresState = {
-  Q1: number[];
-  Q2: number[];
-  Q3: {
-    オープンラック: {
-      isChecked: false;
-      per?: number;
-      times?: number;
-    };
-    IVCラック: {
-      isChecked: false;
-      per?: number;
-      times?: number;
-    };
-    陽圧ラック: {
-      isChecked: false;
-      per?: number;
-      times?: number;
-    };
-    陰圧ラック: {
-      isChecked: false;
-      per?: number;
-      times?: number;
-    };
-    一方向気流ラック: {
-      isChecked: false;
-      per?: number;
-      times?: number;
-    };
-    アイソレータ: {
-      isChecked: false;
-      per?: number;
-      times?: number;
-    };
-  };
-  Q4: number | null;
-  Q5: number | null;
-  Q6: number | null;
-  Q7: number[];
-  Q8: number[];
-  Q9: number[];
-  Q10: number[];
-  Q11: number[];
-  Q12: number[];
-  Q13: number[];
+  Q1: CheckboxScore;
+  Q2: CheckboxScore;
+  Q3: NestedRadioScore;
+  Q4: RadioScore;
+  Q5: RadioScore;
+  Q6: RadioScore;
+  Q7: CheckboxScore;
+  Q8: CheckboxScore;
+  Q9: CheckboxScore;
+  Q10: CheckboxScore;
+  Q11: CheckboxScore;
+  Q12: CheckboxScore;
+  Q13: CheckboxScore;
 };

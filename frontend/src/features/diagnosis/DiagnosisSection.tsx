@@ -1,6 +1,5 @@
 import { useState } from "react";
 import DiagnosisHeader from "./DiagnosisHeader";
-import { Button } from "../../components/Button";
 import DiagnosisForm from "./DiagnosisForm";
 
 function DiagnosisSection() {
@@ -12,17 +11,7 @@ function DiagnosisSection() {
         <DiagnosisHeader index={index} setIndex={setIndex} />
 
         <div className="flex w-1/2 flex-col gap-12 self-center">
-          <DiagnosisForm index={index} />
-          <Button
-            className="self-center py-3 font-medium"
-            onClick={() => {
-              if (index < 12) {
-                setIndex((i) => i + 1);
-              }
-            }}
-          >
-            次の設問へ&nbsp;&nbsp;&rarr;
-          </Button>
+          <DiagnosisForm index={index} setIndex={setIndex} />
         </div>
       </div>
     </section>
