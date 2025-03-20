@@ -12,6 +12,7 @@ import Feedback from "./pages/Feedback";
 import ScrollToTop from "./components/ScrollToTop";
 
 import { Toaster } from "react-hot-toast";
+import ScoresContextProvider from "./context/diagnosis-context";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -26,21 +27,22 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />
+      <ScoresContextProvider>
+        <BrowserRouter>
+          <ScrollToTop />
+          <Routes>
+            <Route element={<AppLayout />}>
+              <Route index element={<Navigate replace to="home" />} />
+              <Route path="home" element={<Home />} />
+              <Route path="feedback" element={<Feedback />} />
+              <Route path="result" element={<Result />} />
+              <Route path="*" element={<PageNotFound />} />
+            </Route>
 
-      <BrowserRouter>
-        <ScrollToTop />
-        <Routes>
-          <Route element={<AppLayout />}>
-            <Route index element={<Navigate replace to="home" />} />
-            <Route path="home" element={<Home />} />
-            <Route path="feedback" element={<Feedback />} />
-            <Route path="result" element={<Result />} />
-            <Route path="*" element={<PageNotFound />} />
-          </Route>
-
-          <Route path="diagnosis" element={<Diagnosis />} />
-        </Routes>
-      </BrowserRouter>
+            <Route path="diagnosis" element={<Diagnosis />} />
+          </Routes>
+        </BrowserRouter>
+      </ScoresContextProvider>
 
       <Toaster
         position="top-right"
