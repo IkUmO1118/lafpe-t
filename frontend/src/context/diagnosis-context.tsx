@@ -1,49 +1,9 @@
 import { createContext, ReactNode, useContext, useReducer } from "react";
-
-export type CheckboxScore = number[];
-
-export type RadioScore = number;
-
-type NestedOption = {
-  isChecked:
-    | false
-    | {
-        isChecked: true;
-        per: number;
-        times: number;
-      };
-};
-
-export type NestedRadioScore = {
-  [key: string]: NestedOption;
-};
-
-type QuestionKeys =
-  | "Q1"
-  | "Q2"
-  | "Q7"
-  | "Q8"
-  | "Q9"
-  | "Q10"
-  | "Q11"
-  | "Q12"
-  | "Q13"
-  | "Q4"
-  | "Q5"
-  | "Q6"
-  | "Q3";
-
-type ScoresState = {
-  [K in QuestionKeys]: K extends "Q3"
-    ? NestedRadioScore
-    : K extends "Q4" | "Q5" | "Q6"
-      ? RadioScore
-      : CheckboxScore;
-};
+import { NestedOption, ScoresState } from "../types/diagnosis";
 
 type ScoresContextValue = {
   scores: ScoresState;
-  addCheckBoxScore: (question: string, score: number[]) => void;
+  addCheckboxScore: (question: string, score: number[]) => void;
   addRadioScore: (question: string, score: number) => void;
   addNestedRadioScore: (
     question: string,
@@ -107,9 +67,9 @@ const initialState: ScoresState = {
   Q1: [],
   Q2: [],
   Q3: {},
-  Q4: 0,
-  Q5: 0,
-  Q6: 0,
+  Q4: null,
+  Q5: null,
+  Q6: null,
   Q7: [],
   Q8: [],
   Q9: [],
@@ -128,7 +88,7 @@ function ScoresContextProvider({ children }: ScoresContextProviderProps) {
 
   const ctx: ScoresContextValue = {
     scores,
-    addCheckBoxScore(question, score) {
+    addCheckboxScore(question, score) {
       dispatch({
         type: "ADD_CHECKBOX_SCORE",
         payload: { question, score },
