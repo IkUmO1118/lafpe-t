@@ -1,10 +1,6 @@
 import { Button } from "../../components/Button";
 import { getQuestion } from "../../config/QuestionConfig";
-import {
-  CheckboxScore,
-  NestedRadioScore,
-  RadioScore,
-} from "../../types/diagnosis";
+import { CheckboxScore, NestedRadioScore } from "../../types/diagnosis";
 import useDiagnosisForm from "./useDiagnosisForm";
 
 interface DiagnosisFormProps {
@@ -118,21 +114,29 @@ function DiagnosisForm({ index, setIndex }: DiagnosisFormProps) {
 
     // RadioScore用の入力（Q4, Q5, Q6）
     else if (["Q4", "Q5", "Q6"].includes(questionNumber)) {
-      return Object.entries(question.option).map(
-        ([key, value], optionIndex) => (
+      return Object.entries(question.option).map(([key, value]) => {
+        // keyをパースして比較に使用する
+        const optionKey = parseInt(key);
+
+        // null安全な比較を行う
+        const isSelected = selectedValue === optionKey;
+        console.log("selectedValue:", selectedValue);
+        console.log("optionKey:", optionKey);
+
+        return (
           <label key={key} className="flex h-12 items-center gap-2">
             <input
               type="radio"
               id={`option-${key}`}
               name={questionNumber}
-              checked={(selectedValue as RadioScore) === optionIndex}
-              onChange={() => handleRadioChange(optionIndex)}
+              checked={isSelected}
+              onChange={() => handleRadioChange(optionKey)}
               className="h-4 w-4 rounded-full border-2 border-neutral-400 text-cyan-700 accent-cyan-700"
             />
             <span className="text-neutral-700">{value as string}</span>
           </label>
-        ),
-      );
+        );
+      });
     }
 
     // NestedRadioScore用の入力（Q3）

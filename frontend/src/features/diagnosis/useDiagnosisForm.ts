@@ -20,7 +20,8 @@ function useDiagnosisForm(questionNumber: string) {
     });
 
     const currentScore = scores[questionNumber as keyof typeof scores];
-    if (currentScore) {
+    // 0の場合でも正しく評価するために、厳密に条件を変更
+    if (currentScore !== undefined && currentScore !== null) {
       setSelectedValue(currentScore);
     } else {
       setSelectedValue(null);
