@@ -14,11 +14,6 @@ function useDiagnosisForm(questionNumber: string) {
     useScoresContext();
 
   useEffect(() => {
-    console.log("Current scores:", {
-      allScores: scores,
-      currentQuestion: questionNumber,
-    });
-
     const currentScore = scores[questionNumber as keyof typeof scores];
     // 0の場合でも正しく評価するために、厳密に条件を変更
     if (currentScore !== undefined && currentScore !== null) {
@@ -32,7 +27,7 @@ function useDiagnosisForm(questionNumber: string) {
     };
   }, [questionNumber, scores]);
 
-  function handleSubmit(e: FormEvent) {
+  async function handleSubmit(e: FormEvent): Promise<void> {
     e.preventDefault();
 
     if (selectedValue !== null) {
@@ -43,7 +38,11 @@ function useDiagnosisForm(questionNumber: string) {
       } else {
         addCheckboxScore(questionNumber, selectedValue as CheckboxScore);
       }
+
+      // スコア更新が完了するのを待つために、次のレンダリングサイクルを待つ
+      return new Promise((resolve) => setTimeout(resolve, 0));
     }
+    return Promise.resolve();
   }
 
   return {

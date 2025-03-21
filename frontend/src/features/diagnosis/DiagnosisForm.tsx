@@ -3,6 +3,10 @@ import { Button } from "../../components/Button";
 import { getQuestion } from "../../config/QuestionConfig";
 import QuestionFactory from "../../factory/QuestionFactory";
 import useDiagnosisForm from "./useDiagnosisForm";
+import { useCreateKarte } from "../karte/useCreateKarte";
+import { useScoresContext } from "../../hooks/useScoresContext";
+import Spinner from "../../components/Spinner";
+import { CheckboxScore } from "../../types/diagnosis";
 
 interface DiagnosisFormProps {
   index: number;
@@ -14,24 +18,35 @@ function DiagnosisForm({ index, setIndex }: DiagnosisFormProps) {
   const questionNumber = `Q${index + 1}`;
   const { selectedValue, setSelectedValue, handleSubmit } =
     useDiagnosisForm(questionNumber);
+  const { scores } = useScoresContext();
+  const { isCreating, createKarte } = useCreateKarte();
 
   const handleButtonClick = async (e: FormEvent) => {
     e.preventDefault();
 
     if (questionNumber === "Q13") {
-      // This is the final question
-      try {
-        console.log("success to submit diagnosis!");
-        // await submitDiagnosis();
-      } catch (error) {
-        console.error("Failed to submit diagnosis:", error);
-        // Show error message to user
+      if (selectedValue !== null) {
+        await handleSubmit(e);
+
+        // 型を明示的に指定して新しいスコアオブジェクトを作成
+        const updatedScores = {
+          ...scores,
+          [questionNumber]: selectedValue as CheckboxScore,
+        };
+
+        // 新しいスコアオブジェクトを使用して関数を呼び出す
+        createKarte(updatedScores);
       }
-    } else {
-      handleSubmit(e);
-      setIndex(index + 1);
+      return;
     }
+
+    handleSubmit(e);
+    setIndex(index + 1);
   };
+
+  if (isCreating) {
+    return <Spinner />;
+  }
 
   return (
     <div className="flex flex-col gap-3">
