@@ -162,7 +162,12 @@ function NestedRadioQuestion({
                 {/* 換気回数セクション */}
                 <div className="w-full">
                   <div className="flex h-12 justify-between pr-4">
-                    <div className="flex-1 opacity-0">飼育室の換気回数</div>
+                    <div
+                      className="flex-1 opacity-0"
+                      style={{ whiteSpace: "nowrap" }}
+                    >
+                      飼育室の換気回数
+                    </div>
                     {Object.entries(timesOptions).map(([, timesValue], idx) => (
                       <div
                         key={idx}
@@ -175,7 +180,10 @@ function NestedRadioQuestion({
                     ))}
                   </div>
                   <div className="flex h-12 justify-between bg-neutral-100 pr-4">
-                    <div className="flex-1 self-center text-base text-neutral-700">
+                    <div
+                      className="flex-1 self-center text-base text-neutral-700"
+                      style={{ whiteSpace: "nowrap" }}
+                    >
                       飼育室の換気回数
                     </div>
                     {Object.entries(timesOptions).map(([,], idx) => {
