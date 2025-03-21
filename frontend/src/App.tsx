@@ -12,7 +12,7 @@ import Feedback from "./pages/Feedback";
 import ScrollToTop from "./components/ScrollToTop";
 
 import { Toaster } from "react-hot-toast";
-import ScoresContextProvider from "./context/diagnosis-context";
+import ScoresContextProvider from "./context/ScoresContextProvider";
 
 const queryClient = new QueryClient({
   defaultOptions: {
