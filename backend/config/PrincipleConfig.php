@@ -4,13 +4,13 @@ namespace Config;
 
 use Exception;
 
-class QuestionConfig
+class PrincipleConfig
 {
   private array $configData;
 
   public function __construct()
   {
-    $filePath = sprintf('%s/QuestionConfig.json', __DIR__);
+    $filePath = sprintf('%s/PrincipleConfig.json', __DIR__);
     if (!file_exists($filePath)) {
       throw new Exception("Configuration file not found: $filePath");
     }
@@ -19,10 +19,10 @@ class QuestionConfig
     $this->configData = json_decode($jsonData, true);
   }
 
-  public function getQuestionData(string $question): array
+  public function getPrincipleData(string $principle): array
   {
-    if (isset($this->configData[$question])) {
-      return $this->configData[$question];
+    if (isset($this->configData[$principle])) {
+      return $this->configData[$principle];
     }
     return [];
   }
