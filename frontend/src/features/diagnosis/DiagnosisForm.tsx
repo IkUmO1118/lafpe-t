@@ -1,3 +1,4 @@
+import { FormEvent } from "react";
 import { Button } from "../../components/Button";
 import { getQuestion } from "../../config/QuestionConfig";
 import QuestionFactory from "../../factory/QuestionFactory";
@@ -14,6 +15,24 @@ function DiagnosisForm({ index, setIndex }: DiagnosisFormProps) {
   const { selectedValue, setSelectedValue, handleSubmit } =
     useDiagnosisForm(questionNumber);
 
+  const handleButtonClick = async (e: FormEvent) => {
+    e.preventDefault();
+
+    if (questionNumber === "Q13") {
+      // This is the final question
+      try {
+        console.log("success to submit diagnosis!");
+        // await submitDiagnosis();
+      } catch (error) {
+        console.error("Failed to submit diagnosis:", error);
+        // Show error message to user
+      }
+    } else {
+      handleSubmit(e);
+      setIndex(index + 1);
+    }
+  };
+
   return (
     <div className="flex flex-col gap-3">
       <QuestionFactory
@@ -29,16 +48,10 @@ function DiagnosisForm({ index, setIndex }: DiagnosisFormProps) {
 
       <Button
         className="self-center py-3 font-medium"
-        onClick={(e) => {
-          handleSubmit(e);
-
-          if (index < 12) {
-            setIndex(index + 1);
-          }
-        }}
+        onClick={(e) => handleButtonClick(e)}
         type="submit"
       >
-        次の設問へ&nbsp;&nbsp;&rarr;
+        {questionNumber !== "Q13" ? "次の設問へ　→" : "完了する"}
       </Button>
     </div>
   );
