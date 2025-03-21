@@ -9,6 +9,15 @@ interface NestedRadioQuestionProps {
   readOnly?: boolean;
 }
 
+const keyToRackLabelMap: Record<string, string> = {
+  openRack: "オープンラック",
+  IVCRack: "IVCラック",
+  positiveRack: "陽圧ラック",
+  negativeRack: "陰圧ラック",
+  oneWayAirflowRack: "一方向気流ラック",
+  isolator: "アイソレータ",
+};
+
 function NestedRadioQuestion({
   options,
   value = {},
@@ -88,11 +97,16 @@ function NestedRadioQuestion({
     <>
       {Object.entries(options).map(([key, optionValue]) => {
         const isNested = typeof optionValue === "object";
-        const optionKey = isNested
+        const englishKey = isNested
           ? (optionValue as { label: string }).label
           : (optionValue as string);
-        const option = value[optionKey] || { isChecked: false };
+
+        // 英語キーを使って値を取得
+        const option = value[englishKey] || { isChecked: false };
         const isChecked = option.isChecked !== false;
+
+        // 日本語ラベルを取得
+        const japaneseLabel = keyToRackLabelMap[englishKey] || englishKey;
 
         return (
           <div key={key} className="mb-4">
@@ -105,11 +119,7 @@ function NestedRadioQuestion({
                 className="h-4 w-4 rounded border-2 border-neutral-400 text-cyan-700 accent-cyan-700"
                 disabled={readOnly}
               />
-              <span className="text-neutral-700">
-                {isNested
-                  ? (optionValue as { label: string }).label
-                  : (optionValue as string)}
-              </span>
+              <span className="text-neutral-700">{japaneseLabel}</span>
             </label>
 
             {isChecked && (
@@ -134,10 +144,6 @@ function NestedRadioQuestion({
                       使用割合
                     </div>
                     {Object.entries(perOptions).map(([,], idx) => {
-                      const currentOption = value[optionKey] || {
-                        isChecked: false,
-                        per: 0,
-                      };
                       return (
                         <div
                           key={idx}
@@ -146,8 +152,8 @@ function NestedRadioQuestion({
                           <div className="text-base">
                             <input
                               type="radio"
-                              name={`usage-${key}`}
-                              checked={currentOption.per === idx}
+                              name={`usage-${englishKey}`}
+                              checked={option.per === idx}
                               onChange={() => handleUsageRateChange(key, idx)}
                               className="h-4 w-4 rounded-full border-2 border-neutral-400 text-cyan-700 accent-cyan-700"
                               disabled={readOnly}
@@ -187,20 +193,16 @@ function NestedRadioQuestion({
                       飼育室の換気回数
                     </div>
                     {Object.entries(timesOptions).map(([,], idx) => {
-                      const currentOption = value[optionKey] || {
-                        isChecked: false,
-                        times: 0,
-                      };
                       return (
                         <div
                           key={idx}
                           className="flex flex-1 items-center justify-center"
                         >
-                          <div key={idx} className="text-base">
+                          <div className="text-base">
                             <input
                               type="radio"
-                              name={`ventilation-${key}`}
-                              checked={currentOption.times === idx}
+                              name={`ventilation-${englishKey}`}
+                              checked={option.times === idx}
                               onChange={() => handleVentilationChange(key, idx)}
                               className="h-4 w-4 rounded-full border-2 border-neutral-400 text-cyan-700 accent-cyan-700"
                               disabled={readOnly}
