@@ -21,7 +21,7 @@ const buttonVariants = cva(
         base: "rounded-sm px-6 py-4 text-base font-bold", //Hero section
         wide: "min-h-12 w-full rounded-sm py-3 font-bold", //feedback
         lg: "rounded-sm px-10 py-4 text-base font-medium", // cta
-        xl: "rounded-sm px-10 py-3 text-base font-medium", // download pdf
+        xl: "rounded-sm px-6 py-3 text-base font-medium", // download pdf
       },
     },
     defaultVariants: {
