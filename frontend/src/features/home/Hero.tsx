@@ -21,7 +21,13 @@ function Hero({ scrollToEvaluation }: HeroProps) {
         <Button
           variant="fillPrimary"
           size="base"
-          onClick={() => navigate("/diagnosis")}
+          onClick={() => {
+            if (kartesData) {
+              navigate("/result");
+            } else {
+              navigate("/diagnosis");
+            }
+          }}
         >
           {kartesData ? "診断結果を見る" : "診断を開始する"}
         </Button>
