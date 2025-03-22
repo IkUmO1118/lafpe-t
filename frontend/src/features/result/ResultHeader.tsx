@@ -1,20 +1,20 @@
 import { useRef } from "react";
-import { useGetSession } from "../../hooks/useSession";
 import html2canvas from "html2canvas";
 import PrincipleRadarChart from "../../components/Charts";
 import { Button } from "../../components/Button";
 import { ScoresState } from "../../types/diagnosis";
 import { useDownloadPDF } from "./useDownloadPDF";
 import SpinnerMini from "../../components/SpinnerMini";
+import { PrincipleProps } from "../../types/principle";
 
 interface ResultHeaderProps {
-  questionAnswers: ScoresState;
+  answersData: ScoresState;
+  kartesData: PrincipleProps;
 }
 
-function ResultHeader({ questionAnswers }: ResultHeaderProps) {
+function ResultHeader({ answersData, kartesData }: ResultHeaderProps) {
   const chartRef = useRef<HTMLDivElement>(null);
   const { downloadPDF, isDownloading } = useDownloadPDF();
-  const karteData = JSON.parse(useGetSession("karte"));
 
   async function handleDownloadPDF() {
     try {
@@ -28,7 +28,7 @@ function ResultHeader({ questionAnswers }: ResultHeaderProps) {
       const chartImage = canvas.toDataURL("image/jpeg", 0.95);
 
       downloadPDF(
-        { questionAnswers, chartImage },
+        { questionAnswers: answersData, chartImage },
         {
           onSuccess: async (response) => {
             // Blobを作成してダウンロード処理
@@ -67,12 +67,12 @@ function ResultHeader({ questionAnswers }: ResultHeaderProps) {
           className="absolute top-0 h-96 w-full justify-self-center"
         >
           <PrincipleRadarChart
-            principle1={karteData.principle1}
-            principle2={karteData.principle2}
-            principle3={karteData.principle3}
-            principle4={karteData.principle4}
-            principle5={karteData.principle5}
-            dp={karteData.principleDP}
+            principle1={kartesData.principle1}
+            principle2={kartesData.principle2}
+            principle3={kartesData.principle3}
+            principle4={kartesData.principle4}
+            principle5={kartesData.principle5}
+            dp={kartesData.principleDP}
           />
         </div>
         <div className="z-50 flex flex-col justify-end gap-5">
