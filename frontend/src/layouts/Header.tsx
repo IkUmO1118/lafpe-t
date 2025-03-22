@@ -1,9 +1,7 @@
 import { useState, useEffect, useRef } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
-import { Button } from "../components/Button";
+import HeaderMenu from "./HeaderMenu";
 
 function Header() {
-  const navigate = useNavigate();
   const [stickyVisible, setStickyVisible] = useState(false);
   const normalHeaderRef = useRef<HTMLElement | null>(null);
 
@@ -37,33 +35,7 @@ function Header() {
           <div className="text-2xl font-bold tracking-tight text-cyan-950">
             実験動物施設性能診断ツール(試)
           </div>
-          <li className="flex items-center gap-10">
-            <NavLink
-              to="/home"
-              className="text-sm text-neutral-700 hover:underline"
-            >
-              ホーム
-            </NavLink>
-            <NavLink
-              to="/diagnosis"
-              className="text-sm text-neutral-700 hover:underline"
-            >
-              性能診断
-            </NavLink>
-            <NavLink
-              to="/feedback"
-              className="text-sm text-neutral-700 hover:underline"
-            >
-              ご意見・ご感想
-            </NavLink>
-            <Button
-              variant="fillPrimary"
-              size="sm"
-              onClick={() => navigate("/diagnosis")}
-            >
-              診断する
-            </Button>
-          </li>
+          <HeaderMenu className="gap-10" />
         </div>
       </header>
 
@@ -80,35 +52,7 @@ function Header() {
           <div className="text-lg font-bold tracking-tight text-cyan-950">
             実験動物施設性能診断ツール(試)
           </div>
-          <div className="flex items-center gap-12">
-            <div className="flex gap-10">
-              <NavLink
-                to="home"
-                className="text-sm text-neutral-800 hover:underline"
-              >
-                ホーム
-              </NavLink>
-              <NavLink
-                to="/diagnosis"
-                className="text-sm text-neutral-800 hover:underline"
-              >
-                性能診断
-              </NavLink>
-              <NavLink
-                to="/feedback"
-                className="text-sm text-neutral-800 hover:underline"
-              >
-                ご意見・ご感想
-              </NavLink>
-            </div>
-            <Button
-              variant="fillPrimary"
-              size="sm"
-              onClick={() => navigate("/diagnosis")}
-            >
-              診断する
-            </Button>
-          </div>
+          <HeaderMenu className="gap-12" />
         </div>
       </header>
     </>
