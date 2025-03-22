@@ -120,7 +120,6 @@ class PDFService
         $pdf->Cell(0, 7, "- {$rackName}", 0, 1);
 
         if (
-          in_array($rackKey, ['IVCRack', 'positiveRack', 'negativeRack']) &&
           isset($answer[$rackKey]['per']) &&
           isset($answer[$rackKey]['times'])
         ) {
