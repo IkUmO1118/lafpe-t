@@ -11,7 +11,7 @@ export function useCreateKarte() {
     onSuccess: (data) => {
       SetSession({
         key: "karte",
-        value: `${JSON.stringify(data)}`,
+        value: `${JSON.stringify(data.diagnosis)}`,
       });
       navigate("/result");
     },
