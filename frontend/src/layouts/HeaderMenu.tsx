@@ -1,14 +1,19 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { Button } from "../components/Button";
+import { useGetSession } from "../hooks/useSession";
 
 interface HeaderMenuProps {
-  className?: string;
+  gap?: string;
+  rounded?: string;
 }
 
-function HeaderMenu({ className }: HeaderMenuProps) {
+function HeaderMenu({ gap, rounded }: HeaderMenuProps) {
   const navigate = useNavigate();
+
+  const hasKarte = useGetSession("karte");
+
   return (
-    <li className={`flex items-center ${className}`}>
+    <li className={`flex items-center ${gap}`}>
       <NavLink to="/home" className="text-sm text-neutral-700 hover:underline">
         ホーム
       </NavLink>
@@ -24,12 +29,16 @@ function HeaderMenu({ className }: HeaderMenuProps) {
       >
         ご意見・ご感想
       </NavLink>
+
       <Button
         variant="fillPrimary"
         size="sm"
-        onClick={() => navigate("/diagnosis")}
+        className={rounded}
+        onClick={() =>
+          hasKarte ? navigate("/result") : navigate("/diagnosis")
+        }
       >
-        診断する
+        {hasKarte ? "診断結果" : "診断する"}
       </Button>
     </li>
   );

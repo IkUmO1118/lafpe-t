@@ -35,7 +35,7 @@ function Header() {
           <div className="text-2xl font-bold tracking-tight text-cyan-950">
             実験動物施設性能診断ツール(試)
           </div>
-          <HeaderMenu className="gap-10" />
+          <HeaderMenu gap="gap-10" rounded="rounded-full" />
         </div>
       </header>
 
@@ -52,7 +52,7 @@ function Header() {
           <div className="text-lg font-bold tracking-tight text-cyan-950">
             実験動物施設性能診断ツール(試)
           </div>
-          <HeaderMenu className="gap-12" />
+          <HeaderMenu gap="gap-12" />
         </div>
       </header>
     </>
