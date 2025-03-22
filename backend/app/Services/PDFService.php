@@ -15,7 +15,7 @@ class PDFService
     $this->questionConfig = new QuestionConfig();
   }
 
-  public function createDiagnosisPDF(array $diagnosticResults, array $questionAnswers, string $chartImage): string
+  public function createDiagnosisPDF(array $questionAnswers, string $chartImage): string
   {
     try {
       $pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8');
@@ -40,30 +40,6 @@ class PDFService
         $pdf->Ln(5);
         $this->processChartImage($pdf, $chartImage);
       }
-
-      //-----------------------------------------------------
-      // 結果の表示
-      // $pdf->SetFont('kozminproregular', 'B', 12);
-      // $pdf->Cell(0, 8, '診断結果内容', 0, 1, 'L');
-      // $pdf->Ln(2);
-
-      // $principleTypes = [
-      //   "principle1" => "原則１",
-      //   "principle2" => "原則２",
-      //   "principle3" => "原則３",
-      //   "principle4" => "原則４",
-      //   "principle5" => "原則５",
-      //   "principleDP" => "DP",
-      // ];
-
-      // $pdf->SetFont('kozminproregular', '', 11);
-      // foreach ($diagnosticResults as $key => $value) {
-      //   if (is_numeric($value)) {
-      //     $pdf->Cell(80, 7, $principleTypes[$key] . '： ' . number_format($value, 2), 0, 1);
-      //   }
-      // }
-      // $pdf->Ln(10);
-
       //-----------------------------------------------------
       // 設問と回答の表示
       $pdf->SetFont('kozminproregular', 'B', 12);
@@ -151,9 +127,6 @@ class PDFService
 
           $perValue = $answer[$rackKey]['per'];
           $timesValue = $answer[$rackKey]['times'];
-
-          // $perText = isset($questionData['per'][$perValue]) ? $questionData['per'][$perValue] : '';
-          // $timesText = isset($questionData['times'][$timesValue]) ? $questionData['times'][$timesValue] : '';
 
           $perText = isset($questionData['option']['per'][$perValue])
             ? $questionData['option']['per'][$perValue]

@@ -50,12 +50,10 @@ return [
     "POST" => function (): HTTPRenderer {
       $requestData = json_decode(file_get_contents('php://input'), true);
 
-      $diagnosticResults = ValidationHelper::checkRequiredPrinciples($requestData['diagnosticResults']);
       $questionAnswers = ValidationHelper::checkRequiredQuestions($requestData['questionAnswers']);
 
       if (
         !isset($requestData['chartImage']) ||
-        !isset($diagnosticResults) ||
         !isset($questionAnswers)
       ) {
         throw new Exception("Required data missing");
