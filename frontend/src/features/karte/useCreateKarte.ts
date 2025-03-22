@@ -10,8 +10,8 @@ export function useCreateKarte() {
     mutationFn: postDiagnosisApi,
     onSuccess: (data) => {
       SetSession({
-        key: "diagnosis-result",
-        value: `${JSON.stringify(data.diagnosis)}`,
+        key: "karte",
+        value: `${JSON.stringify(data)}`,
       });
       navigate("/result");
     },
