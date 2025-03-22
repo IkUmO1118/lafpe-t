@@ -7,6 +7,7 @@ import { useCreateKarte } from "../karte/useCreateKarte";
 import { useScoresContext } from "../../hooks/useScoresContext";
 import { CheckboxScore } from "../../types/diagnosis";
 import SpinnerMini from "../../components/SpinnerMini";
+import { useSetSession as setSession } from "../../hooks/useSession";
 
 interface DiagnosisFormProps {
   index: number;
@@ -35,7 +36,14 @@ function DiagnosisForm({ index, setIndex }: DiagnosisFormProps) {
         };
 
         // 新しいスコアオブジェクトを使用して関数を呼び出す
-        createKarte(updatedScores);
+        createKarte(updatedScores, {
+          onSuccess: () => {
+            setSession({
+              key: "answer",
+              value: JSON.stringify(updatedScores),
+            });
+          },
+        });
       }
       return;
     }
