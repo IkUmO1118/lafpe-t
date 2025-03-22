@@ -109,7 +109,7 @@ function NestedRadioQuestion({
         const japaneseLabel = keyToRackLabelMap[englishKey] || englishKey;
 
         return (
-          <div key={key} className="mb-4">
+          <div key={key}>
             <label className="flex h-12 items-center gap-2">
               <input
                 type="checkbox"
