@@ -19,7 +19,9 @@ function EvaluationCard({
       <div className="flex h-full w-full flex-col justify-between gap-5 rounded-tr-lg rounded-b-lg border-t-[3px] border-cyan-900 bg-white p-6 text-neutral-950 shadow-md">
         <div>
           <h4 className="mb-5 text-xl font-bold text-neutral-950">{title}</h4>
-          <p className="text-base font-normal">{description}</p>
+          <p className="text-base font-normal whitespace-pre-wrap">
+            {description}
+          </p>
         </div>
         <div className="flex flex-col gap-2.5 rounded-l-lg border-l-[3px] border-cyan-900 bg-slate-100 p-5">
           <h5 className="font-bold">
