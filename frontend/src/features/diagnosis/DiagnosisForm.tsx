@@ -5,8 +5,8 @@ import QuestionFactory from "../../factory/QuestionFactory";
 import useDiagnosisForm from "./useDiagnosisForm";
 import { useCreateKarte } from "../karte/useCreateKarte";
 import { useScoresContext } from "../../hooks/useScoresContext";
-import Spinner from "../../components/Spinner";
 import { CheckboxScore } from "../../types/diagnosis";
+import SpinnerMini from "../../components/SpinnerMini";
 
 interface DiagnosisFormProps {
   index: number;
@@ -44,10 +44,6 @@ function DiagnosisForm({ index, setIndex }: DiagnosisFormProps) {
     setIndex(index + 1);
   };
 
-  if (isCreating) {
-    return <Spinner />;
-  }
-
   return (
     <div className="flex flex-col gap-3">
       <QuestionFactory
@@ -66,7 +62,13 @@ function DiagnosisForm({ index, setIndex }: DiagnosisFormProps) {
         onClick={(e) => handleButtonClick(e)}
         type="submit"
       >
-        {questionNumber !== "Q13" ? "次の設問へ　→" : "完了する"}
+        {isCreating && questionNumber === "Q13" ? (
+          <SpinnerMini message="診断中..." />
+        ) : questionNumber === "Q13" ? (
+          "完了する"
+        ) : (
+          "次の設問へ　→"
+        )}
       </Button>
     </div>
   );
