@@ -1,5 +1,5 @@
 interface SpinnerMiniProps {
-  message: string;
+  message?: string;
 }
 
 function SpinnerMini({ message }: SpinnerMiniProps) {
@@ -9,7 +9,7 @@ function SpinnerMini({ message }: SpinnerMiniProps) {
         className="h-5 w-5 animate-spin rounded-full border-2 border-solid border-cyan-50"
         style={{ borderTopColor: "transparent", borderTopWidth: "1.4px" }}
       ></div>
-      <p className="text-base text-neutral-300">{message}</p>
+      {message && <p className="text-base text-neutral-300">{message}</p>}
     </div>
   );
 }
