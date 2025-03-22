@@ -62,7 +62,7 @@ function FeedbackForm() {
         disabled={isPosting}
         onClick={handleSubmit}
       >
-        {isPosting ? <SpinnerMini /> : "送信する"}
+        {isPosting ? <SpinnerMini message="送信中..." /> : "送信する"}
       </Button>
     </div>
   );
