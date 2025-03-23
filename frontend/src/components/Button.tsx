@@ -4,7 +4,7 @@ import { cva, VariantProps } from "class-variance-authority";
 import { cn } from "../lib/utils";
 
 const buttonVariants = cva(
-  "cursor-pointer decoration-0 transition-all duration-300",
+  "cursor-pointer decoration-0 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed",
   {
     variants: {
       variant: {
@@ -22,6 +22,7 @@ const buttonVariants = cva(
         wide: "min-h-12 w-full rounded-sm py-3 font-bold", //feedback
         lg: "rounded-sm px-10 py-4 text-base font-medium", // cta
         xl: "rounded-sm px-6 py-3 text-base font-medium", // download pdf
+        xl2: "rounded-md min-w-26 px-6 py-2 text-sm font-medium", // result/update
       },
     },
     defaultVariants: {
