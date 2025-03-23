@@ -48,7 +48,7 @@ export function QuestionWrapper({
 
           {readOnly && (
             <button
-              className="absolute right-0 bottom-0 z-50 text-sm font-medium text-neutral-800 underline"
+              className="absolute right-0 bottom-0 z-50 cursor-pointer text-sm font-medium text-neutral-800 underline"
               onClick={onEdit}
             >
               変更する
