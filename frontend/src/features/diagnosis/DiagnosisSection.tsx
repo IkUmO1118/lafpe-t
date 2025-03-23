@@ -1,9 +1,19 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import DiagnosisHeader from "./DiagnosisHeader";
 import DiagnosisForm from "./DiagnosisForm";
+import { useScoresContext } from "../../hooks/useScoresContext";
 
 function DiagnosisSection() {
   const [index, setIndex] = useState<number>(0);
+  const { resetScores } = useScoresContext();
+  const initialLoadRef = useRef(true);
+
+  useEffect(() => {
+    if (initialLoadRef.current) {
+      resetScores();
+      initialLoadRef.current = false;
+    }
+  }, []);
 
   return (
     <section className="h-full w-full rounded-xl bg-slate-50 px-8 py-7 shadow-lg">
