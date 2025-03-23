@@ -9,6 +9,10 @@ import {
 
 type Action =
   | {
+      type: "ADD_ALL_SCORES";
+      payload: ScoresState;
+    }
+  | {
       type: "ADD_CHECKBOX_SCORE";
       payload: { question: string; score: CheckboxScore };
     }
@@ -24,6 +28,9 @@ type Action =
 
 function scoresReducer(state: ScoresState, action: Action): ScoresState {
   switch (action.type) {
+    case "ADD_ALL_SCORES":
+      return { ...state, ...action.payload };
+
     case "ADD_CHECKBOX_SCORE":
       return { ...state, [action.payload.question]: action.payload.score };
 
@@ -79,6 +86,9 @@ function ScoresContextProvider({ children }: ScoresContextProviderProps) {
 
   const ctx: ScoresContextValue = {
     scores,
+    addAllScores(scoresData) {
+      dispatch({ type: "ADD_ALL_SCORES", payload: scoresData });
+    },
     addCheckboxScore(question, score) {
       dispatch({ type: "ADD_CHECKBOX_SCORE", payload: { question, score } });
     },

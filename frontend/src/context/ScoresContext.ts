@@ -8,6 +8,7 @@ import {
 
 export type ScoresContextValue = {
   scores: ScoresState;
+  addAllScores: (scoresData: ScoresState) => void;
   addCheckboxScore: (question: string, score: CheckboxScore) => void;
   addRadioScore: (question: string, score: RadioScore) => void;
   addNestedRadioScore: (
