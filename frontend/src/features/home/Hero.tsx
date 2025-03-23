@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "../../components/Button";
-import { useGetSession } from "../../hooks/useSession";
 
 interface HeroProps {
   scrollToEvaluation: () => void;
@@ -8,7 +7,6 @@ interface HeroProps {
 
 function Hero({ scrollToEvaluation }: HeroProps) {
   const navigate = useNavigate();
-  const kartesData = JSON.parse(useGetSession("karte"));
 
   return (
     <div className="flex flex-col items-center justify-center gap-10 pt-20 pb-16">
@@ -22,14 +20,10 @@ function Hero({ scrollToEvaluation }: HeroProps) {
           variant="fillPrimary"
           size="base"
           onClick={() => {
-            if (kartesData) {
-              navigate("/result");
-            } else {
-              navigate("/diagnosis");
-            }
+            navigate("/diagnosis");
           }}
         >
-          {kartesData ? "診断結果を見る" : "診断を開始する"}
+          診断を開始する
         </Button>
         <Button
           variant="outlinePrimary"
