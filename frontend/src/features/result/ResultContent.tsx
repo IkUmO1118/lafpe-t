@@ -7,14 +7,22 @@ import {
   NestedRadioScore,
   RadioScore,
 } from "../../types/diagnosis";
+import { useUpdateKarte } from "../karte/useUpdatekarte";
+import { useSetSession as setSession } from "../../hooks/useSession";
 
-function ResultContent() {
-  const { scores, addAllScores } = useScoresContext();
+// Resultからの通信のためのインターフェース追加
+interface ResultContentProps {
+  onDataUpdated: () => void;
+}
+
+function ResultContent({ onDataUpdated }: ResultContentProps) {
   const [editingQuestion, setEditingQuestion] = useState<string | null>(null);
   const [editedValues, setEditedValues] = useState<
     Record<string, CheckboxScore | RadioScore | NestedRadioScore>
   >({});
 
+  const { scores, addAllScores } = useScoresContext();
+  const { isUpdating, updateKarte } = useUpdateKarte();
   const questionIndexes = Array.from({ length: 13 }, (_, i) => i);
 
   const handleEdit = (questionNumber: string) => {
@@ -33,7 +41,18 @@ function ResultContent() {
 
     addAllScores(updatedScores);
 
-    setEditingQuestion(null);
+    updateKarte(updatedScores, {
+      onSuccess: () => {
+        setSession({
+          key: "answer",
+          value: JSON.stringify(updatedScores),
+        });
+
+        // 親コンポーネントにデータ更新を通知して再描画を促す
+        onDataUpdated();
+        setEditingQuestion(null);
+      },
+    });
   };
 
   const handleCancel = () => {
@@ -81,6 +100,7 @@ function ResultContent() {
                 onEdit={() => handleEdit(questionNumber)}
                 onUpdate={() => handleUpdate(questionNumber)}
                 onCancel={handleCancel}
+                isUpdating={isUpdating}
               />
             </div>
           );
