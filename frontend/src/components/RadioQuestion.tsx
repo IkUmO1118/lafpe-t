@@ -12,7 +12,7 @@ function RadioQuestion({
   options,
   value,
   onChange,
-  name,
+  name = "radio",
   readOnly = false,
 }: RadioQuestionProps) {
   const handleRadioChange = (optionIndex: number) => {
@@ -26,7 +26,7 @@ function RadioQuestion({
         <label key={key} className="flex h-12 items-center gap-2">
           <input
             type="radio"
-            id={`option-${key}`}
+            id={`option-${name}-${key}`}
             name={name}
             checked={value === optionIndex}
             onChange={() => handleRadioChange(optionIndex)}

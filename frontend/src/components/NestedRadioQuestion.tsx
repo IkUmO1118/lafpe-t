@@ -7,6 +7,7 @@ interface NestedRadioQuestionProps {
   perOptions?: Record<string, string>;
   timesOptions?: Record<string, string>;
   readOnly?: boolean;
+  name?: string;
 }
 
 const keyToRackLabelMap: Record<string, string> = {
@@ -25,6 +26,7 @@ function NestedRadioQuestion({
   perOptions = {},
   timesOptions = {},
   readOnly = false,
+  name = "nested",
 }: NestedRadioQuestionProps) {
   const handleNestedRadioChange = (
     rack: string,
@@ -113,7 +115,7 @@ function NestedRadioQuestion({
             <label className="flex h-12 items-center gap-2">
               <input
                 type="checkbox"
-                id={`option-${key}`}
+                id={`nested-checkbox-${name}-${key}`}
                 checked={isChecked}
                 onChange={(e) => handleNestedRadioChange(key, e.target.checked)}
                 className="h-4 w-4 rounded border-2 border-neutral-400 text-cyan-700 accent-cyan-700"
@@ -152,7 +154,8 @@ function NestedRadioQuestion({
                           <div className="text-base">
                             <input
                               type="radio"
-                              name={`usage-${englishKey}`}
+                              id={`usage-${name}-${englishKey}-${idx}`}
+                              name={`usage-${name}-${englishKey}`}
                               checked={option.per === idx}
                               onChange={() => handleUsageRateChange(key, idx)}
                               className="h-4 w-4 rounded-full border-2 border-neutral-400 text-cyan-700 accent-cyan-700"
@@ -201,7 +204,8 @@ function NestedRadioQuestion({
                           <div className="text-base">
                             <input
                               type="radio"
-                              name={`ventilation-${englishKey}`}
+                              id={`ventilation-${name}-${englishKey}-${idx}`}
+                              name={`ventilation-${name}-${englishKey}`}
                               checked={option.times === idx}
                               onChange={() => handleVentilationChange(key, idx)}
                               className="h-4 w-4 rounded-full border-2 border-neutral-400 text-cyan-700 accent-cyan-700"
