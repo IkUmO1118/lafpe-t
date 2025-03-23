@@ -53,6 +53,7 @@ function QuestionFactory({
           options={options as Record<string, string>}
           value={value as CheckboxScore}
           onChange={onChange}
+          name={questionNumber}
           readOnly={readOnly}
         />
       );
@@ -76,6 +77,7 @@ function QuestionFactory({
           onChange={onChange}
           perOptions={perOptions}
           timesOptions={timesOptions}
+          name={questionNumber}
           readOnly={readOnly}
         />
       );
