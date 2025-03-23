@@ -24,6 +24,7 @@ interface QuestionFactoryProps {
   onEdit?: () => void;
   onUpdate?: () => void;
   onCancel?: () => void;
+  isUpdating?: boolean;
 }
 
 function QuestionFactory({
@@ -40,6 +41,7 @@ function QuestionFactory({
   onEdit,
   onUpdate,
   onCancel,
+  isUpdating,
 }: QuestionFactoryProps) {
   const questionType = getQuestion(parseInt(questionNumber.slice(1)) - 1).type;
 
@@ -91,6 +93,7 @@ function QuestionFactory({
       onUpdate={onUpdate}
       onCancel={onCancel}
       readOnly={readOnly}
+      isUpdating={isUpdating}
     >
       {questionComponent}
     </QuestionWrapper>

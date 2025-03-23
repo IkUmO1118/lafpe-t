@@ -1,4 +1,5 @@
 import { Button } from "./Button";
+import SpinnerMini from "./SpinnerMini";
 
 interface QuestionWrapperProps {
   title: string;
@@ -9,6 +10,7 @@ interface QuestionWrapperProps {
   onUpdate?: () => void;
   onCancel?: () => void;
   readOnly?: boolean;
+  isUpdating?: boolean;
 }
 
 export function QuestionWrapper({
@@ -20,6 +22,7 @@ export function QuestionWrapper({
   onUpdate,
   onCancel,
   readOnly = true,
+  isUpdating = false,
 }: QuestionWrapperProps) {
   if (using === "diagnosis") {
     return (
@@ -58,7 +61,7 @@ export function QuestionWrapper({
           {!readOnly && (
             <div className="absolute right-0 bottom-0 z-50 flex gap-3">
               <Button variant="fillPrimary" size="xl2" onClick={onUpdate}>
-                更新する
+                {isUpdating ? <SpinnerMini /> : "更新する"}
               </Button>
               <Button variant="outlinePrimary" size="xl2" onClick={onCancel}>
                 クリア
