@@ -20,6 +20,10 @@ interface QuestionFactoryProps {
   showNumber?: boolean;
   index?: number;
   readOnly?: boolean;
+  using?: string;
+  onEdit?: () => void;
+  onUpdate?: () => void;
+  onCancel?: () => void;
 }
 
 function QuestionFactory({
@@ -30,9 +34,12 @@ function QuestionFactory({
   onChange,
   perOptions,
   timesOptions,
-  showNumber = true,
   index,
   readOnly = false,
+  using = "diagnosis",
+  onEdit,
+  onUpdate,
+  onCancel,
 }: QuestionFactoryProps) {
   const questionType = getQuestion(parseInt(questionNumber.slice(1)) - 1).type;
 
@@ -79,7 +86,11 @@ function QuestionFactory({
     <QuestionWrapper
       title={questionTitle}
       number={index ? index + 1 : parseInt(questionNumber.slice(1))}
-      showNumber={showNumber}
+      using={using}
+      onEdit={onEdit}
+      onUpdate={onUpdate}
+      onCancel={onCancel}
+      readOnly={readOnly}
     >
       {questionComponent}
     </QuestionWrapper>
