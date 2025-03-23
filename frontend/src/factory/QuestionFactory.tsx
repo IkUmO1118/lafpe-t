@@ -25,6 +25,7 @@ interface QuestionFactoryProps {
   onUpdate?: () => void;
   onCancel?: () => void;
   isUpdating?: boolean;
+  isChanged?: boolean;
 }
 
 function QuestionFactory({
@@ -42,6 +43,7 @@ function QuestionFactory({
   onUpdate,
   onCancel,
   isUpdating,
+  isChanged,
 }: QuestionFactoryProps) {
   const questionType = getQuestion(parseInt(questionNumber.slice(1)) - 1).type;
 
@@ -77,7 +79,6 @@ function QuestionFactory({
           onChange={onChange}
           perOptions={perOptions}
           timesOptions={timesOptions}
-          name={questionNumber}
           readOnly={readOnly}
         />
       );
@@ -96,6 +97,7 @@ function QuestionFactory({
       onCancel={onCancel}
       readOnly={readOnly}
       isUpdating={isUpdating}
+      isChanged={isChanged}
     >
       {questionComponent}
     </QuestionWrapper>

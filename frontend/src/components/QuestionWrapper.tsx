@@ -11,6 +11,7 @@ interface QuestionWrapperProps {
   onCancel?: () => void;
   readOnly?: boolean;
   isUpdating?: boolean;
+  isChanged?: boolean;
 }
 
 export function QuestionWrapper({
@@ -23,6 +24,7 @@ export function QuestionWrapper({
   onCancel,
   readOnly = true,
   isUpdating = false,
+  isChanged = false,
 }: QuestionWrapperProps) {
   if (using === "diagnosis") {
     return (
@@ -60,7 +62,12 @@ export function QuestionWrapper({
 
           {!readOnly && (
             <div className="absolute right-0 bottom-0 z-50 flex gap-3">
-              <Button variant="fillPrimary" size="xl2" onClick={onUpdate}>
+              <Button
+                variant="fillPrimary"
+                size="xl2"
+                onClick={onUpdate}
+                disabled={!isChanged}
+              >
                 {isUpdating ? <SpinnerMini /> : "更新する"}
               </Button>
               <Button variant="outlinePrimary" size="xl2" onClick={onCancel}>

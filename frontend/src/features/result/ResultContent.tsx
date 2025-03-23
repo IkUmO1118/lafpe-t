@@ -25,6 +25,7 @@ function ResultContent({ onDataUpdated }: ResultContentProps) {
   const { scores, addAllScores } = useScoresContext();
   const { isUpdating, updateKarte } = useUpdateKarte();
   const questionIndexes = Array.from({ length: 13 }, (_, i) => i);
+  const [isChanged, setIsChanged] = useState<boolean>(false);
 
   // メモ化したhandleCancelをuseOutsideClickに渡す
   const handleCancel = useCallback(() => {
@@ -68,6 +69,7 @@ function ResultContent({ onDataUpdated }: ResultContentProps) {
     questionNumber: string,
     newValue: CheckboxScore | RadioScore | NestedRadioScore,
   ) => {
+    setIsChanged(true);
     setEditedValues({
       ...editedValues,
       [questionNumber]: newValue,
@@ -107,6 +109,7 @@ function ResultContent({ onDataUpdated }: ResultContentProps) {
                 onUpdate={() => handleUpdate(questionNumber)}
                 onCancel={handleCancel}
                 isUpdating={isUpdating}
+                isChanged={isChanged}
               />
             </div>
           );
