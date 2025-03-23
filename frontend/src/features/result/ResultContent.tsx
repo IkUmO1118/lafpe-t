@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { getQuestion } from "../../config/QuestionConfig";
 import QuestionFactory from "../../factory/QuestionFactory";
 import { useScoresContext } from "../../hooks/useScoresContext";
@@ -9,6 +9,7 @@ import {
 } from "../../types/diagnosis";
 import { useUpdateKarte } from "../karte/useUpdatekarte";
 import { useSetSession as setSession } from "../../hooks/useSession";
+import { useOutsideClick } from "../../hooks/useOutsideClick";
 
 // Resultからの通信のためのインターフェース追加
 interface ResultContentProps {
@@ -24,6 +25,14 @@ function ResultContent({ onDataUpdated }: ResultContentProps) {
   const { scores, addAllScores } = useScoresContext();
   const { isUpdating, updateKarte } = useUpdateKarte();
   const questionIndexes = Array.from({ length: 13 }, (_, i) => i);
+
+  // メモ化したhandleCancelをuseOutsideClickに渡す
+  const handleCancel = useCallback(() => {
+    setEditingQuestion(null);
+  }, []);
+
+  // 編集中の質問の外側をクリックしたときに編集状態を解除するためのref
+  const outsideClickRef = useOutsideClick<HTMLDivElement>(handleCancel);
 
   const handleEdit = (questionNumber: string) => {
     setEditingQuestion(questionNumber);
@@ -55,10 +64,6 @@ function ResultContent({ onDataUpdated }: ResultContentProps) {
     });
   };
 
-  const handleCancel = () => {
-    setEditingQuestion(null);
-  };
-
   const handleChange = (
     questionNumber: string,
     newValue: CheckboxScore | RadioScore | NestedRadioScore,
@@ -85,6 +90,7 @@ function ResultContent({ onDataUpdated }: ResultContentProps) {
             <div
               key={questionNumber}
               className="flex w-full flex-col rounded-lg"
+              ref={isEditing ? outsideClickRef : null}
             >
               <QuestionFactory
                 questionNumber={questionNumber}
