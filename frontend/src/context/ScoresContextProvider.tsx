@@ -24,7 +24,8 @@ type Action =
       type: "ADD_NESTED_SCORE";
       payload: { question: string; score: { [key: string]: NestedOption } };
     }
-  | { type: "DELETE_SCORE"; payload: string };
+  | { type: "DELETE_SCORE"; payload: string }
+  | { type: "RESET_SCORES" };
 
 function scoresReducer(state: ScoresState, action: Action): ScoresState {
   switch (action.type) {
@@ -50,6 +51,9 @@ function scoresReducer(state: ScoresState, action: Action): ScoresState {
               ? 0
               : [],
       };
+
+    case "RESET_SCORES":
+      return { ...initialState };
 
     default:
       return state;
@@ -100,6 +104,9 @@ function ScoresContextProvider({ children }: ScoresContextProviderProps) {
     },
     deleteScore(question) {
       dispatch({ type: "DELETE_SCORE", payload: question });
+    },
+    resetScores() {
+      dispatch({ type: "RESET_SCORES" });
     },
   };
 

@@ -16,6 +16,7 @@ export type ScoresContextValue = {
     score: { [key: string]: NestedOption },
   ) => void;
   deleteScore: (question: string) => void;
+  resetScores: () => void;
 };
 
 // Context オブジェクトのみをエクスポート
