@@ -30,6 +30,7 @@ function ResultContent({ onDataUpdated }: ResultContentProps) {
   // メモ化したhandleCancelをuseOutsideClickに渡す
   const handleCancel = useCallback(() => {
     setEditingQuestion(null);
+    setIsChanged(false);
   }, []);
 
   // 編集中の質問の外側をクリックしたときに編集状態を解除するためのref
@@ -41,6 +42,7 @@ function ResultContent({ onDataUpdated }: ResultContentProps) {
       ...editedValues,
       [questionNumber]: scores[questionNumber as keyof typeof scores],
     });
+    setIsChanged(false);
   };
 
   const handleUpdate = (questionNumber: string) => {
@@ -49,8 +51,6 @@ function ResultContent({ onDataUpdated }: ResultContentProps) {
       [questionNumber]: editedValues[questionNumber],
     };
 
-    addAllScores(updatedScores);
-
     updateKarte(updatedScores, {
       onSuccess: () => {
         setSession({
@@ -58,9 +58,13 @@ function ResultContent({ onDataUpdated }: ResultContentProps) {
           value: JSON.stringify(updatedScores),
         });
 
+        addAllScores(updatedScores);
         // 親コンポーネントにデータ更新を通知して再描画を促す
         onDataUpdated();
+      },
+      onSettled: () => {
         setEditingQuestion(null);
+        setIsChanged(false);
       },
     });
   };
