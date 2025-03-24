@@ -10,9 +10,14 @@ import { PrincipleProps } from "../../types/principle";
 interface ResultHeaderProps {
   answersData: ScoresState;
   kartesData: PrincipleProps;
+  scrollToContent: () => void;
 }
 
-function ResultHeader({ answersData, kartesData }: ResultHeaderProps) {
+function ResultHeader({
+  answersData,
+  kartesData,
+  scrollToContent,
+}: ResultHeaderProps) {
   const chartRef = useRef<HTMLDivElement>(null);
   const { downloadPDF, isDownloading } = useDownloadPDF();
 
@@ -88,8 +93,12 @@ function ResultHeader({ answersData, kartesData }: ResultHeaderProps) {
               "結果をPDFで保存"
             )}
           </Button>
-          <Button variant="outlinePrimary" size="base" onClick={() => {}}>
-            結果をファイルで保存
+          <Button
+            variant="outlinePrimary"
+            size="base"
+            onClick={scrollToContent}
+          >
+            回答内容を確認する
           </Button>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useScoresContext } from "../../hooks/useScoresContext";
 import { useGetSession as getSession } from "../../hooks/useSession";
 import ResultHeader from "./ResultHeader";
@@ -12,6 +12,15 @@ function ResultSection() {
   // Use state to store the parsed data
   const [kartesData, setKartesData] = useState(null);
   const [answersData, setAnswersData] = useState(null);
+
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  const scrollToContent = () => {
+    contentRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
 
   // Get fresh data from session
   useEffect(() => {
@@ -46,8 +55,12 @@ function ResultSection() {
 
   return (
     <section className="flex w-full flex-col">
-      <ResultHeader answersData={answersData} kartesData={kartesData} />
-      <ResultContent onDataUpdated={refreshData} />
+      <ResultHeader
+        answersData={answersData}
+        kartesData={kartesData}
+        scrollToContent={scrollToContent}
+      />
+      <ResultContent onDataUpdated={refreshData} ref={contentRef} />
     </section>
   );
 }

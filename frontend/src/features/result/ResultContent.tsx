@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { ForwardedRef, useCallback, useState } from "react";
 import { getQuestion } from "../../config/QuestionConfig";
 import QuestionFactory from "../../factory/QuestionFactory";
 import { useScoresContext } from "../../hooks/useScoresContext";
@@ -14,9 +14,10 @@ import { useOutsideClick } from "../../hooks/useOutsideClick";
 // Resultからの通信のためのインターフェース追加
 interface ResultContentProps {
   onDataUpdated: () => void;
+  ref: ForwardedRef<HTMLDivElement>;
 }
 
-function ResultContent({ onDataUpdated }: ResultContentProps) {
+function ResultContent({ onDataUpdated, ref }: ResultContentProps) {
   const [editingQuestion, setEditingQuestion] = useState<string | null>(null);
   const [editedValues, setEditedValues] = useState<
     Record<string, CheckboxScore | RadioScore | NestedRadioScore>
@@ -81,7 +82,10 @@ function ResultContent({ onDataUpdated }: ResultContentProps) {
   };
 
   return (
-    <div className="flex w-full flex-col items-center gap-12 bg-neutral-100 px-56 py-14">
+    <div
+      ref={ref}
+      className="flex w-full flex-col items-center gap-12 bg-neutral-100 px-56 py-14"
+    >
       <h2 className="text-4xl font-black text-neutral-900">回答内容</h2>
       <div className="flex w-full flex-col">
         {questionIndexes.map((index) => {
