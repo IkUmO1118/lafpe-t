@@ -2,6 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { useSetSession as SetSession } from "../../hooks/useSession";
 import { postDiagnosis as postDiagnosisApi } from "../../services/apiDiagnosis";
+import toast from "react-hot-toast";
 
 export function useCreateKarte() {
   const navigate = useNavigate();
@@ -15,7 +16,10 @@ export function useCreateKarte() {
       });
       navigate("/result");
     },
-    onError: (err) => console.error(err.message),
+    onError: (err) => {
+      toast.error("全ての設問に回答してください");
+      console.error(err.message);
+    },
   });
 
   return { createKarte, isCreating };
