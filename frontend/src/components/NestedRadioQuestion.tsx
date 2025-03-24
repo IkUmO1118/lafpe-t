@@ -120,6 +120,7 @@ function NestedRadioQuestion({
                 onChange={(e) => handleNestedRadioChange(key, e.target.checked)}
                 className="h-4 w-4 rounded border-2 border-neutral-400 text-cyan-700 accent-cyan-700"
                 disabled={readOnly}
+                required
               />
               <span className="text-neutral-700">{japaneseLabel}</span>
             </label>
@@ -160,6 +161,7 @@ function NestedRadioQuestion({
                               onChange={() => handleUsageRateChange(key, idx)}
                               className="h-4 w-4 rounded-full border-2 border-neutral-400 text-cyan-700 accent-cyan-700"
                               disabled={readOnly}
+                              required
                             />
                           </div>
                         </div>
@@ -210,6 +212,7 @@ function NestedRadioQuestion({
                               onChange={() => handleVentilationChange(key, idx)}
                               className="h-4 w-4 rounded-full border-2 border-neutral-400 text-cyan-700 accent-cyan-700"
                               disabled={readOnly}
+                              required
                             />
                           </div>
                         </div>
