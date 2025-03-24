@@ -3,6 +3,7 @@ import { useScoresContext } from "../../hooks/useScoresContext";
 import { useGetSession as getSession } from "../../hooks/useSession";
 import ResultHeader from "./ResultHeader";
 import ResultContent from "./ResultContent";
+import ResultNotData from "./ResultNotData";
 
 function ResultSection() {
   const { addAllScores } = useScoresContext();
@@ -40,7 +41,7 @@ function ResultSection() {
   };
 
   if (kartesData === null || answersData === null) {
-    return <div>データがありません</div>;
+    return <ResultNotData />;
   }
 
   return (
