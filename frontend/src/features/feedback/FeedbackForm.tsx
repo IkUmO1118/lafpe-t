@@ -14,17 +14,11 @@ function FeedbackForm() {
       return;
     }
 
-    const isConfirmed = window.confirm(
-      `以下の内容で送信してよろしいですか？\n\n${message}`,
-    );
-
-    if (isConfirmed) {
-      postFeedback(message, {
-        onSettled: () => {
-          setMessage("");
-        },
-      });
-    }
+    postFeedback(message, {
+      onSettled: () => {
+        setMessage("");
+      },
+    });
   }
 
   return (
