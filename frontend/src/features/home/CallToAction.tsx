@@ -28,12 +28,12 @@ function CallToAction({ scrollToEvaluation }: HeroProps) {
         <div className="flex items-center justify-center gap-4">
           <Button
             variant="fillWhite"
-            size="lg"
+            size="xl"
             onClick={() => navigate("/diagnosis")}
           >
             診断を開始
           </Button>
-          <Button variant="outlineWhite" size="lg" onClick={scrollToEvaluation}>
+          <Button variant="outlineWhite" size="xl" onClick={scrollToEvaluation}>
             ツールについて
           </Button>
         </div>

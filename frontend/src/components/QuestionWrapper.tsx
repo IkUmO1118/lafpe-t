@@ -64,13 +64,13 @@ export function QuestionWrapper({
             <div className="absolute right-0 bottom-0 z-50 flex gap-3">
               <Button
                 variant="fillPrimary"
-                size="xl2"
+                size="xs"
                 onClick={onUpdate}
                 disabled={!isChanged}
               >
                 {isUpdating ? <SpinnerMini /> : "更新する"}
               </Button>
-              <Button variant="outlinePrimary" size="xl2" onClick={onCancel}>
+              <Button variant="outlinePrimary" size="xs" onClick={onCancel}>
                 クリア
               </Button>
             </div>

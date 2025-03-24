@@ -18,18 +18,14 @@ function Hero({ scrollToEvaluation }: HeroProps) {
       <div className="flex gap-4">
         <Button
           variant="fillPrimary"
-          size="base"
+          size="lg"
           onClick={() => {
             navigate("/diagnosis");
           }}
         >
           診断を開始する
         </Button>
-        <Button
-          variant="outlinePrimary"
-          size="base"
-          onClick={scrollToEvaluation}
-        >
+        <Button variant="outlinePrimary" size="lg" onClick={scrollToEvaluation}>
           ツールについて
         </Button>
       </div>

@@ -78,7 +78,7 @@ function ResultHeader({ answersData, kartesData }: ResultHeaderProps) {
         <div className="z-50 flex flex-col justify-end gap-5">
           <Button
             variant="fillPrimary"
-            size="xl"
+            size="base"
             disabled={isDownloading}
             onClick={handleDownloadPDF}
           >
@@ -88,7 +88,7 @@ function ResultHeader({ answersData, kartesData }: ResultHeaderProps) {
               "結果をPDFで保存"
             )}
           </Button>
-          <Button variant="outlinePrimary" size="xl" onClick={() => {}}>
+          <Button variant="outlinePrimary" size="base" onClick={() => {}}>
             結果をファイルで保存
           </Button>
         </div>

@@ -17,12 +17,12 @@ const buttonVariants = cva(
           "border border-neutral-50 text-neutral-50 outline outline-transparent outline-2 outline-offset-[-2px] hover:outline-2 hover:outline-neutral-50 transition-all duration-300 ease-in",
       },
       size: {
-        sm: "rounded-sm px-5 py-2 text-sm font-medium", //header
-        base: "rounded-sm px-6 py-4 text-base font-bold", //Hero section
-        wide: "min-h-12 w-full rounded-sm py-3 font-bold", //feedback
-        lg: "rounded-sm px-10 py-4 text-base font-medium", // cta
-        xl: "rounded-sm px-6 py-3 text-base font-medium", // download pdf
-        xl2: "rounded-md min-w-26 px-6 py-2 text-sm font-medium", // result/update
+        sm: "rounded-sm px-5 py-2 text-sm font-medium",
+        xs: "rounded-md min-w-26 px-6 py-2 text-sm font-medium",
+        base: "rounded-sm px-6 py-3 text-base font-medium",
+        lg: "rounded-sm px-6 py-4 text-base font-bold",
+        xl: "rounded-sm px-10 py-4 text-base font-medium",
+        wide: "min-h-12 w-full rounded-md py-3 font-bold",
       },
     },
     defaultVariants: {
