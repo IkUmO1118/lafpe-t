@@ -31,12 +31,12 @@ class CalcPrinciple5 extends AbstractPrinciple
     ];
 
     if (!isset($resQ3) || empty($resQ3)) {
-      throw new Exception("Empty data for Q3");
+      throw new Exception("設問Q3のデータが入力されていません");
     }
 
     foreach ($requiredRacks as $rack) {
       if (!isset($resQ3[$rack])) {
-        throw new \Exception("Missing required racks in Q3");
+        throw new \Exception("設問3に必要なラック情報「{$rack}」が不足しています");
       }
     }
 
@@ -46,25 +46,25 @@ class CalcPrinciple5 extends AbstractPrinciple
     $hasChecked = false;
 
     foreach ($resQ3 as $rackKey => $rackValue) {
-      if ($rackValue['isChecked'] === null) {
-        throw new Exception('isChecked value cannot be null');
+      if ($rackValue['isChecked'] === null || !is_bool($rackValue['isChecked'])) {
+        throw new Exception("ラック「{$rackKey}」の選択状態が設定されていません");
       }
 
       if (isset($rackValue['isChecked']) && $rackValue['isChecked']) {
         $hasChecked = true;
 
         if (!isset($rackValue['per']) || $rackValue['per'] === null || (!is_int($rackValue['per']) && !is_float($rackValue['per']))) {
-          throw new Exception("Per value cannot be null and numeric for checked rack");
+          throw new Exception("選択されたラック「{$rackKey}」の使用割合（per）は数値で入力してください");
         }
         if (!isset($rackValue['times']) || $rackValue['times'] === null || (!is_int($rackValue['times']) && !is_float($rackValue['times']))) {
-          throw new Exception("Times value cannot be null and numeric for checked rack");
+          throw new Exception("選択されたラック「{$rackKey}」の換気回数（times）は数値で入力してください");
         }
 
         $per = $rackValue['per'];
         $times = $rackValue['times'];
 
         if (!isset($this->weightings['Q3'][$rackKey]['perWeighting'][$per]) || !isset($this->weightings['Q3'][$rackKey]['timesWeighting'][$times])) {
-          throw new Exception("Invalid value for rack {$rackKey}: times and per not found in configuration");
+          throw new Exception("ラック「{$rackKey}」の換気回数値「{$times}」または使用割合「{$per}」が設定に存在しません");
         }
 
         $rackWeight  = $this->weightings['Q3'][$rackKey]['rackWeighting'] ?? 0;
@@ -76,7 +76,7 @@ class CalcPrinciple5 extends AbstractPrinciple
     }
 
     if (!$hasChecked) {
-      throw new Exception("At least one rack must be checked for Q3");
+      throw new Exception("設問Q3では少なくとも1つのラックを選択してください");
     }
 
     $this->addTotalScore($totalWeighting * $totalStaticPoint);
@@ -86,20 +86,20 @@ class CalcPrinciple5 extends AbstractPrinciple
     $res12 = $this->res["Q12"];
 
     if (!isset($res12) || empty($res12)) {
-      throw new Exception("Empty data for Q12");
+      throw new Exception("設問Q12のデータが入力されていません");
     }
     if (count($res12) > 15) {
-      throw new Exception("Too many values for Q12");
+      throw new Exception("設問Q12の選択は15個までです");
     }
 
     $validValues = [];
     foreach ($res12 as $value) {
       if ($value === null || (!is_int($value) && !is_float($value))) {
-        throw new Exception("Q12 array elementes cannot be null and must be numeric");
+        throw new Exception("設問Q12の選択値は数値である必要があります");
       }
 
       if ($value < 0 || $value > 14) {
-        throw new Exception("Q12 array elements must be between 0 and 14");
+        throw new Exception("設問Q12の選択値は0から14までの値である必要があります");
       }
 
       $validValues[intval($value)] = true;
