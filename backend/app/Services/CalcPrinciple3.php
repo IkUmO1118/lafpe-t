@@ -59,17 +59,17 @@ class CalcPrinciple3 extends AbstractPrinciple
         $hasChecked = true;
 
         if (!isset($rackValue['per']) || $rackValue['per'] === null || (!is_int($rackValue['per']) && !is_float($rackValue['per']))) {
-          throw new Exception("選択されたラック「{$rackKey}」の割合（per）は数値で入力してください");
+          throw new Exception("選択されたラック「{$rackKey}」の使用割合（per）は数値で入力してください");
         }
         if (!isset($rackValue['times']) || $rackValue['times'] === null || (!is_int($rackValue['times']) && !is_float($rackValue['times']))) {
-          throw new Exception("選択されたラック「{$rackKey}」の回数（times）は数値で入力してください");
+          throw new Exception("選択されたラック「{$rackKey}」の換気回数（times）は数値で入力してください");
         }
 
         $per = $rackValue['per'];
         $times = $rackValue['times'];
 
         if (!isset($this->weightings['Q3'][$rackKey]['perWeighting'][$per]) || !isset($this->weightings['Q3'][$rackKey]['timesWeighting'][$times])) {
-          throw new Exception("ラック「{$rackKey}」の回数値「{$times}」または割合「{$per}」が設定に存在しません");
+          throw new Exception("ラック「{$rackKey}」の換気回数値「{$times}」または使用割合「{$per}」が設定に存在しません");
         }
 
         $rackWeight  = $this->weightings['Q3'][$rackKey]['rackWeighting'] ?? 0;
@@ -215,14 +215,14 @@ class CalcPrinciple3 extends AbstractPrinciple
     $resQ9 = $this->res['Q9'];
 
     if (!isset($resQ9) || empty($resQ9)) {
-      throw new \Exception("Empty data for Q9");
+      throw new \Exception("設問Q9のデータが入力されていません");
     }
     if (count($resQ9) > 4) {
-      throw new \Exception("Too many values for Q9");
+      throw new \Exception("設問Q9の選択は4つまでです");
     }
     foreach ($resQ9 as $value) {
       if ($value === null || (!is_int($value) && !is_float($value))) {
-        throw new \Exception("Q9 array elements cannot be null and must be numeric");
+        throw new \Exception("設問Q9の選択値は数値である必要があります");
       }
     }
 
@@ -232,7 +232,7 @@ class CalcPrinciple3 extends AbstractPrinciple
       $resQ9,
       function ($acc, $cur) {
         if (!isset($this->weightings['Q9'][$cur])) {
-          throw new \Exception("Invalid weighting value for Q9: {$cur}");
+          throw new \Exception("設問Q9の選択値「{$cur}」は無効な値です");
         }
 
         return $acc + ($this->weightings['Q9'][$cur] ?? 0);

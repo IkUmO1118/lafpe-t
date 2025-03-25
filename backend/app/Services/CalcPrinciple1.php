@@ -55,16 +55,16 @@ class CalcPrinciple1 extends AbstractPrinciple
       if (isset($rackValue['isChecked']) && $rackValue['isChecked']) {
         $hasChecked = true;
         if (!isset($rackValue['per']) || $rackValue['per'] === null || !is_numeric($rackValue['per'])) {
-          throw new \Exception("選択されたラック「{$rackKey}」の割合（per）は数値で入力してください");
+          throw new \Exception("選択されたラック「{$rackKey}」の使用割合（per）は数値で入力してください");
         }
         if (!isset($rackValue['times']) || $rackValue['times'] === null || !is_numeric($rackValue['times'])) {
-          throw new \Exception("選択されたラック「{$rackKey}」の回数（times）は数値で入力してください");
+          throw new \Exception("選択されたラック「{$rackKey}」の換気回数（times）は数値で入力してください");
         }
 
         $times = (int)$rackValue['times'];
 
         if (!isset($this->dynamicPoints['Q3'][$rackKey][$times])) {
-          throw new Exception("ラック「{$rackKey}」の回数値「{$times}」が設定に存在しません");
+          throw new Exception("ラック「{$rackKey}」の換気回数値「{$times}」が設定に存在しません");
         }
 
         $totalDynamicPoint += $this->dynamicPoints['Q3'][$rackKey][$times];
