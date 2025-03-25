@@ -110,14 +110,10 @@ if (isset($routes[$path])) {
 
       // コンテンツの出力（1回だけ）
       echo $renderer->getContent();
-    } catch (Exception $e) {
+    } catch (Exception | InvalidArgumentException $e) {
       http_response_code(500);
 
-      // エラーメッセージを抽出
       $errorMessage = $e->getMessage();
-      if (strpos($errorMessage, 'Error storing message: ') === 0) {
-        $errorMessage = substr($errorMessage, 24);
-      }
 
       echo json_encode([
         'status' => 'error',
