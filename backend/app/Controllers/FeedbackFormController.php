@@ -43,10 +43,10 @@ class FeedbackFormController
       $result = $this->sheetsService->appendRow($rowData);
 
       if (!$result) {
-        throw new Exception('Failed to store message data');
+        throw new Exception('フィードバックの保存に失敗しました');
       }
     } catch (Exception $e) {
-      throw new Exception('Error storing message: ' . $e->getMessage());
+      throw new Exception($e->getMessage());
     }
   }
 }

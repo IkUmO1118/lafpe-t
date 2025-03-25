@@ -30,8 +30,7 @@ class PDFController
 
       return $pdfContent;
     } catch (Exception $e) {
-      error_log('Error generating PDF: ' . $e->getMessage());
-      throw new Exception("Error generating PDF");
+      throw new Exception($e->getMessage());
     }
   }
 }

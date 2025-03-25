@@ -52,11 +52,11 @@ class DiagnosisController
         'principleDP' => $principleDP->calculate(),
       ];
 
-      if (!$result) throw new Exception('Failed to store diagnosis data');
+      if (!$result) throw new Exception('診断に失敗しました');
 
       return $result;
     } catch (Exception $e) {
-      throw new Exception('Error storing message: ' . $e->getMessage());
+      throw new Exception($e->getMessage());
     }
   }
 
