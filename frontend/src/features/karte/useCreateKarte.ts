@@ -14,10 +14,11 @@ export function useCreateKarte() {
         key: "karte",
         value: `${JSON.stringify(data.diagnosis)}`,
       });
+      toast.success("診断を完了しました");
       navigate("/result");
     },
     onError: (err) => {
-      toast.error("全ての設問に回答してください");
+      toast.error(err.message);
       console.error(err.message);
     },
   });
