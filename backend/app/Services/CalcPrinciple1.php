@@ -31,12 +31,12 @@ class CalcPrinciple1 extends AbstractPrinciple
     ];
 
     if (!isset($resQ3) || empty($resQ3)) {
-      throw new \Exception("Empty data for Q3");
+      throw new \Exception("設問Q3のデータが入力されていません");
     }
 
     foreach ($requiredRacks as $rack) {
       if (!isset($resQ3[$rack])) {
-        throw new \Exception("Missing required racks in Q3");
+        throw new Exception("設問3に必要なラック情報「{$rack}」が不足しています");
       }
     }
 
@@ -49,22 +49,22 @@ class CalcPrinciple1 extends AbstractPrinciple
 
     foreach ($resQ3 as $rackKey => $rackValue) {
       if ($rackValue['isChecked'] === null) {
-        throw new \Exception("isChecked value cannot be null");
+        throw new \Exception("ラック「{$rackKey}」の選択状態が設定されていません");
       }
 
       if (isset($rackValue['isChecked']) && $rackValue['isChecked']) {
         $hasChecked = true;
         if (!isset($rackValue['per']) || $rackValue['per'] === null || !is_numeric($rackValue['per'])) {
-          throw new \Exception("Per value cannot be null and numeric for checked rack");
+          throw new \Exception("選択されたラック「{$rackKey}」の割合（per）は数値で入力してください");
         }
         if (!isset($rackValue['times']) || $rackValue['times'] === null || !is_numeric($rackValue['times'])) {
-          throw new \Exception("Times value cannot be null and numeric for checked rack");
+          throw new \Exception("選択されたラック「{$rackKey}」の回数（times）は数値で入力してください");
         }
 
         $times = (int)$rackValue['times'];
 
         if (!isset($this->dynamicPoints['Q3'][$rackKey][$times])) {
-          throw new Exception("Invalid value for rack {$rackKey}: times value {$times} not found in configuration");
+          throw new Exception("ラック「{$rackKey}」の回数値「{$times}」が設定に存在しません");
         }
 
         $totalDynamicPoint += $this->dynamicPoints['Q3'][$rackKey][$times];
@@ -72,7 +72,7 @@ class CalcPrinciple1 extends AbstractPrinciple
     }
 
     if (!$hasChecked) {
-      throw new Exception("At least one rack must be checked for Q3");
+      throw new Exception("設問Q3では少なくとも1つのラックを選択してください");
     }
 
     $this->addTotalScore($totalDynamicPoint);
@@ -83,14 +83,14 @@ class CalcPrinciple1 extends AbstractPrinciple
     $resQ13 = $this->res['Q13'];
 
     if (!isset($resQ13) || empty($resQ13)) {
-      throw new \Exception("Empty data for Q13");
+      throw new \Exception("設問Q13のデータが入力されていません");
     }
     if (count($resQ13) > 2) {
-      throw new \Exception("Too many values for Q13");
+      throw new \Exception("設問Q13の選択は2つまでです");
     }
     foreach ($resQ13 as $value) {
       if ($value === null || (!is_int($value) && !is_float($value))) {
-        throw new \Exception("Q13 array elements cannot be null and must be numeric");
+        throw new \Exception("設問Q13の選択値は数値である必要があります");
       }
     }
 
@@ -100,7 +100,7 @@ class CalcPrinciple1 extends AbstractPrinciple
       $resQ13,
       function ($acc, $cur) {
         if (!isset($this->weightings['Q13'][$cur])) {
-          throw new \Exception("Invalid weighting value for Q13: {$cur}");
+          throw new \Exception("設問Q13の選択値「{$cur}」は無効な値です");
         }
 
         return $acc + ($this->weightings['Q13'][$cur] ?? 0);
