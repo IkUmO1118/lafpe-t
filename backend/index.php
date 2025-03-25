@@ -112,8 +112,21 @@ if (isset($routes[$path])) {
       echo $renderer->getContent();
     } catch (Exception $e) {
       http_response_code(500);
-      print("Internal error, please contact the admin.<br>");
-      if ($DEBUG) print($e->getMessage());
+
+      // エラーメッセージを抽出
+      $errorMessage = $e->getMessage();
+      if (strpos($errorMessage, 'Error storing message: ') === 0) {
+        $errorMessage = substr($errorMessage, 24);
+      }
+
+      echo json_encode([
+        'status' => 'error',
+        'message' => $errorMessage
+      ]);
+
+      if ($DEBUG) {
+        error_log("Error: " . $e->getMessage());
+      }
     }
   } else {
     // メソッドがサポートされていない場合、405エラーを表示します。
