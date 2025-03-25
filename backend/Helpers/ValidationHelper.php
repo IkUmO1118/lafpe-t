@@ -15,8 +15,8 @@ class ValidationHelper
     $requiredQuestions = ['Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6', 'Q7', 'Q8', 'Q9', 'Q10', 'Q11', 'Q12', 'Q13'];
 
     foreach ($requiredQuestions as $question) {
-      if (!isset($data[$question])) {
-        throw new InvalidArgumentException("質問「{$question}」の回答が入力されていません。");
+      if (!array_key_exists($question, $data)) {
+        throw new InvalidArgumentException("設問{$question}の回答が入力されていません。");
       }
     }
 
