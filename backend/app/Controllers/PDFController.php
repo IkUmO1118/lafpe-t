@@ -5,8 +5,6 @@ namespace App\Controllers;
 use App\Services\PDFService;
 use Response\Render\JSONRenderer;
 use Exception;
-use Response\HTTPRenderer;
-use Response\Render\BinaryRenderer;
 
 class PDFController
 {
