@@ -11,7 +11,8 @@ export async function postDownloadPDF({
 }: postDownloadPDFProps) {
   try {
     const response = await fetch(
-      `${import.meta.env.VITE_DEV_API_URL}/api/download/pdf`,
+      `/api/download/pdf`,
+      // `${import.meta.env.VITE_DEV_API_URL}/api/download/pdf`,
       {
         method: "POST",
         headers: {

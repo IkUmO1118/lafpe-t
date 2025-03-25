@@ -1,7 +1,8 @@
 export async function postFeedback(message: string) {
   try {
     const response = await fetch(
-      `${import.meta.env.VITE_DEV_API_URL}/api/feedback`,
+      `/api/feedback`,
+      // `${import.meta.env.VITE_DEV_API_URL}/api/feedback`,
       {
         method: "POST",
         headers: {
