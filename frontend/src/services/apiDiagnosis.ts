@@ -2,7 +2,6 @@ import { ScoresState } from "../types/diagnosis";
 
 export async function postDiagnosis(data: ScoresState) {
   try {
-    console.log(data);
     const response = await fetch(
       `/api/diagnosis`,
       // `${import.meta.env.VITE_DEV_API_URL}/api/diagnosis`,
