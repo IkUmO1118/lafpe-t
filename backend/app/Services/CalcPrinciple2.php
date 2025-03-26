@@ -165,14 +165,16 @@ class CalcPrinciple2 extends AbstractPrinciple
   {
     $resQ5 = $this->res['Q5'];
 
-    if (!isset($resQ5) || $resQ5 === null) {
+    if (!isset($resQ5)) {
       throw new Exception("設問Q5の回答が入力されていません");
     }
-
+    if ($resQ5 === null) {
+      $this->addTotalScore(0);
+      return;
+    }
     if (!is_int($resQ5) && !is_float($resQ5)) {
       throw new Exception("設問Q5の回答は数値である必要があります");
     }
-
     if (!isset($this->weightings["Q5"][$resQ5])) {
       throw new Exception("設問Q5の選択値「{$resQ5}」は無効な値です");
     }
@@ -184,10 +186,13 @@ class CalcPrinciple2 extends AbstractPrinciple
   {
     $resQ6 = $this->res['Q6'];
 
-    if (!isset($resQ6) || $resQ6 === null) {
+    if (!isset($resQ6)) {
       throw new Exception("設問Q6の回答が入力されていません");
     }
-
+    if ($resQ6 === null) {
+      $this->addTotalScore(0);
+      return;
+    }
     if (!is_int($resQ6) && !is_float($resQ6)) {
       throw new Exception("設問Q6の回答は数値である必要があります");
     }
