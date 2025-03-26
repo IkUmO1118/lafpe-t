@@ -45,15 +45,12 @@ class CalcPrinciple1 extends AbstractPrinciple
 
     $this->addTotalScore($totalStaticPoint);
 
-    $hasChecked = false;
-
     foreach ($resQ3 as $rackKey => $rackValue) {
-      if ($rackValue['isChecked'] === null) {
+      if (!isset($rackValue['isChecked'])) {
         throw new \Exception("ラック「{$rackKey}」の選択状態が設定されていません");
       }
 
-      if (isset($rackValue['isChecked']) && $rackValue['isChecked']) {
-        $hasChecked = true;
+      if ($rackValue['isChecked']) {
         if (!isset($rackValue['per']) || $rackValue['per'] === null || !is_numeric($rackValue['per'])) {
           throw new \Exception("選択されたラック「{$rackKey}」の使用割合（per）は数値で入力してください");
         }
@@ -71,10 +68,6 @@ class CalcPrinciple1 extends AbstractPrinciple
       }
     }
 
-    if (!$hasChecked) {
-      throw new Exception("設問Q3では少なくとも1つのラックを選択してください");
-    }
-
     $this->addTotalScore($totalDynamicPoint);
   }
 
@@ -82,8 +75,12 @@ class CalcPrinciple1 extends AbstractPrinciple
   {
     $resQ13 = $this->res['Q13'];
 
-    if (!isset($resQ13) || empty($resQ13)) {
+    if (!isset($resQ13)) {
       throw new \Exception("設問Q13のデータが入力されていません");
+    }
+    if (empty($resQ13)) {
+      $this->addTotalScore(0);
+      return;
     }
     if (count($resQ13) > 2) {
       throw new \Exception("設問Q13の選択は2つまでです");

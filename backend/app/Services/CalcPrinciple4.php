@@ -28,8 +28,12 @@ class CalcPrinciple4 extends AbstractPrinciple
   {
     $resQ1 = $this->res['Q1'];
 
-    if (!isset($resQ1) || empty($resQ1)) {
+    if (!isset($resQ1)) {
       throw new \Exception("設問Q1のデータが入力されていません");
+    }
+    if (empty($resQ1)) {
+      $this->addTotalScore(0);
+      return;
     }
     if (count($resQ1) > 2) {
       throw new \Exception("設問Q1の選択は2つまでです");
@@ -61,8 +65,12 @@ class CalcPrinciple4 extends AbstractPrinciple
   {
     $resQ2 = $this->res['Q2'];
 
-    if (!isset($resQ2) || empty($resQ2)) {
-      throw new \Exception("設問Q2のデータが入力されていません");
+    if (!isset($resQ2)) {
+      throw new \Exception("設問2のデータが入力されていません");
+    }
+    if (empty($resQ2)) {
+      $this->addTotalScore(0);
+      return;
     }
     if (count($resQ2) > 2) {
       throw new \Exception("設問Q2の選択は2つまでです");
@@ -215,8 +223,12 @@ class CalcPrinciple4 extends AbstractPrinciple
   {
     $resQ7 = $this->res['Q7'];
 
-    if (!isset($resQ7) || empty($resQ7)) {
+    if (!isset($resQ7)) {
       throw new \Exception("設問Q7のデータが入力されていません");
+    }
+    if (empty($resQ7)) {
+      $this->addTotalScore(0);
+      return;
     }
     if (count($resQ7) > 2) {
       throw new \Exception("設問Q7の選択は2つまでです");
@@ -248,8 +260,12 @@ class CalcPrinciple4 extends AbstractPrinciple
   {
     $resQ10 = $this->res['Q10'];
 
-    if (!isset($resQ10) || empty($resQ10)) {
+    if (!isset($resQ10)) {
       throw new \Exception("設問Q10のデータが入力されていません");
+    }
+    if (empty($resQ10)) {
+      $this->addTotalScore(0);
+      return;
     }
     if (count($resQ10) > 4) {
       throw new \Exception("設問Q10の選択は4つまでです");

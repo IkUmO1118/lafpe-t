@@ -41,14 +41,16 @@ class CalcPrincipleDP extends AbstractPrinciple
   {
     $resQ11 = $this->res["Q11"];
 
-    if (!isset($resQ11) || empty($resQ11)) {
-      throw new Exception("設問Q11のデータが入力されていません");
+    if (!isset($resQ11)) {
+      throw new \Exception("設問Q11のデータが入力されていません");
     }
-
+    if (empty($resQ11)) {
+      $this->addTotalScore(0);
+      return;
+    }
     if (count($resQ11) > 4) {
       throw new Exception("設問Q11の選択は4つまでです");
     }
-
     foreach ($resQ11 as $value) {
       if ($value === null || (!is_int($value) && !is_float($value))) {
         throw new Exception("設問Q11の選択値は数値である必要があります");

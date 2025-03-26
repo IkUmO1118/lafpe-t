@@ -85,8 +85,12 @@ class CalcPrinciple5 extends AbstractPrinciple
   {
     $res12 = $this->res["Q12"];
 
-    if (!isset($res12) || empty($res12)) {
-      throw new Exception("設問Q12のデータが入力されていません");
+    if (!isset($resQ12)) {
+      throw new \Exception("設問Q12のデータが入力されていません");
+    }
+    if (empty($resQ12)) {
+      $this->addTotalScore(0);
+      return;
     }
     if (count($res12) > 15) {
       throw new Exception("設問Q12の選択は15個までです");
