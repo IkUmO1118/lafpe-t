@@ -98,7 +98,7 @@ export function QuestionWrapper({
                 {isUpdating ? <SpinnerMini /> : "更新する"}
               </Button>
               <Button variant="outlinePrimary" size="xs" onClick={onCancel}>
-                クリア
+                キャンセル
               </Button>
             </div>
           )}
