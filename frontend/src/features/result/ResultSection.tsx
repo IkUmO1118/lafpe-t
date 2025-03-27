@@ -4,12 +4,13 @@ import { useGetSession as getSession } from "../../hooks/useSession";
 import ResultHeader from "./ResultHeader";
 import ResultContent from "./ResultContent";
 import ResultNotData from "./ResultNotData";
+import ResultLoading from "./ResultLoading";
 
 function ResultSection() {
   const { addAllScores } = useScoresContext();
   const [refreshKey, setRefreshKey] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
-  // Use state to store the parsed data
   const [kartesData, setKartesData] = useState(null);
   const [answersData, setAnswersData] = useState(null);
 
@@ -24,6 +25,7 @@ function ResultSection() {
 
   // Get fresh data from session
   useEffect(() => {
+    setIsLoading(true);
     try {
       const rawKarteData = getSession("karte");
       const rawAnswerData = getSession("answer");
@@ -38,7 +40,9 @@ function ResultSection() {
         setAnswersData(parsedAnswerData);
         addAllScores(parsedAnswerData);
       }
+      setIsLoading(false);
     } catch (error) {
+      setIsLoading(false);
       console.error("Error parsing session data:", error);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -48,6 +52,10 @@ function ResultSection() {
   const refreshData = () => {
     setRefreshKey((prev) => prev + 1);
   };
+
+  if (isLoading) {
+    return <ResultLoading />;
+  }
 
   if (kartesData === null || answersData === null) {
     return <ResultNotData />;
