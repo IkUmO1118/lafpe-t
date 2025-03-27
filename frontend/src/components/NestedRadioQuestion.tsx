@@ -212,7 +212,7 @@ function NestedRadioQuestion({
                               onChange={() => handleVentilationChange(key, idx)}
                               className="h-4 w-4 rounded-full border-2 border-neutral-400 text-cyan-700 accent-cyan-700"
                               disabled={readOnly}
-                              required
+                              
                             />
                           </div>
                         </div>

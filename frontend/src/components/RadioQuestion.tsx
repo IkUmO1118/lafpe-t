@@ -32,7 +32,6 @@ function RadioQuestion({
             onChange={() => handleRadioChange(optionIndex)}
             className="h-4 w-4 rounded-full border-2 border-neutral-400 text-cyan-700 accent-cyan-700"
             disabled={readOnly}
-            required
           />
           <span className="text-neutral-700">{optionText as string}</span>
         </label>
