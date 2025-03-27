@@ -1,9 +1,10 @@
+import { getQuestion } from "../config/QuestionConfig";
 import { Button } from "./Button";
 import SpinnerMini from "./SpinnerMini";
 
 interface QuestionWrapperProps {
   title: string;
-  number?: number;
+  number: number;
   children: React.ReactNode;
   using: string;
   onEdit?: () => void;
@@ -35,7 +36,20 @@ export function QuestionWrapper({
         <p className="mb-4 border-b-2 border-dotted border-neutral-300 pb-2.5 text-base font-bold text-neutral-700">
           {title}
         </p>
-        <div className="mb-9">{children}</div>
+        <div className="mb-9 flex flex-col">
+          {children}
+          {number === 12 && (
+            <div className="mt-5">
+              {(getQuestion(11)?.["notes"] ?? []).map(
+                (note: string, idx: number) => (
+                  <p className="text-sm text-neutral-700" key={idx}>
+                    ※{idx + 1} &nbsp; {note}
+                  </p>
+                ),
+              )}
+            </div>
+          )}
+        </div>
       </div>
     );
   }
@@ -49,7 +63,20 @@ export function QuestionWrapper({
           設問{number}： {title}
         </p>
         <div className="relative">
-          <div className="w-3/4">{children}</div>
+          <div className="flex w-3/4 flex-col">
+            {children}
+            {number === 12 && (
+              <div className="mt-5">
+                {(getQuestion(11)?.["notes"] ?? []).map(
+                  (note: string, idx: number) => (
+                    <p className="text-sm text-neutral-700" key={idx}>
+                      ※{idx + 1} &nbsp;{note}
+                    </p>
+                  ),
+                )}
+              </div>
+            )}
+          </div>
 
           {readOnly && (
             <button

@@ -14,6 +14,7 @@ export interface Question {
   type: "radio" | "checkbox" | "nestedRadio";
   per?: { [key: string]: string };
   times?: { [key: string]: string };
+  notes?: string[];
 }
 
 export const getQuestion = (index: number): Question => {
