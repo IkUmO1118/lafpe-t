@@ -75,9 +75,6 @@ class CalcPrinciple1 extends AbstractPrinciple
   {
     $resQ13 = $this->res['Q13'];
 
-    if (!isset($resQ13)) {
-      throw new \Exception("設問Q13のデータが入力されていません");
-    }
     if (empty($resQ13)) {
       $this->addTotalScore(0);
       return;

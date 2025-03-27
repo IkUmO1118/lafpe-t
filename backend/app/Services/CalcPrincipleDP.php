@@ -22,9 +22,6 @@ class CalcPrincipleDP extends AbstractPrinciple
   {
     $resQ4 = $this->res['Q4'];
 
-    if (!isset($resQ4)) {
-      throw new Exception("設問Q4の回答が入力されていません");
-    }
     if ($resQ4 === null) {
       $this->addTotalScore(0);
       return;
