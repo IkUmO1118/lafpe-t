@@ -22,14 +22,16 @@ class CalcPrincipleDP extends AbstractPrinciple
   {
     $resQ4 = $this->res['Q4'];
 
-    if (!isset($resQ4) || $resQ4 === null) {
+    if (!isset($resQ4)) {
       throw new Exception("設問Q4の回答が入力されていません");
     }
-
+    if ($resQ4 === null) {
+      $this->addTotalScore(0);
+      return;
+    }
     if (!is_int($resQ4) && !is_float($resQ4)) {
       throw new Exception("設問Q4の回答は数値である必要があります");
     }
-
     if (!isset($this->weightings["Q4"][$resQ4])) {
       throw new Exception("設問Q4の選択値「{$resQ4}」は無効な値です");
     }
