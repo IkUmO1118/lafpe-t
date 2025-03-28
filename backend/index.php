@@ -2,6 +2,9 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
+
+use Helpers\Settings;
+
 spl_autoload_extensions(".php");
 spl_autoload_register();
 
@@ -10,7 +13,6 @@ ini_set('display_errors', '0');
 ini_set('log_errors', '1');
 ini_set('error_log', __DIR__ . '/error.log');
 
-use Helpers\Settings;
 
 $settings = new Settings();
 
@@ -64,7 +66,6 @@ if (strpos($path, '..') !== false || !preg_match('/^api\/[a-zA-Z0-9\-_\/]+$/', $
 // リクエストメソッドの取得
 $method = $_SERVER['REQUEST_METHOD'];
 
-// デバッグ用のログ追加
 if ($DEBUG) {
   error_log("Request Path: " . $path . PHP_EOL);
   error_log("Request Method: " . $method);
@@ -77,14 +78,12 @@ if (isset($routes[$path])) {
   // ルートのメソッドが存在するかチェックする
   if (is_array($route) && isset($route[$method])) {
     try {
-      // リクエストボディのデバッグログ
       if ($DEBUG) {
         error_log("Request Body: " . file_get_contents('php://input'));
       }
 
       $renderer = $route[$method]();
 
-      // レスポンスのデバッグログ
       if ($DEBUG) {
         error_log("Response: " . $renderer->getContent());
       }
@@ -99,7 +98,6 @@ if (isset($routes[$path])) {
           header("{$name}: {$sanitized_value}");
         } else {
           // ヘッダー設定に失敗した場合、ログに記録するか処理します。
-          // エラー処理によっては、例外をスローするか、デフォルトのまま続行することもできます。
           error_log("Failed setting header - original name: '$name', sanitized name: '$sanitized_name', original value: '$value', sanitized value: '$sanitized_value'");
           http_response_code(500);
           if ($DEBUG) print("Failed setting header - original: '$value', sanitized: '$sanitized_value'");
@@ -111,7 +109,6 @@ if (isset($routes[$path])) {
       echo $renderer->getContent();
     } catch (Exception | InvalidArgumentException $e) {
       http_response_code(500);
-
       $errorMessage = $e->getMessage();
 
       echo json_encode([
@@ -124,7 +121,6 @@ if (isset($routes[$path])) {
       }
     }
   } else {
-    // メソッドがサポートされていない場合、405エラーを表示します。
     http_response_code(405);
     echo json_encode([
       'error' => 'Method Not Allowed',
@@ -132,7 +128,6 @@ if (isset($routes[$path])) {
     ]);
   }
 } else {
-  // マッチするルートがない場合、404エラーを表示します。
   http_response_code(404);
   echo json_encode([
     'error' => 'Not Found',
