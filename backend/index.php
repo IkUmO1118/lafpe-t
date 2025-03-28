@@ -3,10 +3,17 @@
 require __DIR__ . '/vendor/autoload.php';
 
 
-use Helpers\Settings;
 
 spl_autoload_extensions(".php");
 spl_autoload_register();
+
+if (!file_exists(__DIR__ . '/.env')) {
+  throw new Exception('.env file not found');
+}
+
+use Helpers\Settings;
+
+$settings = new Settings();
 
 error_reporting(E_ALL);
 ini_set('display_errors', '0');
@@ -14,7 +21,6 @@ ini_set('log_errors', '1');
 ini_set('error_log', __DIR__ . '/error.log');
 
 
-$settings = new Settings();
 
 $isProd = ($_SERVER['SERVER_NAME'] === $settings->env('PROD_ORIGIN') || $settings->env('APP_ENV') === 'production');
 
