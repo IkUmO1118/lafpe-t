@@ -15,9 +15,17 @@ function ResultSection() {
   const [answersData, setAnswersData] = useState(null);
 
   const contentRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
 
   const scrollToContent = () => {
     contentRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
+
+  const scrollToHeader = () => {
+    headerRef.current?.scrollIntoView({
       behavior: "smooth",
       block: "start",
     });
@@ -50,6 +58,7 @@ function ResultSection() {
 
   // Function to force refresh data
   const refreshData = () => {
+    scrollToHeader();
     setRefreshKey((prev) => prev + 1);
   };
 
@@ -67,6 +76,7 @@ function ResultSection() {
         answersData={answersData}
         kartesData={kartesData}
         scrollToContent={scrollToContent}
+        ref={headerRef}
       />
       <ResultContent onDataUpdated={refreshData} ref={contentRef} />
     </section>

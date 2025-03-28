@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { ForwardedRef, useRef } from "react";
 import html2canvas from "html2canvas";
 import PrincipleRadarChart from "../../components/Charts";
 import { Button } from "../../components/Button";
@@ -11,12 +11,14 @@ interface ResultHeaderProps {
   answersData: ScoresState;
   kartesData: PrincipleProps;
   scrollToContent: () => void;
+  ref: ForwardedRef<HTMLDivElement>;
 }
 
 function ResultHeader({
   answersData,
   kartesData,
   scrollToContent,
+  ref,
 }: ResultHeaderProps) {
   const chartRef = useRef<HTMLDivElement>(null);
   const { downloadPDF, isDownloading } = useDownloadPDF();
@@ -61,7 +63,10 @@ function ResultHeader({
   }
 
   return (
-    <div className="flex w-3/5 flex-col items-center gap-8 self-center pt-20 pb-14">
+    <div
+      ref={ref}
+      className="flex w-3/5 flex-col items-center gap-8 self-center pt-20 pb-14"
+    >
       <h1 className="text-5xl font-black text-neutral-900">
         施設性能の診断結果
       </h1>
