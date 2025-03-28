@@ -1,46 +1,45 @@
 <?php
 
-// 外部ライブラリの自動読み込み
 require __DIR__ . '/vendor/autoload.php';
 
-// オートローダーの設定
 spl_autoload_extensions(".php");
 spl_autoload_register();
 
-// すべてのエラーを報告
 error_reporting(E_ALL);
-// ユーザー画面にエラー表示を行わない
 ini_set('display_errors', '0');
-// エラーをログに記録
 ini_set('log_errors', '1');
-// エラーログの保存先を指定
 ini_set('error_log', __DIR__ . '/error.log');
 
+use Helpers\Settings;
 
-// コンテンツセキュリティポリシー: 自身のオリジンからのみリソースを読み込む
+$settings = new Settings();
+
+$isProd = ($_SERVER['SERVER_NAME'] === $settings->env('PROD_ORIGIN') || $settings->env('APP_ENV') === 'production');
+
+$DEBUG = $isProd ? false : true;
+
+$corsOrigin = $isProd ? $settings->env('PROD_ORIGIN') : $settings->env('DEV_ORIGIN');
+
+// ===== セキュリティヘッダー =====
 header("Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'self'");
-// MIMEタイプスニッフィングの防止
-header("X-Content-Type-Options: nosniff");
-// クリックジャッキング対策：iframe等での埋め込み禁止
-header("X-Frame-Options: DENY");
-// ブラウザ内蔵のXSSフィルタ有効化（検出時はレンダリングをブロック）
 header("X-XSS-Protection: 1; mode=block");
-// HTTPSを強制する HSTS：1年間有効、サブドメインも対象、preloadリスト登録可能
+header("X-Content-Type-Options: nosniff");
+header("X-Frame-Options: DENY");
 header("Strict-Transport-Security: max-age=31536000; includeSubDomains; preload");
-// リファラポリシー：同一オリジンでは完全なURL、クロスオリジンではオリジンのみ送信
 header("Referrer-Policy: strict-origin-when-cross-origin");
-// キャッシュの無効化（2重指定しているが、意図的に強化）
-header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-header("Pragma: no-cache");
+if ($isProd) {
+  header("Strict-Transport-Security: max-age=31536000; includeSubDomains; preload");
+}
 
-// ※ Dev : http://localhost:5173 Prod : https://example.com
-header('Access-Control-Allow-Origin: http://localhost:5173');
+// ===== CORS設定 =====
+header("Access-Control-Allow-Origin: {$corsOrigin}");
 header('Access-Control-Allow-Methods: POST, PUT, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type');
 header('Access-Control-Allow-Credentials: true');
 
-// デバッグ用のフラグ
-$DEBUG = true;
+// ===== キャッシュ設定 =====
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Pragma: no-cache");
 
 // タイムゾーンを日本時間に設定
 date_default_timezone_set('Asia/Tokyo');
