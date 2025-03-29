@@ -9,12 +9,8 @@ export async function postDownloadPDF({
   questionAnswers,
   chartImage,
 }: postDownloadPDFProps) {
-  const url =
-    import.meta.env.VITE_APP_ENV === "production"
-      ? import.meta.env.VITE_PROD_API_URL
-      : import.meta.env.VITE_DEV_API_URL;
   try {
-    const response = await fetch(`${url}api/download/pdf`, {
+    const response = await fetch(`/api/download/pdf`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

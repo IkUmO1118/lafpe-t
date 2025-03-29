@@ -1,12 +1,8 @@
 import { ScoresState } from "../types/diagnosis";
 
 export async function postDiagnosis(data: ScoresState) {
-  const url =
-    import.meta.env.VITE_APP_ENV === "production"
-      ? import.meta.env.VITE_PROD_API_URL
-      : import.meta.env.VITE_DEV_API_URL;
   try {
-    const response = await fetch(`${url}api/diagnosis`, {
+    const response = await fetch(`/api/diagnosis`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
