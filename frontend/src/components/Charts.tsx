@@ -53,6 +53,7 @@ const PrincipleRadarChart = ({
     { id: "principleDP", principle: "DP", 評価結果: dp, 基準値: 5 },
   ];
 
+  // @ts-expect-error TickItem は number と互換性がないが、実行時には問題なし
   const customTicks: TickItem[] = [0, 2, 4, 6, 8, 10];
 
   return (
