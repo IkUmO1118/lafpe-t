@@ -1,18 +1,24 @@
+import { lazy, Suspense } from "react";
 import { BrowserRouter, Navigate, Route } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Routes } from "react-router";
 
-import Home from "./pages/Home";
-import Result from "./pages/Result";
-import PageNotFound from "./pages/PageNotFound";
-import Diagnosis from "./pages/Diagnosis";
 import AppLayout from "./layouts/AppLayout";
-import Feedback from "./pages/Feedback";
 import ScrollToTop from "./components/ScrollToTop";
-
 import { Toaster } from "react-hot-toast";
-import ScoresContextProvider from "./context/ScoresContextProvider";
+
+// Lazy load pages
+const Home = lazy(() => import("./pages/Home"));
+const Result = lazy(() => import("./pages/Result"));
+const PageNotFound = lazy(() => import("./pages/PageNotFound"));
+const Diagnosis = lazy(() => import("./pages/Diagnosis"));
+const Feedback = lazy(() => import("./pages/Feedback"));
+
+// Lazy load context provider
+const ScoresContextProvider = lazy(
+  () => import("./context/ScoresContextProvider"),
+);
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -26,22 +32,24 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />
-      <ScoresContextProvider>
-        <BrowserRouter>
-          <ScrollToTop />
-          <Routes>
-            <Route element={<AppLayout />}>
-              <Route index element={<Navigate replace to="home" />} />
-              <Route path="home" element={<Home />} />
-              <Route path="feedback" element={<Feedback />} />
-              <Route path="result" element={<Result />} />
-              <Route path="*" element={<PageNotFound />} />
-            </Route>
+      <Suspense fallback={<div>Loading...</div>}>
+        <ScoresContextProvider>
+          <BrowserRouter>
+            <ScrollToTop />
+            <Routes>
+              <Route element={<AppLayout />}>
+                <Route index element={<Navigate replace to="home" />} />
+                <Route path="home" element={<Home />} />
+                <Route path="feedback" element={<Feedback />} />
+                <Route path="result" element={<Result />} />
+                <Route path="*" element={<PageNotFound />} />
+              </Route>
 
-            <Route path="diagnosis" element={<Diagnosis />} />
-          </Routes>
-        </BrowserRouter>
-      </ScoresContextProvider>
+              <Route path="diagnosis" element={<Diagnosis />} />
+            </Routes>
+          </BrowserRouter>
+        </ScoresContextProvider>
+      </Suspense>
 
       <Toaster
         position="top-right"
