@@ -9,18 +9,18 @@ export async function postDownloadPDF({
   questionAnswers,
   chartImage,
 }: postDownloadPDFProps) {
+  const url =
+    import.meta.env.VITE_APP_ENV === "production"
+      ? import.meta.env.VITE_PROD_API_URL
+      : import.meta.env.VITE_DEV_API_URL;
   try {
-    const response = await fetch(
-      `/api/download/pdf`,
-      // `${import.meta.env.VITE_DEV_API_URL}/api/download/pdf`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ questionAnswers, chartImage }),
+    const response = await fetch(`${url}api/download/pdf`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
       },
-    );
+      body: JSON.stringify({ questionAnswers, chartImage }),
+    });
 
     if (!response.ok) {
       // レスポンスボディを取得

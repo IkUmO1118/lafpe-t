@@ -1,20 +1,20 @@
 import { ScoresState } from "../types/diagnosis";
 
 export async function postDiagnosis(data: ScoresState) {
+  const url =
+    import.meta.env.VITE_APP_ENV === "production"
+      ? import.meta.env.VITE_PROD_API_URL
+      : import.meta.env.VITE_DEV_API_URL;
   try {
-    const response = await fetch(
-      `/api/diagnosis`,
-      // `${import.meta.env.VITE_DEV_API_URL}/api/diagnosis`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-        cache: "no-cache",
-        credentials: "include",
+    const response = await fetch(`${url}api/diagnosis`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
       },
-    );
+      body: JSON.stringify(data),
+      cache: "no-cache",
+      credentials: "include",
+    });
 
     if (!response.ok) {
       // レスポンスボディを取得
