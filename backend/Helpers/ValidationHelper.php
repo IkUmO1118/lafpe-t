@@ -49,7 +49,7 @@ class ValidationHelper
     $message = trim($value["message"]);
 
     if (mb_strlen($message, 'UTF-8') > 255) {
-      throw new InvalidArgumentException('Tメッセージは255文字以内で入力してください');
+      throw new InvalidArgumentException('メッセージは255文字以内で入力してください');
     }
 
     $message = preg_replace('/[\x00-\x1F\x7F]/u', '', $message);
