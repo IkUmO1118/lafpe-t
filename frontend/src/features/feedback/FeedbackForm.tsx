@@ -24,9 +24,9 @@ function FeedbackForm() {
   return (
     <div className="flex h-full flex-col gap-9 px-24">
       <div className="relative mt-3 flex flex-col">
-        <h1 className="text-base text-neutral-800">ご意見・感想など</h1>
+        <h1 className="text-base text-neutral-800">ご意見・ご感想など</h1>
         <div className="mt-3 w-full border-b-2 border-neutral-300"></div>
-        <div className="absolute bottom-0 left-0 w-32 border-b-2 border-cyan-800"></div>
+        <div className="absolute bottom-0 left-0 w-36 border-b-2 border-cyan-800"></div>
       </div>
 
       <form className="group relative min-h-[450px] flex-1">
