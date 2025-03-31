@@ -27,7 +27,7 @@ class FeedbackFormController
     try {
       // 必須フィールドのチェック
       if (!isset($this->data['message']) || empty($this->data['message'])) {
-        throw new Exception('Message is required');
+        throw new Exception('メッセージが必要です');
       }
 
       // 現在のタイムスタンプを取得
