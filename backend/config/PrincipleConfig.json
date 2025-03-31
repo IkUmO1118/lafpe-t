@@ -475,7 +475,7 @@
 
   "principle5": {
     "Q3": {
-      "staticPoint": 4,
+      "staticPoint": 2,
       "weighting": {
         "openRack": {
           "rackWeighting": 1,
