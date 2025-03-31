@@ -22,7 +22,7 @@ abstract class AbstractPrinciple implements Principle
 
     foreach (static::$questionList as $questionKey) {
       if (!array_key_exists($questionKey, $this->res)) {
-        throw new Exception("Missing key in input array: {$questionKey}");
+        throw new Exception("必要な設問が欠けています: {$questionKey}");
       }
     }
 

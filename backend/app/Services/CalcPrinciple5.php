@@ -12,8 +12,14 @@ class CalcPrinciple5 extends AbstractPrinciple
 
   public function calculate(): float
   {
+    error_log("start Q3");
     $this->calcQ3();
+    error_log($this->getTotalScore());
+    error_log("end Q3");
+    error_log("start Q12");
     $this->calcQ12();
+    error_log($this->getTotalScore());
+    error_log("end Q12");
 
     return $this->getTotalScore();
   }
@@ -72,23 +78,24 @@ class CalcPrinciple5 extends AbstractPrinciple
       }
     }
 
+    error_log("Q3: " . $totalWeighting * $totalStaticPoint);
     $this->addTotalScore($totalWeighting * $totalStaticPoint);
   }
 
   private function calcQ12(): void
   {
-    $res12 = $this->res["Q12"];
+    $resQ12 = $this->res["Q12"];
 
     if (empty($resQ12)) {
       $this->addTotalScore(0);
       return;
     }
-    if (count($res12) > 15) {
+    if (count($resQ12) > 15) {
       throw new Exception("設問Q12の選択は15個までです");
     }
 
     $validValues = [];
-    foreach ($res12 as $value) {
+    foreach ($resQ12 as $value) {
       if ($value === null || (!is_int($value) && !is_float($value))) {
         throw new Exception("設問Q12の選択値は数値である必要があります");
       }
@@ -102,8 +109,9 @@ class CalcPrinciple5 extends AbstractPrinciple
 
     $uniqueValues = array_keys($validValues);
 
-    $scoreMap = [0, 1, 3, 4, 6];
+    $scoreMap = [0, 0.5, 1.5, 2, 3];
 
-    $this->addTotalScore($scoreMap[min(count($uniqueValues), 4)]);
+    error_log("Q12: " . $scoreMap[min(count($uniqueValues), 4)] + 5);
+    $this->addTotalScore($scoreMap[min(count($uniqueValues), 4)] + 5);
   }
 }
