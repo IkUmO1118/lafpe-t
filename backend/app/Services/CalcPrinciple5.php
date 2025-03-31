@@ -12,14 +12,8 @@ class CalcPrinciple5 extends AbstractPrinciple
 
   public function calculate(): float
   {
-    error_log("start Q3");
     $this->calcQ3();
-    error_log($this->getTotalScore());
-    error_log("end Q3");
-    error_log("start Q12");
     $this->calcQ12();
-    error_log($this->getTotalScore());
-    error_log("end Q12");
 
     return $this->getTotalScore();
   }
@@ -78,7 +72,6 @@ class CalcPrinciple5 extends AbstractPrinciple
       }
     }
 
-    error_log("Q3: " . $totalWeighting * $totalStaticPoint);
     $this->addTotalScore($totalWeighting * $totalStaticPoint);
   }
 
@@ -111,7 +104,6 @@ class CalcPrinciple5 extends AbstractPrinciple
 
     $scoreMap = [0, 0.5, 1.5, 2, 3];
 
-    error_log("Q12: " . $scoreMap[min(count($uniqueValues), 4)] + 5);
     $this->addTotalScore($scoreMap[min(count($uniqueValues), 4)] + 5);
   }
 }
