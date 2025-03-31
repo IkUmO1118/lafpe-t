@@ -18,15 +18,23 @@ export async function postDownloadPDF({
       body: JSON.stringify({ questionAnswers, chartImage }),
     });
 
-    const responseText = await response.text();
-
     if (!response.ok) {
-      const errorData = JSON.parse(responseText);
-      throw new Error(errorData.message);
+      // エラーの場合のみレスポンスをテキストとして取得
+      const responseText = await response.text();
+
+      try {
+        // JSONとしてパースを試みる
+        const errorData = JSON.parse(responseText);
+        throw new Error(
+          errorData.message || `エラーが発生しました: ${response.status}`,
+        );
+      } catch {
+        // JSONパースに失敗した場合はレスポンスのテキストをそのまま使用
+        throw new Error(`エラーが発生しました: ${response.status}`);
+      }
     }
 
-    const result = JSON.parse(responseText);
-    return result;
+    return response;
   } catch (error) {
     console.error("Failed to post feedback:", error);
     throw new Error(
