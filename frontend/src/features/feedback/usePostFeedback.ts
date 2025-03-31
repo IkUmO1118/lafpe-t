@@ -8,8 +8,10 @@ export function usePostFeedback() {
     onSuccess: () => {
       toast.success("フィードバックを送信しました");
     },
-    onError: () => {
-      toast.error("フィードバックの送信に失敗しました。");
+    onError: (error: Error) => {
+      const errorMessage =
+        error.message || "フィードバックの送信に失敗しました。";
+      toast.error(errorMessage);
     },
   });
 

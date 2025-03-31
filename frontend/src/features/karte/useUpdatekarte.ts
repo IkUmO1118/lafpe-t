@@ -17,9 +17,9 @@ export function useUpdateKarte() {
       toast.success("診断結果を更新しました");
       navigate("/result");
     },
-    onError: (err) => {
-      toast.error(err.message);
-      console.error(err.message);
+    onError: (error: Error) => {
+      const errorMessage = error.message || "診断の更新に失敗しました";
+      toast.error(errorMessage);
     },
   });
 

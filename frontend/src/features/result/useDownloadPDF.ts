@@ -8,8 +8,9 @@ export function useDownloadPDF() {
     onSuccess: () => {
       toast.success("ダウンロードが完了しました");
     },
-    onError: () => {
-      toast.error("ダウンロードに失敗しました");
+    onError: (error: Error) => {
+      const errorMessage = error.message || "ダウンロードに失敗しました";
+      toast.error(errorMessage);
     },
   });
 
