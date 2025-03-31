@@ -116,6 +116,22 @@ class PDFService
       'isolator' => 'アイソレーター'
     ];
 
+    $anyRackSelected = false;
+    foreach ($rackTypes as $rackKey => $rackName) {
+      if (isset($answer[$rackKey]) && $answer[$rackKey]['isChecked']) {
+        $anyRackSelected = true;
+        break;
+      }
+    }
+
+    // If no rack is selected, show the "no data" message
+    if (!$anyRackSelected) {
+      $pdf->Cell(3, 5, '', 0);
+      $pdf->Cell(0, 5, '※ 選択されたデータがありません', 0, 1, 'L');
+      $pdf->Ln(5);
+      return;
+    }
+
     foreach ($rackTypes as $rackKey => $rackName) {
       if (isset($answer[$rackKey]) && $answer[$rackKey]['isChecked']) {
         $pdf->Cell(3, 5, '', 0);
