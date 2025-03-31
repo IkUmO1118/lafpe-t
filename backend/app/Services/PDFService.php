@@ -62,7 +62,7 @@ class PDFService
         $pdf->MultiCell(0, 7, $qKey . '. ' . $questionData['title'], 0, 'L');
         $pdf->SetFont('kozminproregular', '', 10);
 
-        if (empty($answer) || (is_array($answer) && count($answer) === 0)) {
+        if ($answer === null || $answer === '' || (is_array($answer) && count($answer) === 0)) {
           $pdf->Cell(3, 5, '', 0);
           $pdf->Cell(0, 5, '※ 選択されたデータがありません', 0, 1, 'L');
         } elseif (is_array($answer) && isset($questionData['option'])) {
