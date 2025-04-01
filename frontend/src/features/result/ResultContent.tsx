@@ -118,6 +118,7 @@ function ResultContent({ onDataUpdated, ref }: ResultContentProps) {
                 onCancel={handleCancel}
                 isUpdating={isUpdating}
                 isChanged={isChanged}
+                type="result"
               />
             </div>
           );

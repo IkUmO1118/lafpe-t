@@ -63,6 +63,7 @@ function DiagnosisForm({ index, setIndex }: DiagnosisFormProps) {
         perOptions={question.per}
         timesOptions={question.times}
         index={index}
+        type="diagnosis"
       />
 
       <Button
