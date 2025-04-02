@@ -6,6 +6,7 @@ interface RadioQuestionProps {
   onChange: (newValue: RadioScore) => void;
   name: string;
   readOnly?: boolean;
+  type?: string;
 }
 
 function RadioQuestion({
@@ -14,6 +15,7 @@ function RadioQuestion({
   onChange,
   name = "radio",
   readOnly = false,
+  type,
 }: RadioQuestionProps) {
   const handleRadioChange = (optionIndex: number) => {
     if (readOnly) return;
@@ -28,7 +30,9 @@ function RadioQuestion({
             type="radio"
             id={`option-${name}-${key}`}
             name={name}
-            checked={value == optionIndex}
+            checked={
+              type === "result" ? value == optionIndex : value === optionIndex
+            }
             onChange={() => handleRadioChange(optionIndex)}
             className="h-4 w-4 rounded-full border-2 border-neutral-400 text-cyan-700 accent-cyan-700"
             disabled={readOnly}

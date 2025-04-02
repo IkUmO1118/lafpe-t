@@ -27,6 +27,7 @@ function ResultContent({ onDataUpdated, ref }: ResultContentProps) {
   const { isUpdating, updateKarte } = useUpdateKarte();
   const questionIndexes = Array.from({ length: 13 }, (_, i) => i);
   const [isChanged, setIsChanged] = useState<boolean>(false);
+  const MAXVALUE = 999;
 
   // メモ化したhandleCancelをuseOutsideClickに渡す
   const handleCancel = useCallback(() => {
@@ -41,7 +42,8 @@ function ResultContent({ onDataUpdated, ref }: ResultContentProps) {
     setEditingQuestion(questionNumber);
     setEditedValues({
       ...editedValues,
-      [questionNumber]: scores[questionNumber as keyof typeof scores],
+      [questionNumber]:
+        scores[questionNumber as keyof typeof scores] ?? MAXVALUE,
     });
     setIsChanged(false);
   };
@@ -93,8 +95,8 @@ function ResultContent({ onDataUpdated, ref }: ResultContentProps) {
           const questionNumber = `Q${index + 1}`;
           const isEditing = editingQuestion === questionNumber;
           const value = isEditing
-            ? editedValues[questionNumber]
-            : scores[questionNumber as keyof typeof scores] || [];
+            ? (editedValues[questionNumber] ?? MAXVALUE)
+            : (scores[questionNumber as keyof typeof scores] ?? MAXVALUE);
 
           return (
             <div
