@@ -1,6 +1,6 @@
 function ToolBanner() {
   return (
-    <div className="flex flex-col items-center justify-center gap-4 bg-slate-100 py-16 text-neutral-800">
+    <div className="flex flex-col items-center justify-center gap-8 bg-slate-100 py-16 text-neutral-800">
       <h3 className="text-[28px] font-medium">
         実験動物施設性能診断ツールとは
       </h3>
