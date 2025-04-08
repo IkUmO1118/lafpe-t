@@ -7,6 +7,7 @@ import { Routes } from "react-router";
 import AppLayout from "./layouts/AppLayout";
 import ScrollToTop from "./components/ScrollToTop";
 import { Toaster } from "react-hot-toast";
+import Spinner from "./components/Spinner";
 
 // Lazy load pages
 const Home = lazy(() => import("./pages/Home"));
@@ -32,7 +33,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Spinner />}>
         <ScoresContextProvider>
           <BrowserRouter>
             <ScrollToTop />
