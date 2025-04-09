@@ -204,19 +204,23 @@ class CalcPrinciple2 extends AbstractPrinciple
 
     $totalStaticPoint = $this->staticPoints['Q7'] ?? 0;
 
-    $totalWeighting = array_reduce(
-      $resQ7,
-      function ($acc, $cur) {
-        if (!isset($this->weightings['Q7'][$cur])) {
-          throw new \Exception("設問Q7の選択値「{$cur}」は無効な値です");
-        }
+    // 最大値を0で初期化
+    $maxWeighting = 0;
 
-        return $acc + ($this->weightings['Q7'][$cur] ?? 0);
-      },
-      0
-    );
+    // 各選択値の重み付けをループし、最大値を見つける
+    foreach ($resQ7 as $cur) {
+      if (!isset($this->weightings['Q7'][$cur])) {
+        throw new \Exception("設問Q7の選択値「{$cur}」は無効な値です");
+      }
 
-    $this->addTotalScore($totalStaticPoint * $totalWeighting);
+      $currentWeighting = $this->weightings['Q7'][$cur] ?? 0;
+      if ($currentWeighting > $maxWeighting) {
+        $maxWeighting = $currentWeighting;
+      }
+    }
+
+    // 最大値を使ってスコアを計算
+    $this->addTotalScore($totalStaticPoint * $maxWeighting);
   }
 
   private function calcQ8(): void
