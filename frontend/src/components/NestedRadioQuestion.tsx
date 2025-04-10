@@ -47,8 +47,8 @@ function NestedRadioQuestion({
       ...currentValue,
       [optionKey]: {
         isChecked: checked,
-        per: per ?? 0,
-        times: times ?? 0,
+        per: per !== undefined ? per : undefined,
+        times: times !== undefined ? times : undefined,
       },
     });
   };
@@ -212,7 +212,6 @@ function NestedRadioQuestion({
                               onChange={() => handleVentilationChange(key, idx)}
                               className="h-4 w-4 rounded-full border-2 border-neutral-400 text-cyan-700 accent-cyan-700"
                               disabled={readOnly}
-                              
                             />
                           </div>
                         </div>
