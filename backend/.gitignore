@@ -1,4 +1,4 @@
 vendor/
 .env
-error.log
+log/
 config/credentials
