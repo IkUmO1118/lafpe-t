@@ -36,12 +36,12 @@ class CalcPrinciple3 extends AbstractPrinciple
     ];
 
     if (!isset($resQ3) || empty($resQ3)) {
-      throw new Exception("設問Q3のデータが入力されていません");
+      throw new Exception("設問Q3：データが入力されていません");
     }
 
     foreach ($requiredRacks as $rack) {
       if (!isset($resQ3[$rack])) {
-        throw new \Exception("設問3に必要なラック情報「{$rack}」が不足しています");
+        throw new \Exception("設問3：必要なラック情報「{$rack}」が不足しています");
       }
     }
 
@@ -50,23 +50,23 @@ class CalcPrinciple3 extends AbstractPrinciple
 
     foreach ($resQ3 as $rackKey => $rackValue) {
       if (!isset($rackValue['isChecked'])) {
-        throw new \Exception("ラック「{$rackKey}」の選択状態が設定されていません");
+        throw new \Exception("設問3：ラック「{$rackKey}」の選択状態が設定されていません");
       }
 
       if ($rackValue['isChecked']) {
 
         if (!isset($rackValue['per']) || $rackValue['per'] === null || (!is_int($rackValue['per']) && !is_float($rackValue['per']))) {
-          throw new Exception("選択されたラック「{$rackKey}」の使用割合（per）は数値で入力してください");
+          throw new Exception("設問3：選択されたラック「{$rackKey}」の使用割合を入力してください");
         }
         if (!isset($rackValue['times']) || $rackValue['times'] === null || (!is_int($rackValue['times']) && !is_float($rackValue['times']))) {
-          throw new Exception("選択されたラック「{$rackKey}」の換気回数（times）は数値で入力してください");
+          throw new Exception("設問3：選択されたラック「{$rackKey}」の換気回数を入力してください");
         }
 
         $per = $rackValue['per'];
         $times = $rackValue['times'];
 
         if (!isset($this->weightings['Q3'][$rackKey]['perWeighting'][$per]) || !isset($this->weightings['Q3'][$rackKey]['timesWeighting'][$times])) {
-          throw new Exception("ラック「{$rackKey}」の換気回数値「{$times}」または使用割合「{$per}」が設定に存在しません");
+          throw new Exception("設問3：ラック「{$rackKey}」の換気回数または使用割合が設定に存在しません");
         }
 
         $rackWeight  = $this->weightings['Q3'][$rackKey]['rackWeighting'] ?? 0;
@@ -89,11 +89,10 @@ class CalcPrinciple3 extends AbstractPrinciple
       return;
     }
     if (!is_int($resQ4) && !is_float($resQ4)) {
-      throw new Exception("設問Q4の回答は数値である必要があります");
+      throw new Exception("設問Q4：選択された値が無効です");
     }
-
     if (!isset($this->weightings["Q4"][$resQ4])) {
-      throw new Exception("設問Q4の選択値「{$resQ4}」は無効な値です");
+      throw new Exception("設問Q4：正しい選択肢から選んでください");
     }
 
     $this->addTotalScore($this->staticPoints["Q4"] * $this->weightings["Q4"][$resQ4]);
@@ -108,10 +107,10 @@ class CalcPrinciple3 extends AbstractPrinciple
       return;
     }
     if (!is_int($resQ5) && !is_float($resQ5)) {
-      throw new Exception("設問Q5の回答は数値である必要があります");
+      throw new Exception("設問Q5：選択された値が無効です");
     }
     if (!isset($this->weightings["Q5"][$resQ5])) {
-      throw new Exception("設問Q5の選択値「{$resQ5}」は無効な値です");
+      throw new Exception("設問Q5：正しい選択肢から選んでください");
     }
 
     $this->addTotalScore($this->staticPoints["Q5"] * $this->weightings["Q5"][$resQ5]);
@@ -126,11 +125,11 @@ class CalcPrinciple3 extends AbstractPrinciple
       return;
     }
     if (!is_int($resQ6) && !is_float($resQ6)) {
-      throw new Exception("設問Q6の回答は数値である必要があります");
+      throw new Exception("設問Q6：選択された値が無効です");
     }
 
     if (!isset($this->weightings["Q6"][$resQ6])) {
-      throw new Exception("設問Q6の選択値「{$resQ6}」は無効な値です");
+      throw new Exception("設問Q6：正しい選択肢から選んでください");
     }
 
     $this->addTotalScore($this->staticPoints["Q6"] * $this->weightings["Q6"][$resQ6]);
@@ -145,11 +144,11 @@ class CalcPrinciple3 extends AbstractPrinciple
       return;
     }
     if (count($resQ7) > 2) {
-      throw new \Exception("設問Q7の選択は2つまでです");
+      throw new \Exception("設問Q7：選択は2つまでです");
     }
     foreach ($resQ7 as $value) {
       if ($value === null || (!is_int($value) && !is_float($value))) {
-        throw new \Exception("設問Q7の選択値は数値である必要があります");
+        throw new \Exception("設問Q7：選択された値が無効です");
       }
     }
 
@@ -161,7 +160,7 @@ class CalcPrinciple3 extends AbstractPrinciple
     // 各選択値の重み付けをループし、最大値を見つける
     foreach ($resQ7 as $cur) {
       if (!isset($this->weightings['Q7'][$cur])) {
-        throw new \Exception("設問Q7の選択値「{$cur}」は無効な値です");
+        throw new \Exception("設問Q7：正しい選択肢から選んで下さい");
       }
 
       $currentWeighting = $this->weightings['Q7'][$cur] ?? 0;
@@ -183,11 +182,11 @@ class CalcPrinciple3 extends AbstractPrinciple
       return;
     }
     if (count($resQ8) > 4) {
-      throw new \Exception("設問Q8の選択は4つまでです");
+      throw new \Exception("設問Q8：選択は4つまでです");
     }
     foreach ($resQ8 as $value) {
       if ($value === null || (!is_int($value) && !is_float($value))) {
-        throw new \Exception("設問Q8の選択値は数値である必要があります");
+        throw new \Exception("設問Q8：選択された値が無効です");
       }
     }
 
@@ -197,7 +196,7 @@ class CalcPrinciple3 extends AbstractPrinciple
       $resQ8,
       function ($acc, $cur) {
         if (!isset($this->weightings['Q8'][$cur])) {
-          throw new \Exception("設問Q8の選択値「{$cur}」は無効な値です");
+          throw new \Exception("設問Q8：正しい選択肢から選んで下さい");
         }
 
         return $acc + ($this->weightings['Q8'][$cur] ?? 0);
@@ -217,11 +216,11 @@ class CalcPrinciple3 extends AbstractPrinciple
       return;
     }
     if (count($resQ9) > 4) {
-      throw new \Exception("設問Q9の選択は4つまでです");
+      throw new \Exception("設問Q9：選択は4つまでです");
     }
     foreach ($resQ9 as $value) {
       if ($value === null || (!is_int($value) && !is_float($value))) {
-        throw new \Exception("設問Q9の選択値は数値である必要があります");
+        throw new \Exception("設問Q9：選択された値が無効です");
       }
     }
 
@@ -231,7 +230,7 @@ class CalcPrinciple3 extends AbstractPrinciple
       $resQ9,
       function ($acc, $cur) {
         if (!isset($this->weightings['Q9'][$cur])) {
-          throw new \Exception("設問Q9の選択値「{$cur}」は無効な値です");
+          throw new \Exception("設問Q9：正しい選択肢から選んで下さい");
         }
 
         return $acc + ($this->weightings['Q9'][$cur] ?? 0);

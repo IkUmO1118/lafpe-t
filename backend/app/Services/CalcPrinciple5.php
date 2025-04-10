@@ -31,12 +31,12 @@ class CalcPrinciple5 extends AbstractPrinciple
     ];
 
     if (!isset($resQ3) || empty($resQ3)) {
-      throw new Exception("設問Q3のデータが入力されていません");
+      throw new Exception("設問Q3：データが入力されていません");
     }
 
     foreach ($requiredRacks as $rack) {
       if (!isset($resQ3[$rack])) {
-        throw new \Exception("設問3に必要なラック情報「{$rack}」が不足しています");
+        throw new \Exception("設問3：必要なラック情報「{$rack}」が不足しています");
       }
     }
 
@@ -45,23 +45,23 @@ class CalcPrinciple5 extends AbstractPrinciple
 
     foreach ($resQ3 as $rackKey => $rackValue) {
       if (!isset($rackValue['isChecked'])) {
-        throw new \Exception("ラック「{$rackKey}」の選択状態が設定されていません");
+        throw new \Exception("設問3：ラック「{$rackKey}」の選択状態が設定されていません");
       }
 
       if ($rackValue['isChecked']) {
 
         if (!isset($rackValue['per']) || $rackValue['per'] === null || (!is_int($rackValue['per']) && !is_float($rackValue['per']))) {
-          throw new Exception("選択されたラック「{$rackKey}」の使用割合（per）は数値で入力してください");
+          throw new Exception("設問3：選択されたラック「{$rackKey}」の使用割合を入力してください");
         }
         if (!isset($rackValue['times']) || $rackValue['times'] === null || (!is_int($rackValue['times']) && !is_float($rackValue['times']))) {
-          throw new Exception("選択されたラック「{$rackKey}」の換気回数（times）は数値で入力してください");
+          throw new Exception("設問3：選択されたラック「{$rackKey}」の換気回数を入力してください");
         }
 
         $per = $rackValue['per'];
         $times = $rackValue['times'];
 
         if (!isset($this->weightings['Q3'][$rackKey]['perWeighting'][$per]) || !isset($this->weightings['Q3'][$rackKey]['timesWeighting'][$times])) {
-          throw new Exception("ラック「{$rackKey}」の換気回数値「{$times}」または使用割合「{$per}」が設定に存在しません");
+          throw new Exception("設問3：ラック「{$rackKey}」の換気回数または使用割合が設定に存在しません");
         }
 
         $rackWeight  = $this->weightings['Q3'][$rackKey]['rackWeighting'] ?? 0;
@@ -79,22 +79,25 @@ class CalcPrinciple5 extends AbstractPrinciple
   {
     $resQ12 = $this->res["Q12"];
 
+    if (!isset($resQ12)) {
+      throw new \Exception("設問Q12：データが入力されていません");
+    }
     if (empty($resQ12)) {
       $this->addTotalScore(0);
       return;
     }
     if (count($resQ12) > 15) {
-      throw new Exception("設問Q12の選択は15個までです");
+      throw new Exception("設問Q12：選択は15個までです");
     }
 
     $validValues = [];
     foreach ($resQ12 as $value) {
       if ($value === null || (!is_int($value) && !is_float($value))) {
-        throw new Exception("設問Q12の選択値は数値である必要があります");
+        throw new Exception("設問Q12：選択された値が無効です");
       }
 
       if ($value < 0 || $value > 14) {
-        throw new Exception("設問Q12の選択値は0から14までの値である必要があります");
+        throw new Exception("設問Q12：正しい選択肢から選んで下さい");
       }
 
       $validValues[intval($value)] = true;

@@ -27,10 +27,10 @@ class CalcPrincipleDP extends AbstractPrinciple
       return;
     }
     if (!is_int($resQ4) && !is_float($resQ4)) {
-      throw new Exception("設問Q4の回答は数値である必要があります");
+      throw new Exception("設問Q4：選択された値が無効です");
     }
     if (!isset($this->weightings["Q4"][$resQ4])) {
-      throw new Exception("設問Q4の選択値「{$resQ4}」は無効な値です");
+      throw new Exception("設問Q4：正しい選択肢から選んでください");
     }
 
     $this->addTotalScore($this->staticPoints["Q4"] * $this->weightings["Q4"][$resQ4]);
@@ -41,18 +41,18 @@ class CalcPrincipleDP extends AbstractPrinciple
     $resQ11 = $this->res["Q11"];
 
     if (!isset($resQ11)) {
-      throw new \Exception("設問Q11のデータが入力されていません");
+      throw new \Exception("設問Q11：データが入力されていません");
     }
     if (empty($resQ11)) {
       $this->addTotalScore(0);
       return;
     }
     if (count($resQ11) > 4) {
-      throw new Exception("設問Q11の選択は4つまでです");
+      throw new Exception("設問Q11：選択は4つまでです");
     }
     foreach ($resQ11 as $value) {
       if ($value === null || (!is_int($value) && !is_float($value))) {
-        throw new Exception("設問Q11の選択値は数値である必要があります");
+        throw new Exception("設問Q11：選択された値が無効です");
       }
     }
 
@@ -62,7 +62,7 @@ class CalcPrincipleDP extends AbstractPrinciple
       $resQ11,
       function ($acc, $cur) {
         if (!isset($this->weightings["Q11"][$cur])) {
-          throw new Exception("設問Q11の選択値「{$cur}」は無効な値です");
+          throw new Exception("設問Q11：正しい選択肢から選んで下さい");
         }
         return $acc + ($this->weightings["Q11"][$cur] ?? 0);
       },
