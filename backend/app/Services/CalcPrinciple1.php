@@ -42,8 +42,7 @@ class CalcPrinciple1 extends AbstractPrinciple
 
     $totalStaticPoint = $this->staticPoints['Q3'] ?? 0;
     $totalDynamicPoint = 0;
-
-    $this->addTotalScore($totalStaticPoint);
+    $hasCheckedRack = false;
 
     foreach ($resQ3 as $rackKey => $rackValue) {
       if (!isset($rackValue['isChecked'])) {
@@ -51,6 +50,8 @@ class CalcPrinciple1 extends AbstractPrinciple
       }
 
       if ($rackValue['isChecked']) {
+        $hasCheckedRack = true;
+
         if (!isset($rackValue['per']) || $rackValue['per'] === null || !is_numeric($rackValue['per'])) {
           throw new \Exception("設問3：選択されたラック「{$rackKey}」の使用割合を入力してください");
         }
@@ -66,6 +67,10 @@ class CalcPrinciple1 extends AbstractPrinciple
 
         $totalDynamicPoint += $this->dynamicPoints['Q3'][$rackKey][$times];
       }
+    }
+
+    if ($hasCheckedRack) {
+      $this->addTotalScore($totalStaticPoint);
     }
 
     $this->addTotalScore($totalDynamicPoint);
