@@ -10,7 +10,8 @@ function DiagnosisHeader({ index, setIndex }: DiagnosisHeaderProps) {
     <div className="flex flex-col gap-4">
       <ProgressBar index={index} />
       <button
-        className="cursor-pointer self-start text-xs text-neutral-600 hover:underline"
+        className={`cursor-pointer self-start text-xs text-neutral-600 hover:underline ${index === 0 ? "invisible" : "visible"}`}
+        disabled={index === 0}
         onClick={() => {
           if (index > 0) {
             setIndex(index - 1);
