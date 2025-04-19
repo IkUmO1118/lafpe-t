@@ -29,10 +29,7 @@ class PDFService
       // 日本語フォントの設定
       $pdf->SetFont('kozminproregular', '', 11);
 
-      // タイトル
-      $pdf->SetFont('kozminproregular', 'B', 16);
-      $pdf->Cell(0, 10, '実験動物施設診断結果', 0, 1, 'C');
-      $pdf->Ln(5);
+      $this->renderHeader($pdf);
 
       //-----------------------------------------------------
       // 画像データの処理
@@ -42,8 +39,6 @@ class PDFService
       }
       //-----------------------------------------------------
       // 設問と回答の表示
-      $pdf->SetFont('kozminproregular', 'B', 12);
-      $pdf->Cell(0, 8, '回答内容', 0, 1, 'L');
       $pdf->Ln(4);
 
       foreach ($questionAnswers as $qKey => $answer) {
@@ -58,7 +53,7 @@ class PDFService
           continue;
         }
 
-        $pdf->SetFont('kozminproregular', 'B', 11);
+        $pdf->SetFont('kozminproregular', '', 11);
         $pdf->MultiCell(0, 7, $qKey . '. ' . $questionData['title'], 0, 'L');
         $pdf->SetFont('kozminproregular', '', 10);
 
@@ -82,17 +77,25 @@ class PDFService
         $pdf->Ln(5);
       }
 
-      //-----------------------------------------------------
-      // 作成日の表示
-      $pdf->Ln(5);
-      $pdf->Cell(0, 7, '作成日： ' . date('Y年m月d日'), 0, 1, 'R');
-
       // PDFを出力
       $pdfContent = $pdf->Output('', 'S'); // 文字列として出力
       return $pdfContent;
     } catch (Exception $e) {
       throw new Exception('PDF生成エラー: ' . $e->getMessage());
     }
+  }
+
+  private function renderHeader(TCPDF $pdf): void
+  {
+    // タイトル
+    $pdf->SetFont('kozminproregular', '', 16);
+    $pdf->Cell(0, 10, '実験動物施設診断結果', 0, 1, 'C');
+
+    // 日付表示
+    $pdf->SetFont('kozminproregular', '', 9);
+    $pdf->Cell(0, 5, '作成日: ' . date('Y年m月d日'), 0, 1, 'R');
+
+    $pdf->Ln(5);
   }
 
   private function renderQ3Details(TCPDF $pdf, array $answer): void
@@ -103,7 +106,7 @@ class PDFService
       return;
     }
 
-    $pdf->SetFont('kozminproregular', 'B', 11);
+    $pdf->SetFont('kozminproregular', '', 11);
     $pdf->MultiCell(0, 10, 'Q3. ' . $questionData['title'], 0, 'L');
     $pdf->SetFont('kozminproregular', '', 10);
 
