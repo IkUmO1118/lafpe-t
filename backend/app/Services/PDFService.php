@@ -74,7 +74,7 @@ class PDFService
           $pdf->MultiCell(0, 5, $questionData['option'][$answer], 0, 'L');
         }
 
-        $pdf->Ln(5);
+        $pdf->Ln(7);
       }
 
       // PDFを出力
