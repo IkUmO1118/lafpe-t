@@ -59,6 +59,43 @@ class GoogleSheetsService
   }
 
   /**
+   * CSVインジェクション対策のためのデータサニタイズ
+   * 
+   * @param mixed $value サニタイズする値
+   * @return string サニタイズされた値
+   */
+  private function sanitizeForCsvInjection($value): string
+  {
+    // 文字列に変換
+    $value = (string)$value;
+
+    // 数式の先頭文字を検出するパターン（=, +, -, @, 等）
+    $dangerousPatterns = ['/^=/', '/^\\+/', '/^-/', '/^@/', '/^\\t=/'];
+
+    // 危険な文字パターンで始まる場合は先頭にシングルクォートを追加
+    if (preg_match('/^([=\\+\\-@\\t])/', $value)) {
+      $value = "'" . $value;
+    }
+
+    return $value;
+  }
+
+  /**
+   * 配列内の全ての値をサニタイズ
+   * 
+   * @param array $data サニタイズする配列
+   * @return array サニタイズされた配列
+   */
+  private function sanitizeArray(array $data): array
+  {
+    $sanitized = [];
+    foreach ($data as $value) {
+      $sanitized[] = $this->sanitizeForCsvInjection($value);
+    }
+    return $sanitized;
+  }
+
+  /**
    * スプレッドシートに行を追加する
    * 
    * @param array $rowData 追加する行データ
@@ -68,8 +105,11 @@ class GoogleSheetsService
   public function appendRow(array $rowData): bool
   {
     try {
+      // CSVインジェクション対策
+      $sanitizedRowData = $this->sanitizeArray($rowData);
+
       $body = new Google_Service_Sheets_ValueRange([
-        'values' => [$rowData]
+        'values' => [$sanitizedRowData]
       ]);
 
       $params = [

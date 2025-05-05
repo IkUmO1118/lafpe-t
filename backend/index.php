@@ -38,7 +38,7 @@ header("Pragma: no-cache");
 // タイムゾーンを日本時間に設定
 date_default_timezone_set('Asia/Tokyo');
 
-$DEBUG = true;
+$DEBUG = false;
 
 // ルーティングファイルのインクルード
 $routes = include(__DIR__ . '/Routing/routes.php');
