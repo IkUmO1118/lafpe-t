@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7fa4b23f45cf2b3facce962e687234d7",
+    "content-hash": "1e5d966c49c0bc38fb34e867d3cd092b",
     "packages": [
         {
             "name": "firebase/php-jwt",
@@ -1270,20 +1270,21 @@
         },
         {
             "name": "tecnickcom/tcpdf",
-            "version": "6.7.8",
+            "version": "6.9.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tecnickcom/TCPDF.git",
-                "reference": "7956f5e37863c6a569d5ccfae826f353a12a2493"
+                "reference": "c838d7f7babb0d35763acfb9ecf78c3f45966f83"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tecnickcom/TCPDF/zipball/7956f5e37863c6a569d5ccfae826f353a12a2493",
-                "reference": "7956f5e37863c6a569d5ccfae826f353a12a2493",
+                "url": "https://api.github.com/repos/tecnickcom/TCPDF/zipball/c838d7f7babb0d35763acfb9ecf78c3f45966f83",
+                "reference": "c838d7f7babb0d35763acfb9ecf78c3f45966f83",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.5.0"
+                "ext-curl": "*",
+                "php": ">=7.1.0"
             },
             "type": "library",
             "autoload": {
@@ -1291,8 +1292,6 @@
                     "config",
                     "include",
                     "tcpdf.php",
-                    "tcpdf_parser.php",
-                    "tcpdf_import.php",
                     "tcpdf_barcodes_1d.php",
                     "tcpdf_barcodes_2d.php",
                     "include/tcpdf_colors.php",
@@ -1330,15 +1329,15 @@
             ],
             "support": {
                 "issues": "https://github.com/tecnickcom/TCPDF/issues",
-                "source": "https://github.com/tecnickcom/TCPDF/tree/6.7.8"
+                "source": "https://github.com/tecnickcom/TCPDF/tree/6.9.4"
             },
             "funding": [
                 {
-                    "url": "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&currency_code=GBP&business=paypal@tecnick.com&item_name=donation%20for%20tcpdf%20project",
+                    "url": "https://www.paypal.com/donate/?hosted_button_id=NZUEC5XS8MFBJ",
                     "type": "custom"
                 }
             ],
-            "time": "2024-12-13T19:31:40+00:00"
+            "time": "2025-05-13T11:34:35+00:00"
         }
     ],
     "packages-dev": [
