@@ -6,20 +6,15 @@ import { ScoresState } from "../../types/diagnosis";
 import { useDownloadPDF } from "./useDownloadPDF";
 import SpinnerMini from "../../components/SpinnerMini";
 import { PrincipleProps } from "../../types/principle";
+import { NavLink } from "react-router-dom";
 
 interface ResultHeaderProps {
   answersData: ScoresState;
   kartesData: PrincipleProps;
-  scrollToContent: () => void;
   ref: ForwardedRef<HTMLDivElement>;
 }
 
-function ResultHeader({
-  answersData,
-  kartesData,
-  scrollToContent,
-  ref,
-}: ResultHeaderProps) {
+function ResultHeader({ answersData, kartesData, ref }: ResultHeaderProps) {
   const chartRef = useRef<HTMLDivElement>(null);
   const { downloadPDF, isDownloading } = useDownloadPDF();
 
@@ -98,13 +93,12 @@ function ResultHeader({
               "結果をPDFで保存"
             )}
           </Button>
-          <Button
-            variant="outlinePrimary"
-            size="base"
-            onClick={scrollToContent}
+          <NavLink
+            className="flex cursor-pointer items-center justify-center rounded-sm border border-cyan-900 px-6 py-3 text-base font-medium text-cyan-900 decoration-0 outline-2 outline-offset-[-2px] outline-transparent transition-all duration-300 ease-in hover:outline-2 hover:outline-cyan-900 disabled:cursor-not-allowed disabled:opacity-50"
+            to="/feedback"
           >
-            回答内容を確認する
-          </Button>
+            ご意見・ご感想
+          </NavLink>
         </div>
       </div>
     </div>

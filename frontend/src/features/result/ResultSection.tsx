@@ -17,13 +17,6 @@ function ResultSection() {
   const contentRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
 
-  const scrollToContent = () => {
-    contentRef.current?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
-  };
-
   const scrollToHeader = () => {
     headerRef.current?.scrollIntoView({
       behavior: "smooth",
@@ -75,7 +68,6 @@ function ResultSection() {
       <ResultHeader
         answersData={answersData}
         kartesData={kartesData}
-        scrollToContent={scrollToContent}
         ref={headerRef}
       />
       <ResultContent onDataUpdated={refreshData} ref={contentRef} />
