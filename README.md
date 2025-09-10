@@ -1,4 +1,4 @@
-# LAFPE-T (Learning Assessment for Principle Evaluation - Tool)
+# LAFPE-T (Laboratory Animal Facilities performance Examination - Tool)
 
 **[Click here for the website](https://lafpe-t.com 'open')**
 
